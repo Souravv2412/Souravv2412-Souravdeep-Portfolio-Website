@@ -195,6 +195,14 @@
     tr:hover {
       background-color: #f5f5f5;
     }
+
+    body { font-family: Arial, sans-serif; margin: 20px; padding: 20px; }
+    h1, h2 { color: #333; }
+    p { line-height: 1.6; }
+    ul { margin-left: 20px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { border: 1px solid black; padding: 8px; text-align: left; }
+    th { background-color: #f2f2f2; }
   </style>
 </head>
 <body>
@@ -224,8 +232,14 @@
 
   <!-- Table Section -->
   <section class="section" id="tableSection">
-    <h2>Dataset</h2>
+    <h2>Dataset Overview</h2>
 
+    <ul>
+      <li><strong>Source:</strong><h3> You can access the dataset through the following link: <a href="https://data.world/data-society/us-air-pollution-data" target="_blank">US Air Pollution Data - Data Society</a></h3></li>
+      </li>
+  </ul>
+
+  <h2>Sample Data</h2>
     <!-- Table -->
     <table id="dataTable">
       <thead>
@@ -238,12 +252,14 @@
       </tbody>
     </table>
 
-    <h3> You can access the dataset through the following link: <a href="https://data.world/data-society/us-air-pollution-data" target="_blank">US Air Pollution Data - Data Society</a></h3>
+    <ul>
+      <li><strong>Note:</strong> If dataset is not downloding using the below link try downloding from source link  </li>
+      </li>
+  </ul>
 
     <center>
       <button id="downloadButton">Download Dataset as Excel</button>
     </center>
-
 
 
   <!-- Footer -->
@@ -252,15 +268,16 @@
   </footer>
 
   <script>
-    // Example dataset: Replace this array with your actual dataset
+    
     const dataset = [
-      ['Year', 'State', 'Pollution Level'],
-      ['2020', 'California', 35],
-      ['2021', 'New York', 29],
-      ['2022', 'Texas', 42],
-      ['2023', 'Florida', 38],
-      // Add more data rows as needed
-    ];
+  ['Date', 'State', 'City', 'NO₂', 'SO₂', 'O₃', 'PM2.5', 'PM10', 'AQI'],
+  ['2023-01-01', 'California', 'Los Angeles', 25, 12, 40, 35, 50, 120],
+  ['2023-01-02', 'Texas', 'Houston', 18, 8, 35, 28, 45, 100],
+  ['2023-01-03', 'New York', 'NYC', 22, 10, 38, 30, 48, 110],
+  ['2023-01-04', 'Florida', 'Miami', 15, 5, 25, 20, 38, 90],
+  ['2023-01-05', 'Illinois', 'Chicago', 20, 7, 30, 25, 42, 95],
+];
+
 
     function populateTable() {
       // Populate headers
