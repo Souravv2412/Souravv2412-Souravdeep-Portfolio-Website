@@ -141,6 +141,15 @@
         </div>
       </section>
     
+
+      <!-- Pop-up Message -->
+    <div id="popupMessage">
+      <button id="closePopup">&times;</button>
+      <p>See my Skill Certificates</p>
+      <button onclick="window.location.href='Certificate.html'">View Certificates</button>
+  </div>
+
+  
     <div class="social-icons-container">
         <a href="https://www.instagram.com/souravv2412/" target="_blank" class="social-icon instagram-icon"><i class="fab fa-instagram"></i></a>
         <a href="https://www.linkedin.com/in/sourav2312/" target="_blank" class="social-icon linkedin-icon"><i class="fab fa-linkedin-in"></i></a>
@@ -162,24 +171,43 @@
         document.onmousedown = rightclickD; function rightclickD(e) { e = e||event; if (e.button == 2) { alert('Hey im sourav ,Function is Disabled...'); 
         return false; } }
     </script>
+    
     <script>
-        document.onkeydown = (e) => {
-    if (e.key == 123) {
-        e.preventDefault();
-    }
-    if (e.ctrlKey && e.shiftKey && e.key == 'I') {
-        e.preventDefault();
-    }
-    if (e.ctrlKey && e.shiftKey && e.key == 'C') {
-        e.preventDefault();
-    }
-    if (e.ctrlKey && e.shiftKey && e.key == 'J') {
-        e.preventDefault();
-    }
-    if (e.ctrlKey && e.key == 'U') {
-        e.preventDefault();
-    }
-};
-    </script>
+      document.onkeydown = (e) => {
+          if (e.key == 123) {
+              e.preventDefault();
+          }
+          if (e.ctrlKey && e.shiftKey && e.key == 'I') {
+              e.preventDefault();
+          }
+          if (e.ctrlKey && e.shiftKey && e.key == 'C') {
+              e.preventDefault();
+          }
+          if (e.ctrlKey && e.shiftKey && e.key == 'J') {
+              e.preventDefault();
+          }
+          if (e.ctrlKey && e.key == 'U') {
+              e.preventDefault();
+          }
+      };
+
+      // Show pop-up message immediately and every 30 seconds
+      function showPopup() {
+          var popup = document.getElementById('popupMessage');
+          popup.style.display = 'block';
+      }
+
+      // Hide pop-up message when the close button is clicked
+      document.getElementById('closePopup').addEventListener('click', function() {
+          var popup = document.getElementById('popupMessage');
+          popup.style.display = 'none';
+      });
+
+      // Show the pop-up message when the page loads
+      window.onload = function() {
+          showPopup();
+          setInterval(showPopup, 30000); // Show the message every 30 seconds
+      };
+  </script>
 </body>
 </html>
