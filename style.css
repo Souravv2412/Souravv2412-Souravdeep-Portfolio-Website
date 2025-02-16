@@ -925,3 +925,44 @@ footer span a:hover {
     background-color: #2EC866;
     color: #fff;
 }
+
+    /* Styles for the pop-up message */
+    #popupMessage {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+        width: 300px;
+        padding: 25px;
+        background-color: #333;
+        color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        text-align: center;
+    }
+    #popupMessage p {
+        margin: 0;
+    }
+    #popupMessage button {
+        margin-top: 2px;
+        padding: 5px 10px;
+        background-color: crimson;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        color: #000;
+    }
+    #popupMessage button:hover {
+        background-color: rgb(169, 7, 7);
+    }
+    #closePopup {
+        position: absolute;
+        top: 0.5px;
+        right: 2px;
+        padding: 1px;
+        background-color: transparent;
+        color: #ff0000;
+        font-size: 15px;
+        border: none;
+        cursor: pointer;
+}
