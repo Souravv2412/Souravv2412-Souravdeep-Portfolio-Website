@@ -115,7 +115,7 @@
                 <div class="column left">
                     <div class="text">My creative skills & experiences.</div>
                     <p>I possess a strong foundation in <strong>Python</strong> (Pandas, Numpy, Seaborn, Matplotlib) with expertise in data manipulation, analysis, and visualization. I am proficient in <strong>Databases</strong> (MySQL, NoSQL) for managing and querying data, and skilled in <strong>Data Visualization Tools</strong> (Tableau, Power BI) for creating impactful dashboards and reports. My experience extends to <strong>Big Data</strong> technologies like <strong>Hadoop</strong> and <strong>Spark</strong>, and I have hands-on expertise in <strong>Machine Learning</strong> (scikit-learn) for predictive analytics. I also excel in <strong>Business Intelligence</strong> using <strong>Excel</strong>, and I am proficient in <strong>Github</strong> and <strong>Jupyter Notebook</strong> for version control and data analysis. Additionally, I am well-versed in <strong>Web Technologies</strong> (HTML, CSS, JavaScript, Java) for full-stack development and data-driven web applications.</p>
-                    <a href="https://www.hackerrank.com/certificates/cc15106ae6f2">Skill Certificates</a>
+                    <a href="Certificate.html">See Skill Certificates</a>
                 </div>
                 <div class="column right">
                     <div class="bars">
@@ -269,7 +269,14 @@
             </div>
         </div>
     </section>
-    
+
+    <!-- Pop-up Message -->
+    <div id="popupMessage">
+        <button id="closePopup">&times;</button>
+        <p>See my Skill Certificates</p>
+        <button onclick="window.location.href='Certificate.html'">View Certificates</button>
+    </div>
+
     <div class="social-icons-container">
         <a href="https://www.instagram.com/souravv2412/" target="_blank" class="social-icon instagram-icon"><i class="fab fa-instagram"></i></a>
         <a href="https://www.linkedin.com/in/sourav2312/" target="_blank" class="social-icon linkedin-icon"><i class="fab fa-linkedin-in"></i></a>
@@ -291,24 +298,45 @@
         document.onmousedown = rightclickD; function rightclickD(e) { e = e||event; if (e.button == 2) { alert('Hey im sourav ,Function is Disabled...'); 
         return false; } }
     </script>
+
+
     <script>
         document.onkeydown = (e) => {
-    if (e.key == 123) {
-        e.preventDefault();
-    }
-    if (e.ctrlKey && e.shiftKey && e.key == 'I') {
-        e.preventDefault();
-    }
-    if (e.ctrlKey && e.shiftKey && e.key == 'C') {
-        e.preventDefault();
-    }
-    if (e.ctrlKey && e.shiftKey && e.key == 'J') {
-        e.preventDefault();
-    }
-    if (e.ctrlKey && e.key == 'U') {
-        e.preventDefault();
-    }
-};
+            if (e.key == 123) {
+                e.preventDefault();
+            }
+            if (e.ctrlKey && e.shiftKey && e.key == 'I') {
+                e.preventDefault();
+            }
+            if (e.ctrlKey && e.shiftKey && e.key == 'C') {
+                e.preventDefault();
+            }
+            if (e.ctrlKey && e.shiftKey && e.key == 'J') {
+                e.preventDefault();
+            }
+            if (e.ctrlKey && e.key == 'U') {
+                e.preventDefault();
+            }
+        };
+
+        // Show pop-up message immediately and every 30 seconds
+        function showPopup() {
+            var popup = document.getElementById('popupMessage');
+            popup.style.display = 'block';
+        }
+
+        // Hide pop-up message when the close button is clicked
+        document.getElementById('closePopup').addEventListener('click', function() {
+            var popup = document.getElementById('popupMessage');
+            popup.style.display = 'none';
+        });
+
+        // Show the pop-up message when the page loads
+        window.onload = function() {
+            showPopup();
+            setInterval(showPopup, 30000); // Show the message every 30 seconds
+        };
     </script>
+    
 </body>
 </html>
