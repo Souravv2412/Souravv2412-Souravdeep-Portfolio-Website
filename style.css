@@ -386,47 +386,121 @@ section .title::after {
     top: 0;
     background: crimson;
 }
-
-.skills-content .right .html::before {
-    width: 85%;
+/* Skill Level Styling */
+.skill-level {
+    font-weight: 600;
+    color: crimson;
 }
 
-.skills-content .right .css::before {
-    width: 80%;
+/* Stars Container */
+.stars {
+    display: inline-block;
+    position: absolute;
+    top: -20px; /* Adjust as needed */
+    left: 0;
+    opacity: 0;
+    transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
-.skills-content .right .js::before {
-    width: 82%;
+/* Star Animation */
+.stars span {
+    display: inline-block;
+    font-size: 18px;
+    color: gold;
+    transform: scale(0);
+    transition: transform 0.3s ease;
 }
 
-.skills-content .right .php::before {
-    width: 60%;
+/* Animate stars on scroll */
+.skills-content .right .line.animate .stars {
+    opacity: 1;
 }
 
-.skills-content .right .mysql::before {
-    width: 60%;
-}
-
-.skills-content .right .java::before {
-    width: 75%;
-}
-
-.skills-content .right .mongo::before {
-    width: 90%;
-}
-
-.skills-content .right .react::before {
-    width: 85%;
-}
-
-.skills-content .right .express::before {
-    width: 55%;
+.skills-content .right .line.animate .stars span {
+    transform: scale(1);
 }
 
 /* teams section styling */
 .teams .title::after {
     content: "worked with";
 }
+
+/* Replace percentage-based widths with skill levels */
+.skills-content .right .html::before {
+    width: 85%; /* Advanced */
+}
+
+.skills-content .right .css::before {
+    width: 80%; /* Advanced */
+}
+
+.skills-content .right .js::before {
+    width: 82%; /* Advanced */
+}
+
+.skills-content .right .php::before {
+    width: 60%; /* Intermediate */
+}
+
+.skills-content .right .mysql::before {
+    width: 60%; /* Intermediate */
+}
+
+.skills-content .right .java::before {
+    width: 75%; /* Advanced */
+}
+
+.skills-content .right .mongo::before {
+    width: 90%; /* Expert */
+}
+
+.skills-content .right .react::before {
+    width: 85%; /* Advanced */
+}
+
+.skills-content .right .express::before {
+    width: 55%; /* Intermediate */
+}
+
+/* Skills Section Styling */
+#skills .skill-level {
+    font-size: 24px;
+    color: red;
+    position: relative;
+}
+
+#skills .stars-container {
+    position: relative;
+    display: inline-block;
+}
+
+#skills .star-filled {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0; /* Start with 0 width */
+    overflow: hidden;
+    white-space: nowrap;
+    color: red ;
+    font-size: 25px; /* Increased font size for stars */
+    animation: fillStars 5s ease-in-out forwards; /* Animation */
+}
+
+#skills .star-empty {
+    color: #ccc; /* Light gray for empty stars */
+    font-size: 25px; /* Increased font size for stars */
+}
+
+/* Keyframes for star-filling animation */
+@keyframes fillStars {
+    from {
+        width: 0; /* Start with 0 width */
+    }
+    to {
+        width: 100%; /* Fill to full width */
+    }
+}
+
 
 .teams .carousel .card {
     background: #222;
@@ -706,6 +780,32 @@ footer span a:hover {
         flex: 100%;
     }
 
+    .about .about-content .right {
+        flex: 100%;
+    }
+
+    @media (max-width: 768px) {
+        .about .about-content {
+            flex-direction: column; /* Stack columns vertically */
+            align-items: center; /* Center align the columns */
+            text-align: center; /* Center align text */
+        }
+    
+        .about .about-content .column {
+            width: 100%; /* Full width for both columns */
+        }
+    
+        .about .about-content .left img {
+            display: block; /* Use block instead of flex for images */
+            margin: 0 auto 60px; /* Center the image and add bottom margin */
+        }
+    
+        .about .about-content .right {
+            text-align: center; /* Center align text in the right column */
+            padding: 0 20px; /* Add some padding for better spacing */
+        }
+    }
+    
     .services .serv-content .card {
         width: calc(50% - 10px);
         margin-bottom: 20px;
@@ -966,3 +1066,145 @@ footer span a:hover {
         border: none;
         cursor: pointer;
 }
+
+
+#chatbot, #chatIcon {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 9999; /* High z-index to ensure it stays above other content */
+}
+
+#chatbot {
+    display: none;
+    width: 90%;
+    max-width: 320px;
+    border-radius: 15px;
+    padding: 15px;
+    background: #111;
+    box-shadow: 2px 2px 15px rgba(255, 0, 0, 0.7);
+    border: 2px solid red;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+/* Ensure chatbot header and content are inside chatbot container */
+.chatbot-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.chatbot-header button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+        .chatbot-header button:hover {
+            color: red;
+        }
+        .message { 
+            white-space: normal; /* Allows text wrapping */
+            word-wrap: break-word; /* Ensures words break properly */
+            overflow-wrap: break-word; /* Additional support for wrapping */
+            max-width: 90%; /* Prevents messages from stretching too wide */
+            margin-bottom: 10px; /* Adds spacing between messages */
+            font-size: 16px; /* Adjusts text size */
+            line-height: 1.5;
+        }
+        .user {
+            text-align: right;
+            background: red;
+            color: white;
+            align-self: flex-end;
+        }
+        .bot {
+            text-align: left;
+            background: #333;
+            color: white;
+            align-self: flex-start;
+        }
+        .options-container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr); /* 2 options per row */
+            gap: 10px; /* Space between options */
+            margin-top: 10px;
+        }
+        .option {
+            padding: 10px;
+            background: #222;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            gap: 8px; /* Space between icon and text */
+            border: 1px solid #444;
+        }
+        .option:hover {
+            background: #333;
+            transform: scale(1.05); /* Slight zoom effect on hover */
+        }
+        /* Icon for chatbot toggle */
+#chatIcon {
+    width: 60px;
+    height: 60px;
+    background: red;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 28px;
+    box-shadow: 2px 2px 15px rgba(255, 0, 0, 0.7);
+    transition: transform 0.3s ease;
+}
+        #chatIcon:hover {
+            transform: scale(1.1);
+        }
+        .typing { 
+            font-style: italic; 
+            color: white; /* Font color to match red theme */
+            background: transparent; /* Remove black shade background */
+            display: flex;
+            align-items: center;
+        }
+        .typing2 {
+            display: inline; 
+            white-space: nowrap; /* Prevent line break */
+        }
+        
+        /* Emoji for Bot Message */
+        .bot-emoji {
+            font-size: 24px;
+            margin-right: 10px;
+        }
+
+        /* Responsive Design for Mobile */
+            @media (max-width: 600px) {
+                #chatbot {
+                    width: 90%;
+                    left: 5%;
+                    bottom: 10px;
+                }
+            .options-container {
+                grid-template-columns: 1fr; /* 1 option per row on mobile */
+            }
+            .option {
+                padding: 12px; /* Slightly larger padding for mobile */
+            }
+            #chatIcon {
+                width: 50px;
+                height: 50px;
+                font-size: 24px;
+            }
+        }
