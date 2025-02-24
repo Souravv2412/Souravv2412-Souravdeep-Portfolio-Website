@@ -33,21 +33,7 @@ $(document).ready(function () {
         $('.menu-btn i').toggleClass("active");
     });
 
-    // Typing text animation script
-    var typed = new Typed(".typing", {
-        strings: ["Certified Web Developer", "Data Analytics Student", "Freelancer"],
-        typeSpeed: 50,
-        backSpeed: 30,
-        loop: true
-    });
-
-    var typed = new Typed(".typing-2", {
-        strings: ["Programming", "Data Visualization", "Statistical Analysis", "Business Acumen"],
-        typeSpeed: 50,
-        backSpeed: 30,
-        loop: true
-    });
-
+    
     // Owl carousel script
     $('.carousel').owlCarousel({
         margin: 20,
@@ -66,4 +52,54 @@ $(document).ready(function () {
             },
         }
     });
+});
+
+/* typing animation*/
+
+document.addEventListener('DOMContentLoaded', function() {
+    var typed = new Typed(".typing3", {
+        strings: ["Programming", "Data Visualization", "Statistical Analysis", "Business Acumen"],
+        typeSpeed: 50,
+        backSpeed: 30,
+        loop: true
+    });
+});
+
+document.addEventListener('DOMContentLoaded', function() {
+    var typed = new Typed(".typing2", {
+        strings: ["Certified Web Developer", "Data Analytics Student", "Freelancer"],
+        typeSpeed: 50,
+        backSpeed: 30,
+        loop: true
+    });
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    const skillsSection = document.getElementById("skills");
+
+    const animateStars = (entries, observer) => {
+        entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+                // Add the class to trigger the animation
+                const starsContainers = document.querySelectorAll("#skills .stars-container");
+                starsContainers.forEach((container) => {
+                    container.classList.remove("animate-stars"); // Reset animation
+                    void container.offsetWidth; // Trigger reflow to restart animation
+                    container.classList.add("animate-stars"); // Start animation
+                });
+            } else {
+                // Remove the class when the section is out of view
+                const starsContainers = document.querySelectorAll("#skills .stars-container");
+                starsContainers.forEach((container) => {
+                    container.classList.remove("animate-stars");
+                });
+            }
+        });
+    };
+
+    const observer = new IntersectionObserver(animateStars, {
+        threshold: 5, // Trigger when 50% of the section is visible
+    });
+
+    observer.observe(skillsSection);
 });
