@@ -74,6 +74,8 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
+
+/* Star animation in skills */
 document.addEventListener("DOMContentLoaded", function () {
     const skillsSection = document.getElementById("skills");
 
@@ -103,3 +105,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
     observer.observe(skillsSection);
 });
+
+
+/*Break line for skills animation in about section title*/ 
+
+  // Function to check if the screen is small (mobile device)
+  function isMobile() {
+    return window.innerWidth <= 768; // Adjust the breakpoint as needed
+  }
+
+  // Add <br> tag only for mobile devices
+  const textDiv = document.querySelector('.text');
+  const typing3Element = document.querySelector('.typing3');
+
+  // Example content for .typing3
+  typing3Element.textContent = '';
+
+  // Add <br> if the screen is small
+  if (isMobile()) {
+    const brElement = document.createElement('br');
+    textDiv.insertBefore(brElement, typing3Element);
+  }
