@@ -319,104 +319,16 @@
     </section>
 
     <div id="chatIcon" onclick="toggleChat()">
-        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white">
-            <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/>
-        </svg>
+        <img src="images/Avatar2.avif" alt="Chat Logo" width="24" height="24">
     </div>
     <div id="chatbot">
         <div class="chatbot-header">
             <span style="color: white;">Chatbot</span>
-            <button onclick="cancelChat()" style="color: white;">✖</button> <!-- Cancel/Close Button -->
+            <button onclick="cancelChat()" style="color: white;">✖</button> <!-- Close Button -->
         </div>
-        
         <div id="chatWindow"></div>
     </div>
 
-    <script>
-        // Array of random statements
-        const randomStatements = [
-            "Great choice! We are preparing everything for you. Redirecting in a moment...",
-            "Awesome! Just a second while we get things ready for you...",
-            "Perfect! We're setting things up. Please wait a moment...",
-            "Excellent choice! Redirecting you now...",
-            "Hold on! We're preparing your selection. Redirecting shortly...",
-            "Nice pick! We're getting everything ready for you..."
-        ];
-
-        function toggleChat() {
-            const chatbot = document.getElementById('chatbot');
-            if (chatbot.style.display === 'none' || chatbot.style.display === '') {
-                chatbot.style.display = 'block';
-                setTimeout(() => {
-                    chatbot.style.opacity = '1';
-                    chatbot.style.transform = 'translateY(0)';
-                    startConversation();
-                }, 100);
-            } else {
-                chatbot.style.opacity = '0';
-                chatbot.style.transform = 'translateY(20px)';
-                setTimeout(() => { chatbot.style.display = 'none'; }, 500);
-            }
-        }
-
-        function cancelChat() {
-            const chatbot = document.getElementById('chatbot');
-            chatbot.style.opacity = '0';
-            chatbot.style.transform = 'translateY(20px)';
-            setTimeout(() => { chatbot.style.display = 'none'; }, 500);
-        }
-
-        function startConversation() {
-            const chatWindow = document.getElementById('chatWindow');
-            chatWindow.innerHTML = `
-                <div class="bot">
-                    <p class="typing" id="typingEffect">
-                        <span class="bot-emoji">🤖</span>
-                    </p>
-                </div>`;
-            typeMessage("Hi there! Welcome to my portfolio.\n\nWhat would you like to explore?", function() {
-                setTimeout(() => {
-                    chatWindow.innerHTML += `
-    <div class="options-container">
-        <div class="option" onclick="redirect('All-Project.html')" style="color: white;">📂 Projects</div>
-        <div class="option" onclick="redirect('index.html#skills')" style="color: white;">💡 Skills</div>
-        <div class="option" onclick="redirect('Certificate.html')" style="color: white;">🏅 Certifications</div>
-        <div class="option" onclick="redirect('index.html#contact')" style="color: white;">📞 Contact</div>
-    </div>`;
-
-                }, 500);
-            });
-        }
-
-        function typeMessage(message, callback) {
-            let index = 0;
-            const typingElement = document.getElementById('typingEffect');
-            typingElement.innerHTML = `<span class="bot-emoji">🤖</span>`; // Bot emoji beside typing
-            const typingInterval = setInterval(() => {
-                typingElement.innerHTML += message.charAt(index);
-                index++;
-                if (index === message.length) {
-                    clearInterval(typingInterval);
-                    if (callback) callback();
-                }
-            }, 30); // Increased typing speed
-        }
-
-        function redirect(url) {
-            const chatWindow = document.getElementById('chatWindow');
-            chatWindow.innerHTML = `
-                <div class="bot">
-                    <p class="typing" id="typingEffect">
-                        <span class="bot-emoji">🤖</span>
-                    </p>
-                </div>`;
-            // Select a random statement
-            const randomStatement = randomStatements[Math.floor(Math.random() * randomStatements.length)];
-            typeMessage(randomStatement, function() {
-                setTimeout(() => { window.location.href = url; }, 2000);
-            });
-        }
-    </script>
 
     <div class="social-icons-container">
         <a href="https://www.instagram.com/souravv2412/" target="_blank" class="social-icon instagram-icon"><i class="fab fa-instagram"></i></a>
