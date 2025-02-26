@@ -126,3 +126,82 @@ document.addEventListener("DOMContentLoaded", function () {
     const brElement = document.createElement('br');
     textDiv.insertBefore(brElement, typing3Element);
   }
+
+  // chatbot animation
+
+  // Array of random statements
+const randomStatements = [
+    "Great choice! We are preparing everything for you. Redirecting in a moment...",
+    "Awesome! Just a second while we get things ready for you...",
+    "Perfect! We're setting things up. Please wait a moment...",
+    "Excellent choice! Redirecting you now...",
+    "Hold on! We're preparing your selection. Redirecting shortly...",
+    "Nice pick! We're getting everything ready for you..."
+];
+
+function toggleChat() {
+    const chatbot = document.getElementById("chatbot");
+    chatbot.classList.toggle("show");
+    if (chatbot.classList.contains("show")) {
+        startConversation();
+    }
+}
+
+function cancelChat() {
+    const chatbot = document.getElementById("chatbot");
+    chatbot.classList.remove("show");
+}
+
+// Start the conversation with the bot
+function startConversation() {
+    const chatWindow = document.getElementById('chatWindow');
+    chatWindow.innerHTML = `
+        <div class="bot">
+            <p class="typing" id="typingEffect">
+                <span class="bot-emoji">🤖</span>
+            </p>
+        </div>`;
+    typeMessage("Hi there! Welcome to my portfolio.\n\nWhat would you like to explore?", function() {
+        setTimeout(() => {
+            chatWindow.innerHTML += `
+                <div class="options-container">
+                    <div class="option" onclick="redirect('All-Project.html')">📂 Projects</div>
+                    <div class="option" onclick="redirect('index.html#skills')">💡 Skills</div>
+                    <div class="option" onclick="redirect('Certificate.html')">🏅 Certifications</div>
+                    <div class="option" onclick="redirect('index.html#contact')">📞 Contact</div>
+                </div>`;
+        }, 500);
+    });
+}
+
+// Type message with delay effect
+function typeMessage(message, callback) {
+    let index = 0;
+    const typingElement = document.getElementById('typingEffect');
+    typingElement.innerHTML = `<span class="bot-emoji">🤖</span>`; // Bot emoji beside typing
+    const typingInterval = setInterval(() => {
+        typingElement.innerHTML += message.charAt(index);
+        index++;
+        if (index === message.length) {
+            clearInterval(typingInterval);
+            if (callback) callback();
+        }
+    }, 30); // Increased typing speed
+}
+
+// Redirect to specified URL
+function redirect(url) {
+    const chatWindow = document.getElementById('chatWindow');
+    chatWindow.innerHTML = `
+        <div class="bot">
+            <p class="typing" id="typingEffect">
+                <span class="bot-emoji">🤖</span>
+            </p>
+        </div>`;
+    // Select a random statement
+    const randomStatement = randomStatements[Math.floor(Math.random() * randomStatements.length)];
+    typeMessage(randomStatement, function() {
+        setTimeout(() => { window.location.href = url; }, 2000);
+    });
+}
+
