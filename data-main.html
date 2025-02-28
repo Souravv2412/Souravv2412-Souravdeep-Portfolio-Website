@@ -79,6 +79,55 @@
               grid-template-columns: 1fr;
             }
           }
+          .project-image {
+            width: 100%; /* Make the image take up the full width of the card */
+            height: 200px; /* Set a fixed height for consistency */
+            object-fit: cover; /* Ensure the image covers the area without distortion */
+            border-radius: 8px 8px 0 0; /* Rounded corners at the top */
+            margin-bottom: 15px; /* Add some space below the image */
+        }
+        
+        .card {
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column; /* Stack content vertically */
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        .card h2 {
+            margin-top: 0;
+        }
+        
+        .card span {
+            display: block;
+            margin-top: 8px;
+            font-size: 0.9em;
+            color: #555;
+        }
+        
+        .project-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 15px;
+            background-color: #f91427;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            align-self: flex-start; /* Align button to the left */
+        }
+        
+        .project-btn:hover {
+            background-color: #a71d28;
+        }
         </style>
 </head>
 <body>
@@ -108,31 +157,34 @@
             <div class="container">
               <div class="projects">
                 <div class="card">
-                  <h2>US-Air Quality Analysis</h2>
-                  <p>Analyze U.S. air pollution trends using AQI data to compare regions, track patterns, and assess environmental health.</p>
-                  <span>Technologies: Python, Pandas, NumPy, Matplotlib, Seaborn, Plotly</span>
-                  <a href="Plot.html" class="project-btn">Open Project</a>
-                </div>
-                <div class="card">
-                  <h2>Customer Segmentation</h2>
-                  <p>Cluster customers based on buying behavior using K-Means and Hierarchical Clustering.</p>
-                  <span>Technologies: Python, Scikit-learn, Matplotlib, Seaborn</span>
-                  <a href="#" class="project-btn">Yet to add</a>
-                </div>
-                <div class="card">
-                  <h2>Churn Prediction</h2>
-                  <p>Identify customers likely to leave the service using classification algorithms.</p>
-                  <span>Technologies: Python, TensorFlow, Keras, Scikit-learn</span>
-                  <a href="#" class="project-btn">yet to add</a>
-                </div>
-                <div class="card">
-                  <h2>Sentiment Analysis</h2>
-                  <p>Analyze customer feedback to determine sentiment using Natural Language Processing.</p>
-                  <span>Technologies: Python, NLTK, VADER, TextBlob</span>
-                  <a href="#" class="project-btn">yet to add</a>
-                </div>
+                  <img src="/images/OIP.jpg" alt="Customer Segmentation" class="project-image">
+                  <h2>Walmart-Sales-Analysis</h2>
+                  <p>Optimizing Sales with Data Insights, Predictive Models, and Strategy Alignment</p>
+                  <span>Technologies: Python, Scikit-learn, Stats, RandomForestRegressor, Matplotlib, Seaborn</span>
+                  <a href="/Walmart-Analysis/Walmart.html" class="project-btn">Open Project</a>
               </div>
 
+                <div class="card">
+                    <img src="/images/US Air.jpg" alt="US Air Quality Analysis" class="project-image">
+                    <h2>US-Air Quality Analysis</h2>
+                    <p>Analyze U.S. air pollution trends using AQI data to compare regions, track patterns, and assess environmental health.</p>
+                    <span>Technologies: Python, Pandas, NumPy, Matplotlib, Seaborn, Plotly</span>
+                    <a href="Plot.html" class="project-btn">Working</a>
+                </div><br>
+                
+                <div class="card">
+                    <h2>Churn Prediction</h2>
+                    <p>Yet to Add.</p>
+                    <span>Technologies: </span>
+                    <a href="#" class="project-btn">Yet to add</a>
+                </div>
+                <div class="card">
+                    <h2>Sentiment Analysis</h2>
+                    <p>Yet to Add</p>
+                    <span>Technologies:</span>
+                    <a href="#" class="project-btn">Yet to add</a>
+                </div>
+            </div>
              <!-- <div style="text-align: center;"> 
                 <a href="all-projects.html" class="see-all-btn" style="display: inline-block; margin-top: 40px; padding: 10px 20px; background-color: #d92332; color: white; text-decoration: none; border-radius: 5px; transition: background-color 0.3s;" onmouseover="this.style.backgroundColor='#b71c28'" onmouseout="this.style.backgroundColor='#d92332'">See All Projects</a>
               </div>-->
