@@ -205,3 +205,18 @@ function redirect(url) {
     });
 }
 
+// for mobile ms of dataset
+document.addEventListener("DOMContentLoaded", function () {
+    // Function to check if the device is a mobile device
+    function isMobileDevice() {
+        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    }
+
+    // Get the mobile message element
+    const mobileMessage = document.getElementById("mobile-message");
+
+    // Show the message if the device is mobile
+    if (isMobileDevice()) {
+        mobileMessage.style.display = "block";
+    }
+});
