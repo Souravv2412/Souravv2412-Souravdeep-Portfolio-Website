@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dataset - US Air Pollution</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+  <style>
+    /* Global Styles */
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      background-color: #f4f4f9;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    /* Navbar Styles */
+    .navigationWrapper {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px;
+      background-color: #222;
+      box-shadow: 0 5px 15px 0 rgba(0, 0, 0, 0.25);
+      color: white;
+      text-transform: uppercase;
+    }
+
+    .logoWrapper {
+      display: flex;
+    }
+
+    .stylish {
+      font-weight: bold;
+    }
+
+    .logo {
+      padding-left: 4px;
+      color: #ea4f4c;
+    }
+
+    .navigation {
+      display: flex;
+      list-style-type: none;
+    }
+
+    .parent {
+      padding: 0 10px;
+      cursor: pointer;
+    }
+
+    .link {
+      text-decoration: none;
+      color: white;
+      transition: color 0.3s;
+    }
+
+    .link:hover {
+      color: #ea4f4c;
+    }
+
+    .toggle {
+      display: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: white;
+    }
+
+    .menu {
+      display: none;
+    }
+
+    /* Responsive Navbar */
+    /* Responsive Navbar */
+@media (max-width: 768px) {
+  .navigation {
+    display: none;
+  }
+
+  .toggle {
+    display: block;
+  }
+
+  .menu.active {
+    display: block;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    background: #222;
+    z-index: 1;
+  }
+
+  .menu ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .menu ul li {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 1px solid #444;
+  }
+
+  .menu ul li a {
+    text-decoration: none;
+    color: white;
+    transition: color 0.3s;
+  }
+
+  .menu ul li a:hover {
+    color: #ea4f4c;
+  }
+}
+
+
+    /* Section Styling */
+    .section {
+      padding: 30px 20px;
+      margin: 20px;
+      background: #ffffff;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .section h2 {
+      text-align: center;
+    }
+
+    .plot img {
+      width: 100%;
+      max-width: 900px;
+      height: auto;
+      border-radius: 8px;
+    }
+
+    #downloadButton {
+      padding: 12px 30px;
+      font-size: 18px;
+      cursor: pointer;
+      background-color: #FF6F61;
+      color: white;
+      border: none;
+      border-radius: 50px;
+      transition: 0.3s;
+      margin-top: 20px;
+      display: block;
+      text-align: center;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    #downloadButton:hover {
+      background-color: #d92332;
+    }
+
+    footer {
+      margin-top: 40px;
+      text-align: center;
+      padding: 20px;
+      background: #333;
+      color: white;
+    }
+
+    footer a {
+      color: #d92332;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+
+    table, th, td {
+      border: 1px solid #ddd;
+    }
+
+    th, td {
+      padding: 12px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    tr:hover {
+      background-color: #f5f5f5;
+    }
+
+    body { font-family: Arial, sans-serif; margin: 20px; padding: 20px; }
+    h1, h2 { color: #333; }
+    p { line-height: 1.6; }
+    ul { margin-left: 20px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { border: 1px solid black; padding: 8px; text-align: left; }
+    th { background-color: #f2f2f2; }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navigationWrapper">
+    <div class="logoWrapper">
+      <span class="stylish">US  </span>
+      <span class="logo">AirPollution</span>
+    </div>
+    <ul class="navigation">
+      <li class="parent"><a class="link" href="index.html">Home</a></li>
+      <li class="parent"><a class="link" href="Plot.html">Visualization</a></li>
+      <li class="parent"><a class="link" href="Dataset.html">Dataset</a></li>
+      <li class="parent"><a class="link" href="Describtion.html">Description</a></li>
+    </ul>
+    <div class="toggle"><i class="fa fa-bars"></i></div>
+  </nav>
+  <div class="menu">
+    <ul>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="Plot.html">Visualization</a></li>
+      <li><a href="Dataset.html">Dataset</a></li>
+      <li><a href="Describtion.html">Description</a></li>
+    </ul>
+  </div>
+
+  <!-- Table Section -->
+  <section class="section" id="tableSection">
+    <h2>Dataset Overview</h2>
+
+    <ul>
+      <li><strong>Source:</strong><h3> You can access the dataset through the following link: <a href="https://data.world/data-society/us-air-pollution-data" target="_blank">US Air Pollution Data - Data Society</a></h3></li>
+      </li>
+  </ul>
+
+  <h2>Sample Data</h2>
+    <!-- Table -->
+    <table id="dataTable">
+      <thead>
+        <tr id="tableHeaders">
+          <!-- Column headers will be inserted here -->
+        </tr>
+      </thead>
+      <tbody id="tableBody">
+        <!-- Data rows will be inserted here -->
+      </tbody>
+    </table>
+
+    <ul>
+      <li><strong>Note:</strong> If dataset is not downloding using the below link try downloding from source link  </li>
+      </li>
+  </ul>
+
+    <center>
+      <button id="downloadButton">Download Dataset as Excel</button>
+    </center>
+
+
+  <!-- Footer -->
+  <footer>
+    Created by <a href="#">Souravdeep</a> | © 2023 All rights reserved.
+  </footer>
+
+  <script>
+    
+    const dataset = [
+  ['Date', 'State', 'City', 'NO₂', 'SO₂', 'O₃', 'PM2.5', 'PM10', 'AQI'],
+  ['2023-01-01', 'California', 'Los Angeles', 25, 12, 40, 35, 50, 120],
+  ['2023-01-02', 'Texas', 'Houston', 18, 8, 35, 28, 45, 100],
+  ['2023-01-03', 'New York', 'NYC', 22, 10, 38, 30, 48, 110],
+  ['2023-01-04', 'Florida', 'Miami', 15, 5, 25, 20, 38, 90],
+  ['2023-01-05', 'Illinois', 'Chicago', 20, 7, 30, 25, 42, 95],
+];
+
+
+    function populateTable() {
+      // Populate headers
+      const headers = dataset[0];
+      const headerRow = headers.map(header => `<th>${header}</th>`).join('');
+      document.getElementById('tableHeaders').innerHTML = headerRow;
+
+      // Populate data rows
+      const rows = dataset.slice(1);
+      const tableBody = rows.map(row => {
+        return `<tr>${row.map(cell => `<td>${cell}</td>`).join('')}</tr>`;
+      }).join('');
+
+      document.getElementById('tableBody').innerHTML = tableBody;
+    }
+
+    function downloadTableAsExcel() {
+      const ws = XLSX.utils.aoa_to_sheet(dataset);
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, 'Dataset');
+
+      const wbout = XLSX.write(wb, { bookType: 'xlsx', type: 'binary' });
+
+      function s2ab(s) {
+        const buf = new ArrayBuffer(s.length);
+        const view = new Uint8Array(buf);
+        for (let i = 0; i < s.length; i++) {
+          view[i] = s.charCodeAt(i) & 0xFF;
+        }
+        return buf;
+      }
+
+      saveAs(new Blob([s2ab(wbout)], { type: 'application/octet-stream' }), 'dataset.xlsx');
+    }
+
+    // Call the populateTable function to load the dataset initially
+    populateTable();
+
+    document.getElementById('downloadButton').addEventListener('click', function () {
+      const fileUrl = 'pollution_us_2000_2016.csv';
+      const link = document.createElement('a');
+      link.href = fileUrl;
+      link.download = 'US-Data-pollution.csv';
+      link.click();
+    });
+
+    $(document).ready(function () {
+      $('.toggle').click(function () {
+        $('.menu').toggleClass('active');
+      });
+    });
+  </script>
+
+</body>
+</html>
