@@ -21,7 +21,7 @@ Explore the live website: [Souravdeep Singh Portfolio](https://souravv2412.githu
 For collaboration, projects, or inquiries, feel free to reach out via:
 
 - **Email:** singh.s.deep800@gmail.com
-- **LinkedIn:** [Souravdeep Singh]([https://www.linkedin.com/in/souravdeep](https://www.linkedin.com/in/sourav2312/))
+- **LinkedIn:** [Souravdeep Singh]([https://www.linkedin.com/in/souravdeep](https://www.linkedin.com/in/sourav2312)
 
 ---
 
