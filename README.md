@@ -7,16 +7,10 @@ This portfolio showcases Souravdeep's skills, projects, and achievements in the 
 
 ## Sections
 
-- **About Me:** Learn about Souravdeep's educational background, career goals, and technical expertise.
+- **About Me:** Learn about my educational background, career goals, and technical expertise.
 - **Projects:** View various real-world projects that demonstrate his data analysis and web development capabilities.
 - **Skills:** A comprehensive list of technical skills, including Python, Machine Learning, SQL, Web Development, and Data Visualization tools.
-- **Contact:** Get in touch with Souravdeep for collaboration, consulting, or inquiries.
-
-## Technologies Used
-
-- **Languages & Frameworks:** Python, HTML, CSS, JavaScript
-- **Libraries & Tools:** Pandas, NumPy, Tableau, Scikit-Learn
-- **Database:** MySQL
+- **Contact:** Get in touch with me for collaboration, consulting, or inquiries.
 
 ## Live Website
 
@@ -26,8 +20,8 @@ Explore the live website: [Souravdeep Singh Portfolio](https://souravv2412.githu
 
 For collaboration, projects, or inquiries, feel free to reach out via:
 
-- **Email:** souravdeep@example.com
-- **LinkedIn:** [Souravdeep Singh](https://www.linkedin.com/in/souravdeep)
+- **Email:** singh.s.deep800@gmail.com
+- **LinkedIn:** [Souravdeep Singh]([https://www.linkedin.com/in/souravdeep](https://www.linkedin.com/in/sourav2312/))
 
 ---
 
