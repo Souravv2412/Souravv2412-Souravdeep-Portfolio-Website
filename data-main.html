@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en"> 
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Souravdeep Portfolio Website </title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.11/typed.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"/>
+    <base url="https://souravv2412.github.io/Souravv2412-Souravdeep-Portfolio-Website/"/>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+          }
+      
+          .container {
+            padding: 10px;
+          }
+      
+          .title {
+            text-align: center;
+            margin-bottom: 20px;
+          }
+      
+          .projects {
+            display:grid;
+            grid-template-columns: repeat(3, minmax(300px, 1fr));
+            gap: 20px;
+          }
+      
+          .card {
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+          }
+      
+          .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+          }
+      
+          .card h2 {
+            margin-top: 0;
+          }
+      
+          .card span {
+            display: block;
+            margin-top: 8px;
+            font-size: 0.9em;
+            color: #555;
+          }
+      
+          .project-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 15px;
+            background-color: #f91427;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+          }
+      
+          .project-btn:hover {
+            background-color: #a71d28;
+          }
+      
+          @media (max-width: 600px) {
+            .projects {
+              grid-template-columns: 1fr;
+            }
+          }
+          .project-image {
+            width: 100%; /* Make the image take up the full width of the card */
+            height: 200px; /* Set a fixed height for consistency */
+            object-fit: cover; /* Ensure the image covers the area without distortion */
+            border-radius: 8px 8px 0 0; /* Rounded corners at the top */
+            margin-bottom: 15px; /* Add some space below the image */
+        }
+        
+        .card {
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column; /* Stack content vertically */
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+        }
+        
+        .card h2 {
+            margin-top: 0;
+        }
+        
+        .card span {
+            display: block;
+            margin-top: 8px;
+            font-size: 0.9em;
+            color: #555;
+        }
+        
+        .project-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 15px;
+            background-color: #f91427;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            align-self: flex-start; /* Align button to the left */
+        }
+        
+        .project-btn:hover {
+            background-color: #a71d28;
+        }
+        </style>
+</head>
+<body>
+    <div class="scroll-up-btn">
+        <i class="fas fa-angle-up"></i>
+    </div>
+    <nav class="navbar">
+        <div class="max-width">
+            <div class="logo"><a href="#"> My<span>Projects </span></a></div>
+            <ul class="menu">
+                <li><a href="index.html" class="menu-btn">Home</a></li>
+                <li><a href="index.html#about" class="menu-btn">About</a></li>
+                <li><a href="index.html#services" class="menu-btn">Projects</a></li>
+                <li><a href="index.html#skills" class="menu-btn">Skills</a></li>
+                <li><a href="index.html#teams" class="menu-btn">Experiences</a></li>
+                <li><a href="index.html#contact" class="menu-btn">Contact</a></li>
+            </ul>
+            <div class="menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+  
+    <section class="services" id="services">
+        <div class="max-width">
+          <div class="serv-content">
+            <div class="container">
+              <div class="projects">
+                <div class="card">
+                  <img src="Data-Analysis/Walmart-Analysis/img/OIP.jpg" alt="Customer Segmentation" class="project-image">
+                  <h2>Walmart-Sales-Analysis</h2>
+                  <p>Optimizing Sales with Data Insights, Predictive Models, and Strategy Alignment</p>
+                  <span>Technologies: Python, Scikit-learn, Stats, RandomForestRegressor, Matplotlib, Seaborn</span>
+                  <a href="Data-Analysis/Walmart-Analysis/Walmart.html" class="project-btn">Open Project</a>
+              </div>
+
+                <div class="card">
+                    <img src="Data-Analysis/US-Air Pollution/img/US Air.jpg" alt="US Air Quality Analysis" class="project-image">
+                    <h2>US-Air Quality Analysis</h2>
+                    <p>Analyze U.S. air pollution trends using AQI data to compare regions, track patterns, and assess environmental health.</p>
+                    <span>Technologies: Python, Pandas, NumPy, Matplotlib, Seaborn, Plotly</span>
+                    <a href="Data-Analysis/US-Air Pollution/Analysis-US.html" class="project-btn">Open Project</a>
+                </div>
+                
+                <div class="card">
+                    <img src="Data-Analysis/Deforestation/Img/Forest.jpg" alt="Global Forest Watch" class="project-image">
+                    <h2>Global Forest Watch Analysis</h2>
+                    <p>Analyzing global deforestation patterns, carbon emissions, and forest cover changes using satellite data.</p>
+                    <span>Technologies: Tableau, Excel, Data Cleaning, Geospatial Analysis, Dashboard Creation</span>
+                    <a href="Data-Analysis/Deforestation/Deforestation.html" class="project-btn">Open Project</a>
+                </div>
+                
+                <div class="card">
+                    <h2>Churn Prediction</h2>
+                    <p>Yet to Add.</p>
+                    <span>Technologies: </span>
+                    <a href="#" class="project-btn">Yet to add</a>
+                </div>
+                <div class="card">
+                    <h2>Sentiment Analysis</h2>
+                    <p>Yet to Add</p>
+                    <span>Technologies:</span>
+                    <a href="#" class="project-btn">Yet to add</a>
+                </div>
+            </div>
+            </div>
+          </div>
+        </div>
+      </section>
+  
+    <div class="social-icons-container">
+        <a href="https://www.instagram.com/souravv2412/" target="_blank" class="social-icon instagram-icon"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.linkedin.com/in/sourav2312/" target="_blank" class="social-icon linkedin-icon"><i class="fab fa-linkedin-in"></i></a>
+        <a href="mailto:singh.s.deep800@gmail.com" class="social-icon gmail-icon"><i class="far fa-envelope"></i></a>
+        <a href="https://www.hackerrank.com/Sourav2312/" target="_blank" class="social-icon hackerrank-icon"><i class="fab fa-hackerrank"></i></a>
+    </div><br><br><br>
+
+    <!-- Include the Font Awesome library -->
+    <script src="https://kit.fontawesome.com/your-font-awesome-kit.js" crossorigin="anonymous"></script>
+
+    <!-- footer section start -->
+    <footer>
+        <span>Created By <a href="#">Souravdeep</a> | <span class="far fa-copyright"></span> 2023 All rights reserved.</span>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script>
+        document.onmousedown = rightclickD; function rightclickD(e) { e = e||event; if (e.button == 2) { alert('Hey im sourav ,Function is Disabled...'); 
+        return false; } }
+    </script>
+</body>
+</html>
