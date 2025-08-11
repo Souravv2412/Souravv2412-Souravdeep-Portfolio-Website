@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en"> 
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Global Forest Watch Description </title>
+    <link rel="stylesheet" href="../../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/typed.js/2.0.11/typed.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/jquery.waypoints.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css"/>
+    <style>
+        /* Navbar styling */
+        .navbar {
+            position: fixed;
+            width: 100%;
+            z-index: 999;
+            padding: 15px 0;
+            font-family: 'Ubuntu', sans-serif;
+            background:crimson;
+            transition: none;
+        }
+
+        .navbar .max-width {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .navbar .logo a {
+            color: #fff;
+            font-size: 35px;
+            font-weight: 600;
+        }
+
+        .navbar .logo a span {
+            color: #fff;
+            transition: none;
+        }
+
+        .navbar .menu li {
+            list-style: none;
+            display: inline-block;
+        }
+
+        .navbar .menu li a {
+            display: block;
+            color: #fff;
+            font-size: 18px;
+            font-weight: 500;
+            margin-left: 25px;
+            transition: none;
+        }
+
+        .navbar .menu li a:hover {
+            color: #111111;
+            opacity: 0.8;
+        }
+
+        .navbar.sticky {
+            padding: 15px 0;
+            background: crimson;
+        }
+
+        .navbar.sticky .logo a span {
+            color: #fff;
+        }
+
+        .navbar.sticky .menu li a:hover {
+            color: #fff;
+        }
+
+        /* Menu button styling */
+        .menu-btn {
+            color: #fff;
+            font-size: 23px;
+            cursor: pointer;
+            display: none;
+        }
+
+        /* Scroll-up button styling */
+        .scroll-up-btn {
+            position: fixed;
+            height: 45px;
+            width: 42px;
+            background: crimson;
+            right: 30px;
+            bottom: 10px;
+            text-align: center;
+            line-height: 45px;
+            color: #fff;
+            z-index: 9999;
+            font-size: 30px;
+            border-radius: 6px;
+            border-bottom-width: 2px;
+            cursor: pointer;
+            opacity: 0;
+            pointer-events: none;
+            transition: all 0.3s ease;
+        }
+
+        .scroll-up-btn.show {
+            bottom: 30px;
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .scroll-up-btn:hover {
+            filter: brightness(90%);
+        }
+
+        .social-icons-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 5px;
+        }
+
+        .social-icon {
+            display: inline-block;
+            margin: 0 10px;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            background-color: #fff;
+            border-radius: 50%;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            line-height: 40px;
+            color: #333;
+            font-size: 18px;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .instagram-icon {
+            background-color: crimson;
+            color: #fff;
+        }
+
+        .linkedin-icon {
+            background-color: #0077B5;
+            color: #fff;
+        }
+
+        .gmail-icon {
+            background-color: #D44638;
+            color: #fff;
+        }
+
+        .hackerrank-icon {
+            background-color: #2EC866;
+            color: #fff;
+        }
+
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+        }
+
+    
+        @media (max-width: 947px) {
+            .menu-btn {
+                display: block;
+                position: relative;
+                z-index: 999;
+                color: #fff;
+            }
+
+            .menu-btn i.active:before {
+                content: "\f00d";
+            }
+
+            .navbar .menu {
+                position: fixed;
+                height: 100vh;
+                width: 100%;
+                left: -100%;
+                top: 0;
+                background:crimson;
+                text-align: center;
+                padding-top: 80px;
+                transition: all 0.3s ease;
+            }
+
+            .navbar .menu.active {
+                left: 0;
+            }
+
+            .navbar .menu li {
+                display: block;
+            }
+
+            .navbar .menu li a {
+                display: inline-block;
+                margin: 20px 0;
+                font-size: 25px;
+                color: #fff;
+            }
+
+            .navbar .menu li a:hover {
+                color: #fff;
+                opacity: 0.8;
+            }
+        }
+        /* Use more specific selectors for the description page */
+.description-container {
+    max-width: 90%;
+    margin: 50px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    line-height: 1.6;
+}
+
+.description-container h1, .description-container h2 {
+    color:crimson;
+}
+
+.description-container ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.description-container ul li {
+    background: #f9f9f9;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 4px;
+    border-left: 4px solid crimson;
+}
+
+.description-container p {
+    margin-bottom: 15px;
+}
+
+.description-container a {
+    color:crimson;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.description-container a:hover {
+    text-decoration: underline;
+}
+
+.citation {
+    font-style: italic;
+    background: #f0f0f0;
+    padding: 10px;
+    border-radius: 4px;
+    margin: 10px 0;
+}
+
+.caution {
+    background: #fff3cd;
+    padding: 15px;
+    border-radius: 4px;
+    border-left: 4px solid #ffc107;
+    margin: 15px 0;
+}
+    </style>
+</head>
+<body>
+    <div class="scroll-up-btn">
+        <i class="fas fa-angle-up"></i>
+    </div>
+    <nav class="navbar">
+        <div class="max-width">
+            <div class="logo"><a href="#"> Global<span>Forest Watch</span></a></div>
+            <ul class="menu">
+                <li><a href="../../index.html" class="menu-btn">Home</a></li>
+                <li><a href="../Deforestation/Deforestation.html" class="menu-btn">Analysis</a></li>
+                <li><a href="../Deforestation/Deforestation-Dataset.html" class="menu-btn">Dataset</a></li>
+                <li><a href="../Deforestation/Deforestation-Description.html" class="menu-btn">Description</a></li>
+            </ul>
+            <div class="menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav><br><br><br><br>
+  
+    <div class="description-container">
+        <center><h1>Global Forest Watch Dataset Description</h1></center><br>
+        <h2>Dataset Overview</h2><br>
+        <p>
+            This comprehensive dataset provides insights into global forest cover change, carbon fluxes, and deforestation drivers at national and sub-national levels. It includes:
+        </p>
+        <ul>
+            <li>Tree cover extent and primary forest extent</li>
+            <li>Aboveground live woody biomass (AGB) stocks and densities</li>
+            <li>Annual tree cover loss (2001-2023)</li>
+            <li>Annual tree cover loss by dominant driver</li>
+            <li>Annual primary forest loss (2002-2023)</li>
+            <li>Annual forest greenhouse gas (GHG) emissions</li>
+            <li>Average annual forest CO₂ removals (sequestration)</li>
+            <li>Average annual net GHG flux</li>
+        </ul><br><br>
+        
+        <h2>Data Categories</h2>
+        <ul>
+            <li><strong>Country tree cover loss:</strong> Hectares of tree cover loss at national level (2001-2023) by canopy cover %</li>
+            <li><strong>Country primary loss:</strong> Hectares of primary forest loss at national level (2002-2023) at 30% canopy density</li>
+            <li><strong>Country carbon data:</strong> Aboveground biomass stocks/densities (2000); average annual GHG emissions/removals (2001-2023)</li>
+            <li><strong>Country drivers:</strong> Tree cover loss by dominant driver (2001-2023) at 30% canopy density</li>
+            <li><strong>Subnational data:</strong> Similar metrics at first sub-national level (state/province)</li>
+        </ul><br><br>
+        
+        <h2>Key Methodologies</h2>
+        <p>The data was produced using:</p>
+        <ul>
+            <li>Tree cover data from University of Maryland's GLAD lab and Google (Hansen et al. 2013)</li>
+            <li>Primary forest definition by Turubanova et al. 2018</li>
+            <li>Tree cover loss drivers from Curtis et al. 2018</li>
+            <li>Carbon densities and fluxes from Harris et al. 2021</li>
+        </ul><br><br>
+        
+        <h2>Citations</h2>
+        <div class="citation">
+            Hansen, M.C., P.V. Potapov, R. Moore, et al. 2013. "High-Resolution Global Maps of 21st-Century Forest Cover Change." Science 342: 850–53.<br><br>
+            Turubanova, S., Potapov, P.V., Tyukavina, A. and Hansen, M.C., 2018. Ongoing primary forest loss in Brazil, Democratic Republic of the Congo, and Indonesia. Environmental Research Letters, 13(7), p.074028.<br><br>
+            Harris, N.L., D.A. Gibbs, A. Baccini, et al. 2021. "Global maps of twenty-first century forest carbon fluxes." Nature Climate Change 11: 234-240.
+        </div><br><br>
+        
+        <h2>Important Cautions</h2>
+        <div class="caution">
+            <p>"Tree cover" includes all vegetation >5m in height (natural forests and plantations). "Loss" indicates removal/mortality and doesn't always equate to deforestation. Emissions and removals data are model outputs with inherent uncertainty. Gross removals and net flux reflect annual averages (2001-2023), not time series trends. Emissions are from stand-replacing disturbances only (not degradation).</p>
+        </div><br><br>
+        
+        <h2>Dataset Source</h2><br>
+        <p>
+            The dataset is sourced from Global Forest Watch. <a href="https://data.globalforestwatch.org/" target="_blank">Access the original data here</a>
+        </p><br><br>
+        
+        <h2>Libraries Used</h2>
+        <ul>
+            <li>Tableau for visualization</li>
+            <li>Pandas for data manipulation</li>
+            <li>NumPy for numerical operations</li>
+            <li>Matplotlib/Seaborn for additional visualizations</li>
+            <li>Geopandas for geospatial analysis</li>
+        </ul>
+    </div>
+    
+    <div class="social-icons-container">
+        <a href="https://www.instagram.com/souravv2412/" target="_blank" class="social-icon instagram-icon"><i class="fab fa-instagram"></i></a>
+        <a href="https://www.linkedin.com/in/sourav2312/" target="_blank" class="social-icon linkedin-icon"><i class="fab fa-linkedin-in"></i></a>
+        <a href="mailto:singh.s.deep800@gmail.com" class="social-icon gmail-icon"><i class="far fa-envelope"></i></a>
+        <a href="https://www.hackerrank.com/Sourav2312/" target="_blank" class="social-icon hackerrank-icon"><i class="fab fa-hackerrank"></i></a>
+    </div><br><br><br>
+
+    <!-- Include the Font Awesome library -->
+    <script src="https://kit.fontawesome.com/your-font-awesome-kit.js" crossorigin="anonymous"></script>
+
+    <!-- footer section start -->
+    <footer>
+        <span>Created By <a href="#">Souravdeep</a> | <span class="far fa-copyright"></span> 2023 All rights reserved.</span>
+    </footer>
+
+    <script src="../../js/script.js"></script>
+</body>
+</html>
