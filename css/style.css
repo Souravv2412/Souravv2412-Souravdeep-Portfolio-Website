@@ -189,7 +189,7 @@ section .title::after {
 /* home section styling */
 .home {
     display: flex;
-    background: url("../images/Banner22.png") no-repeat center;
+    background: url("../images/Banner2.png") no-repeat center;
     height: 100vh;
     color: #fff;
     min-height: 460px;
@@ -1244,5 +1244,6 @@ body {
         left: 10px; /* Adjusted tail position for mobile */
     }
 }
+
 
 
