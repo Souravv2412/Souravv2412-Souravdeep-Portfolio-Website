@@ -220,3 +220,83 @@ document.addEventListener("DOMContentLoaded", function () {
         mobileMessage.style.display = "block";
     }
 });
+
+// ===== CANVAS PARTICLE BURST =====
+const canvas = document.getElementById("dataCanvas");
+const ctx = canvas.getContext("2d");
+let w, h, particles = [];
+
+function resizeCanvas() {
+  w = canvas.width = window.innerWidth;
+  h = canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
+
+class Particle {
+  constructor() {
+    this.reset();
+  }
+  reset() {
+    this.x = Math.random() * w;
+    this.y = Math.random() * h;
+    this.vx = (Math.random() - 0.5) * 2;
+    this.vy = (Math.random() - 0.5) * 2;
+    this.size = Math.random() * 3 + 1;
+    this.opacity = 0;
+    this.targetOpacity = Math.random() * 0.8 + 0.2;
+  }
+  update() {
+    this.x += this.vx;
+    this.y += this.vy;
+    if(this.x < 0 || this.x > w) this.vx *= -1;
+    if(this.y < 0 || this.y > h) this.vy *= -1;
+    this.opacity += (this.targetOpacity - this.opacity) * 0.02;
+  }
+  draw() {
+    ctx.fillStyle = `rgba(34,211,238,${this.opacity})`;
+    ctx.beginPath();
+    ctx.arc(this.x, this.y, this.size, 0, Math.PI*2);
+    ctx.fill();
+  }
+}
+
+for(let i=0;i<120;i++){
+  particles.push(new Particle());
+}
+
+function animateParticles() {
+  ctx.clearRect(0,0,w,h);
+  particles.forEach(p => {
+    p.update();
+    p.draw();
+  });
+  // Connect close particles
+  for(let i=0;i<particles.length;i++){
+    for(let j=i+1;j<particles.length;j++){
+      const dx = particles[i].x - particles[j].x;
+      const dy = particles[i].y - particles[j].y;
+      const dist = Math.sqrt(dx*dx + dy*dy);
+      if(dist < 120){
+        ctx.strokeStyle = `rgba(239,68,68,0.1)`;
+        ctx.beginPath();
+        ctx.moveTo(particles[i].x, particles[i].y);
+        ctx.lineTo(particles[j].x, particles[j].y);
+        ctx.stroke();
+      }
+    }
+  }
+  requestAnimationFrame(animateParticles);
+}
+animateParticles();
+
+// ===== INTRO EXIT / PHOTO & TEXT FADE IN =====
+setTimeout(() => {
+  document.querySelector(".introCenter").style.opacity = 1;
+  setTimeout(() => {
+    const intro = document.getElementById("dataIntro");
+    intro.style.transition = "1.5s";
+    intro.style.opacity = 0;
+    setTimeout(()=>intro.remove(),1500);
+  }, 3000);
+}, 1000);
