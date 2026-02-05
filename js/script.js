@@ -18,12 +18,10 @@ $(document).ready(function () {
     // Slide-up script
     $('.scroll-up-btn').click(function () {
         $('html').animate({ scrollTop: 0 });
-        // Removing smooth scroll on slide-up button click
         $('html').css("scrollBehavior", "auto");
     });
 
     $('.navbar .menu li a').click(function () {
-        // Applying smooth scroll on menu items click
         $('html').css("scrollBehavior", "smooth");
     });
 
@@ -32,30 +30,9 @@ $(document).ready(function () {
         $('.navbar .menu').toggleClass("active");
         $('.menu-btn i').toggleClass("active");
     });
-
-    
-    // Owl carousel script
-    $('.carousel').owlCarousel({
-        margin: 20,
-        loop: true,
-        autoplay: true,
-        autoplayTimeOut: 2000,
-        autoplayHoverPause: true,
-        responsive: {
-            0: {
-                items: 1,
-                nav: false
-            },
-            600: {
-                items: 2,
-                nav: false
-            },
-        }
-    });
 });
 
-/* typing animation*/
-
+/* typing animation */
 document.addEventListener('DOMContentLoaded', function() {
     var typed = new Typed(".typing3", {
         strings: ["Programming", "Data Visualization", "Statistical Analysis", "Business Acumen"],
@@ -74,62 +51,55 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-
-/* Star animation in skills */
+/* Skills section scroll animations - updated for new layout */
 document.addEventListener("DOMContentLoaded", function () {
     const skillsSection = document.getElementById("skills");
+    let hasAnimated = false;
 
-    const animateStars = (entries, observer) => {
+    const animateSkills = (entries, observer) => {
         entries.forEach((entry) => {
-            if (entry.isIntersecting) {
-                // Add the class to trigger the animation
-                const starsContainers = document.querySelectorAll("#skills .stars-container");
-                starsContainers.forEach((container) => {
-                    container.classList.remove("animate-stars"); // Reset animation
-                    void container.offsetWidth; // Trigger reflow to restart animation
-                    container.classList.add("animate-stars"); // Start animation
-                });
-            } else {
-                // Remove the class when the section is out of view
-                const starsContainers = document.querySelectorAll("#skills .stars-container");
-                starsContainers.forEach((container) => {
-                    container.classList.remove("animate-stars");
+            if (entry.isIntersecting && !hasAnimated) {
+                hasAnimated = true;
+                
+                // Animate stat numbers
+                const statNumbers = document.querySelectorAll(".stat-number");
+                statNumbers.forEach((stat, index) => {
+                    setTimeout(() => {
+                        const target = stat.textContent;
+                        const numericValue = parseFloat(target);
+                        const suffix = target.replace(/[0-9.]/g, '');
+                        let current = 0;
+                        const increment = numericValue / 60;
+                        const duration = 1500;
+                        const frameTime = duration / 60;
+
+                        stat.textContent = "0" + suffix;
+
+                        const counter = setInterval(() => {
+                            current += increment;
+                            if (current >= numericValue) {
+                                stat.textContent = target;
+                                clearInterval(counter);
+                            } else {
+                                stat.textContent = Math.floor(current * 10) / 10 + suffix;
+                            }
+                        }, frameTime);
+                    }, index * 150);
                 });
             }
         });
     };
 
-    const observer = new IntersectionObserver(animateStars, {
-        threshold: 5, // Trigger when 50% of the section is visible
+    const observer = new IntersectionObserver(animateSkills, {
+        threshold: 0.3,
     });
 
-    observer.observe(skillsSection);
+    if (skillsSection) {
+        observer.observe(skillsSection);
+    }
 });
 
-
-/*Break line for skills animation in about section title*/ 
-
-  // Function to check if the screen is small (mobile device)
-  function isMobile() {
-    return window.innerWidth <= 768; // Adjust the breakpoint as needed
-  }
-
-  // Add <br> tag only for mobile devices
-  const textDiv = document.querySelector('.text');
-  const typing3Element = document.querySelector('.typing3');
-
-  // Example content for .typing3
-  typing3Element.textContent = '';
-
-  // Add <br> if the screen is small
-  if (isMobile()) {
-    const brElement = document.createElement('br');
-    textDiv.insertBefore(brElement, typing3Element);
-  }
-
-  // chatbot animation
-
-  // Array of random statements
+/* chatbot animation */
 const randomStatements = [
     "Great choice! We are preparing everything for you. Redirecting in a moment...",
     "Awesome! Just a second while we get things ready for you...",
@@ -152,7 +122,6 @@ function cancelChat() {
     chatbot.classList.remove("show");
 }
 
-// Start the conversation with the bot
 function startConversation() {
     const chatWindow = document.getElementById('chatWindow');
     chatWindow.innerHTML = `
@@ -165,7 +134,7 @@ function startConversation() {
         setTimeout(() => {
             chatWindow.innerHTML += `
                 <div class="options-container">
-                    <div class="option" onclick="redirect('All-Project.html')">📂 Projects</div>
+                    <div class="option" onclick="redirect('index.html#projects')">📂 Projects</div>
                     <div class="option" onclick="redirect('index.html#skills')">💡 Skills</div>
                     <div class="option" onclick="redirect('Certificate.html')">🏅 Certifications</div>
                     <div class="option" onclick="redirect('index.html#contact')">📞 Contact</div>
@@ -174,11 +143,10 @@ function startConversation() {
     });
 }
 
-// Type message with delay effect
 function typeMessage(message, callback) {
     let index = 0;
     const typingElement = document.getElementById('typingEffect');
-    typingElement.innerHTML = `<span class="bot-emoji">🤖</span>`; // Bot emoji beside typing
+    typingElement.innerHTML = `<span class="bot-emoji">🤖</span>`;
     const typingInterval = setInterval(() => {
         typingElement.innerHTML += message.charAt(index);
         index++;
@@ -186,10 +154,9 @@ function typeMessage(message, callback) {
             clearInterval(typingInterval);
             if (callback) callback();
         }
-    }, 30); // Increased typing speed
+    }, 30);
 }
 
-// Redirect to specified URL
 function redirect(url) {
     const chatWindow = document.getElementById('chatWindow');
     chatWindow.innerHTML = `
@@ -198,25 +165,106 @@ function redirect(url) {
                 <span class="bot-emoji">🤖</span>
             </p>
         </div>`;
-    // Select a random statement
     const randomStatement = randomStatements[Math.floor(Math.random() * randomStatements.length)];
     typeMessage(randomStatement, function() {
         setTimeout(() => { window.location.href = url; }, 2000);
     });
 }
 
-// for mobile ms of dataset
-document.addEventListener("DOMContentLoaded", function () {
-    // Function to check if the device is a mobile device
-    function isMobileDevice() {
-        return /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+/* ===== CANVAS PARTICLE BURST ===== */
+const canvas = document.getElementById("dataCanvas");
+if (canvas) {
+    const ctx = canvas.getContext("2d");
+    let w, h, particles = [];
+
+    function resizeCanvas() {
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+    }
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
+
+    class Particle {
+        constructor() {
+            this.reset();
+        }
+        reset() {
+            this.x = Math.random() * w;
+            this.y = Math.random() * h;
+            this.vx = (Math.random() - 0.5) * 2;
+            this.vy = (Math.random() - 0.5) * 2;
+            this.size = Math.random() * 3 + 1;
+            this.opacity = 0;
+            this.targetOpacity = Math.random() * 0.8 + 0.2;
+        }
+        update() {
+            this.x += this.vx;
+            this.y += this.vy;
+            if(this.x < 0 || this.x > w) this.vx *= -1;
+            if(this.y < 0 || this.y > h) this.vy *= -1;
+            this.opacity += (this.targetOpacity - this.opacity) * 0.02;
+        }
+        draw() {
+            ctx.fillStyle = `rgba(34,211,238,${this.opacity})`;
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI*2);
+            ctx.fill();
+        }
     }
 
-    // Get the mobile message element
-    const mobileMessage = document.getElementById("mobile-message");
-
-    // Show the message if the device is mobile
-    if (isMobileDevice()) {
-        mobileMessage.style.display = "block";
+    for(let i=0;i<120;i++){
+        particles.push(new Particle());
     }
-});
+
+    function animateParticles() {
+        ctx.clearRect(0,0,w,h);
+        particles.forEach(p => {
+            p.update();
+            p.draw();
+        });
+        // Connect close particles
+        for(let i=0;i<particles.length;i++){
+            for(let j=i+1;j<particles.length;j++){
+                const dx = particles[i].x - particles[j].x;
+                const dy = particles[i].y - particles[j].y;
+                const dist = Math.sqrt(dx*dx + dy*dy);
+                if(dist < 120){
+                    ctx.strokeStyle = `rgba(239,68,68,0.1)`;
+                    ctx.beginPath();
+                    ctx.moveTo(particles[i].x, particles[i].y);
+                    ctx.lineTo(particles[j].x, particles[j].y);
+                    ctx.stroke();
+                }
+            }
+        }
+        requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+
+    /* ===== INTRO EXIT / PHOTO & TEXT FADE IN - ONLY ONCE PER SESSION ===== */
+    // Check if intro has already been shown in this session
+    const introShown = sessionStorage.getItem('introShown');
+    
+    if (!introShown) {
+        // Show intro animation
+        setTimeout(() => {
+            document.querySelector(".introCenter").style.opacity = 1;
+            setTimeout(() => {
+                const intro = document.getElementById("dataIntro");
+                intro.style.transition = "1.5s";
+                intro.style.opacity = 0;
+                setTimeout(() => {
+                    intro.remove();
+                    // Mark intro as shown for this session
+                    sessionStorage.setItem('introShown', 'true');
+                }, 1500);
+            }, 3000);
+        }, 1000);
+    } else {
+        // Skip intro, remove it immediately
+        const intro = document.getElementById("dataIntro");
+        if (intro) {
+            intro.remove();
+        }
+    }
+}
