@@ -269,7 +269,7 @@ if (canvas) {
     }
 }
 
-// ===== FLUID ANIMATION FOR HOME SECTION =====
+// ===== FLUID ANIMATION FOR HOME SECTION - MOBILE FIXED VERSION =====
 (function() {
   const config = {
     SIM_RESOLUTION: 128,
@@ -292,6 +292,15 @@ if (canvas) {
   // Only initialize if we're on the home page and the fluid canvas exists
   const fluidCanvas = document.getElementById("fluid");
   if (!fluidCanvas) return;
+
+  // Add flag to track if we're on mobile
+  const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+  
+  // Disable on mobile or reduce interaction
+  if (isMobile) {
+    // On mobile, just show static effect or reduce interaction
+    config.SPLAT_FORCE = 2000; // Reduce force
+  }
 
   // Pointer interface
   function pointerPrototype() {
@@ -316,11 +325,32 @@ if (canvas) {
   let dye, velocity, divergence, curlFBO, pressureFBO;
   let lastUpdateTime = Date.now();
   let colorUpdateTimer = 0.0;
+  let isScrolling = false;
+  let scrollTimeout;
 
   // Programs
   let copyProgram, clearProgram, splatProgram, advectionProgram;
   let divergenceProgram, curlProgram, vorticityProgram, pressureProgram;
   let gradienSubtractProgram, displayMaterial;
+
+  // Helper function to check if we should handle touch
+  function shouldHandleTouch(e) {
+    // Don't handle touch if we're scrolling
+    if (isScrolling) return false;
+    
+    // Check if the target is interactive
+    const target = e.target;
+    const interactiveElements = ['A', 'BUTTON', 'INPUT', 'TEXTAREA', 'SELECT', 'OPTION'];
+    if (interactiveElements.includes(target.tagName) || 
+        target.closest('.menu-btn') || 
+        target.closest('.navbar') || 
+        target.closest('#chatIcon') || 
+        target.closest('.social-icon')) {
+      return false;
+    }
+    
+    return true;
+  }
 
   function initializeWebGL() {
     const params = {
@@ -611,6 +641,14 @@ if (canvas) {
 
       void main () {
           vec3 c = texture2D(uTexture, vUv).rgb;
+          
+          // Boost color saturation and brightness for more vibrant output
+          c = c * 1.3; // Boost overall brightness
+          
+          // Saturation boost
+          float gray = dot(c, vec3(0.299, 0.587, 0.114));
+          c = mix(vec3(gray), c, 1.4); // 1.4 = saturation multiplier
+          
           #ifdef SHADING
               vec3 lc = texture2D(uTexture, vL).rgb;
               vec3 rc = texture2D(uTexture, vR).rgb;
@@ -628,7 +666,7 @@ if (canvas) {
           #endif
 
           float a = max(c.r, max(c.g, c.b));
-          gl_FragColor = vec4(c, a * 0.8); // Slight transparency
+          gl_FragColor = vec4(c, a * 0.8); // Keep transparency
       }
     `;
 
@@ -1075,25 +1113,36 @@ if (canvas) {
     return { r, g, b };
   }
 
- function generateColor() {
-  // Use full saturation (1.0) and higher value/brightness
-  const c = HSVtoRGB(Math.random(), 0.9, 0.9); // High saturation, high brightness
-  
-  // Increase color intensity - was 0.15, now 0.4-0.6 range with variation
-  const intensity = 0.4 + (Math.random() * 0.3); // Range: 0.4 to 0.7
-  
-  c.r *= intensity;
-  c.g *= intensity;
-  c.b *= intensity;
-  
-  // Occasionally boost one channel for more variety
-  const channelBoost = Math.floor(Math.random() * 3);
-  if (channelBoost === 0) c.r *= 1.5;
-  else if (channelBoost === 1) c.g *= 1.5;
-  else c.b *= 1.5;
-  
-  return c;
-}
+  // UPDATED: More vibrant color generation
+  function generateColor() {
+    // Create vibrant colors with high saturation and brightness
+    let hue;
+    
+    // Mix between warm and cool colors for variety
+    if (Math.random() > 0.5) {
+      hue = 0.0 + (Math.random() * 0.15); // Warm range (reds, oranges, yellows)
+    } else {
+      hue = 0.6 + (Math.random() * 0.3); // Cool range (blues, purples)
+    }
+    
+    // High saturation (0.9-1.0) and high brightness (0.9-1.0)
+    const c = HSVtoRGB(hue, 0.95, 0.95);
+    
+    // Boost intensity to 0.5-0.9 range
+    const intensity = 0.5 + (Math.random() * 0.4);
+    
+    c.r *= intensity;
+    c.g *= intensity;
+    c.b *= intensity;
+    
+    // Randomly boost one channel for more variety
+    const channelBoost = Math.floor(Math.random() * 3);
+    if (channelBoost === 0) c.r *= 1.5;
+    else if (channelBoost === 1) c.g *= 1.5;
+    else c.b *= 1.5;
+    
+    return c;
+  }
 
   function wrap(value, min, max) {
     const range = max - min;
@@ -1348,59 +1397,62 @@ if (canvas) {
     splat(pointer.texcoordX, pointer.texcoordY, dx, dy, pointer.color);
   }
 
+  // UPDATED: More vibrant click splat
   function clickSplat(pointer) {
-  const color = generateColor();
-  // Increase the multiplier from 10 to 15-25 for more impact
-  const multiplier = 15 + (Math.random() * 10);
-  color.r *= multiplier;
-  color.g *= multiplier;
-  color.b *= multiplier;
-  
-  const dx = 10 * (Math.random() - 0.5);
-  const dy = 30 * (Math.random() - 0.5);
-  splat(pointer.texcoordX, pointer.texcoordY, dx, dy, color);
-}
+    const color = generateColor();
+    // Increase multiplier for more impact (15-25 range)
+    const multiplier = 15 + (Math.random() * 10);
+    color.r *= multiplier;
+    color.g *= multiplier;
+    color.b *= multiplier;
+    
+    const dx = 10 * (Math.random() - 0.5);
+    const dy = 30 * (Math.random() - 0.5);
+    splat(pointer.texcoordX, pointer.texcoordY, dx, dy, color);
+  }
 
+  // UPDATED: Enhanced splat with velocity multiplier
   function splat(x, y, dx, dy, color) {
-  splatProgram.bind();
-  if (splatProgram.uniforms.uTarget) {
-    gl.uniform1i(splatProgram.uniforms.uTarget, velocity.read.attach(0));
-  }
-  if (splatProgram.uniforms.aspectRatio) {
-    gl.uniform1f(
-      splatProgram.uniforms.aspectRatio,
-      canvas.width / canvas.height
-    );
-  }
-  if (splatProgram.uniforms.point) {
-    gl.uniform2f(splatProgram.uniforms.point, x, y);
-  }
-  
-  // Velocity splat - increase force for more energetic movement
-  const velocityMultiplier = 1.5; // Increase from default
-  if (splatProgram.uniforms.color) {
-    gl.uniform3f(splatProgram.uniforms.color, dx * velocityMultiplier, dy * velocityMultiplier, 0);
-  }
-  
-  if (splatProgram.uniforms.radius) {
-    gl.uniform1f(
-      splatProgram.uniforms.radius,
-      correctRadius(config.SPLAT_RADIUS / 100)
-    );
-  }
-  blit(velocity.write);
-  velocity.swap();
+    splatProgram.bind();
+    if (splatProgram.uniforms.uTarget) {
+      gl.uniform1i(splatProgram.uniforms.uTarget, velocity.read.attach(0));
+    }
+    if (splatProgram.uniforms.aspectRatio) {
+      gl.uniform1f(
+        splatProgram.uniforms.aspectRatio,
+        canvas.width / canvas.height
+      );
+    }
+    if (splatProgram.uniforms.point) {
+      gl.uniform2f(splatProgram.uniforms.point, x, y);
+    }
+    
+    // Velocity splat - increase force for more energetic movement
+    const velocityMultiplier = 1.5;
+    if (splatProgram.uniforms.color) {
+      gl.uniform3f(splatProgram.uniforms.color, dx * velocityMultiplier, dy * velocityMultiplier, 0);
+    }
+    
+    if (splatProgram.uniforms.radius) {
+      gl.uniform1f(
+        splatProgram.uniforms.radius,
+        correctRadius(config.SPLAT_RADIUS / 100)
+      );
+    }
+    blit(velocity.write);
+    velocity.swap();
 
-  // Dye splat - this is where the color appears
-  if (splatProgram.uniforms.uTarget) {
-    gl.uniform1i(splatProgram.uniforms.uTarget, dye.read.attach(0));
+    // Dye splat - this is where the color appears
+    if (splatProgram.uniforms.uTarget) {
+      gl.uniform1i(splatProgram.uniforms.uTarget, dye.read.attach(0));
+    }
+    if (splatProgram.uniforms.color) {
+      gl.uniform3f(splatProgram.uniforms.color, color.r, color.g, color.b);
+    }
+    blit(dye.write);
+    dye.swap();
   }
-  if (splatProgram.uniforms.color) {
-    gl.uniform3f(splatProgram.uniforms.color, color.r, color.g, color.b);
-  }
-  blit(dye.write);
-  dye.swap();
-}
+
   function correctRadius(radius) {
     const aspectRatio = canvas.width / canvas.height;
     if (aspectRatio > 1) radius *= aspectRatio;
@@ -1443,8 +1495,12 @@ if (canvas) {
     return delta;
   }
 
-  // Event listeners
+  // FIXED: Event listeners with proper mobile handling
   function setupEventListeners() {
+    let touchStartTime = 0;
+    let touchStartY = 0;
+    
+    // Mouse events (desktop) - keep as is
     window.addEventListener("mousedown", (e) => {
       const pointer = pointers[0];
       const posX = scaleByPixelRatio(e.clientX);
@@ -1461,9 +1517,19 @@ if (canvas) {
       updatePointerMoveData(pointer, posX, posY, color);
     });
 
+    // FIXED: Touch events for mobile
     window.addEventListener(
       "touchstart",
       (e) => {
+        // Store touch start time and position for scroll detection
+        touchStartTime = Date.now();
+        touchStartY = e.touches[0].clientY;
+        
+        // Check if we should handle this touch
+        if (!shouldHandleTouch(e)) {
+          return; // Let the browser handle normally
+        }
+        
         e.preventDefault();
         const touches = e.targetTouches;
         const pointer = pointers[0];
@@ -1471,6 +1537,7 @@ if (canvas) {
           const posX = scaleByPixelRatio(touches[i].clientX);
           const posY = scaleByPixelRatio(touches[i].clientY);
           updatePointerDownData(pointer, touches[i].identifier, posX, posY);
+          clickSplat(pointer);
         }
       },
       { passive: false }
@@ -1479,6 +1546,26 @@ if (canvas) {
     window.addEventListener(
       "touchmove",
       (e) => {
+        // Detect if this is a scroll gesture
+        const touchY = e.touches[0].clientY;
+        const deltaY = Math.abs(touchY - touchStartY);
+        const touchDuration = Date.now() - touchStartTime;
+        
+        // If movement is primarily vertical and quick, it's likely a scroll
+        if (deltaY > 20 && touchDuration < 300) {
+          isScrolling = true;
+          // Clear the scrolling flag after a delay
+          clearTimeout(scrollTimeout);
+          scrollTimeout = setTimeout(() => {
+            isScrolling = false;
+          }, 300);
+        }
+        
+        // Check if we should handle this touch
+        if (!shouldHandleTouch(e) || isScrolling) {
+          return; // Let the browser handle scrolling
+        }
+        
         e.preventDefault();
         const touches = e.targetTouches;
         const pointer = pointers[0];
@@ -1494,6 +1581,18 @@ if (canvas) {
     window.addEventListener("touchend", (e) => {
       const pointer = pointers[0];
       pointer.down = false;
+      
+      // Reset scroll flag after touch ends
+      clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        isScrolling = false;
+      }, 100);
+    });
+
+    window.addEventListener("touchcancel", (e) => {
+      const pointer = pointers[0];
+      pointer.down = false;
+      isScrolling = false;
     });
   }
 
