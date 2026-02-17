@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce Churn - The Problem & Dataset</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/ecommerce-project.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</head>
+<body>
+    <!-- Mobile Warning Banner -->
+    <div id="mobile-warning" class="mobile-warning">
+        <i class="fas fa-desktop"></i>
+        <p>For the best viewing experience, please open this page on a desktop or laptop.</p>
+        <button onclick="dismissWarning()">Continue Anyway</button>
+    </div>
+
+    <div class="scroll-up-btn">
+        <i class="fas fa-angle-up"></i>
+    </div>
+
+    <nav class="navbar">
+        <div class="max-width">
+            <div class="logo"><a href="../index.html">Back to <span>Portfolio</span></a></div>
+            <ul class="menu">
+                <li><a href="index.html" class="menu-btn">Overview</a></li>
+                <li><a href="problem.html" class="menu-btn active">The Problem</a></li>
+                <li><a href="insights.html" class="menu-btn">Insights Lab</a></li>
+                <li><a href="dashboard.html" class="menu-btn">Dashboard</a></li>
+                <li><a href="strategy.html" class="menu-btn">Strategy</a></li>
+            </ul>
+            <div class="menu-btn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="max-width">
+            <div class="breadcrumb">
+                <a href="index.html">Overview</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>The Problem</span>
+            </div>
+            <h1 class="page-title">Data & Problem Definition</h1>
+            <p class="page-description">
+                Understanding the business context, exploring the dataset, and defining the critical 0-3 month churn crisis
+            </p>
+        </div>
+    </section>
+
+    <!-- Business Context -->
+    <section class="business-context">
+        <div class="max-width">
+            <h2 class="section-title">The Business Crisis</h2>
+            <div class="crisis-grid">
+                <div class="crisis-card critical">
+                    <div class="crisis-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <h3>16.8% Churn Rate</h3>
+                    <p>947 out of 5,630 customers have churned, representing significant revenue loss</p>
+                </div>
+                <div class="crisis-card warning">
+                    <div class="crisis-icon">
+                        <i class="fas fa-calendar-times"></i>
+                    </div>
+                    <h3>0-3 Month Window</h3>
+                    <p>New customers in their first quarter show the highest risk, with nearly 50% churn rate</p>
+                </div>
+                <div class="crisis-card danger">
+                    <div class="crisis-icon">
+                        <i class="fas fa-dollar-sign"></i>
+                    </div>
+                    <h3>$236K at Risk</h3>
+                    <p>Immediate revenue exposure from at-risk customers without intervention</p>
+                </div>
+            </div>
+
+            <div class="context-detail">
+                <h3>Why This Matters</h3>
+                <p>
+                    Customer acquisition costs in e-commerce typically range from $50-$200 per customer. 
+                    With 947 churned customers, the company has lost between <strong>$47,350 - $189,400</strong> 
+                    in acquisition investments alone, not counting the lost lifetime value of these customers.
+                </p>
+                <p>
+                    The <strong>0-3 month churn crisis</strong> is particularly critical because:
+                </p>
+                <ul class="detail-list">
+                    <li>These customers haven't recovered their acquisition cost</li>
+                    <li>Early negative experiences create lasting brand damage</li>
+                    <li>High early churn signals systemic onboarding or product issues</li>
+                    <li>Prevention is 5-25x cheaper than reacquisition</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dataset Explorer -->
+    <section class="dataset-section">
+        <div class="max-width">
+            <h2 class="section-title">Dataset Explorer</h2>
+            <p class="section-description">
+                Explore both the raw and cleaned versions of the dataset used in this analysis
+            </p>
+
+            <!-- Dataset Tabs -->
+            <div class="dataset-tabs">
+                <button class="dataset-tab-btn active" onclick="switchDataset('raw')">
+                    <i class="fas fa-table"></i>
+                    <span>Raw Dataset</span>
+                </button>
+                <button class="dataset-tab-btn" onclick="switchDataset('cleaned')">
+                    <i class="fas fa-broom"></i>
+                    <span>Cleaned Dataset</span>
+                </button>
+            </div>
+
+            <!-- Raw Dataset Content -->
+            <div id="raw-dataset" class="dataset-content active">
+                <div class="dataset-info">
+                    <div class="info-card">
+                        <i class="fas fa-database"></i>
+                        <div>
+                            <h4>5,630 Customers</h4>
+                            <p>Complete customer records</p>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-columns"></i>
+                        <div>
+                            <h4>20 Features</h4>
+                            <p>Behavioral & demographic data</p>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-calendar"></i>
+                        <div>
+                            <h4>E-Commerce Platform</h4>
+                            <p>Real-world transaction data</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dataset-description">
+                    <h3>About the Raw Dataset</h3>
+                    <p>
+                        This dataset contains the original, unprocessed customer data from an e-commerce platform. 
+                        It includes behavioral patterns, transaction history, satisfaction scores, and churn status 
+                        for 5,630 customers. The raw data requires preprocessing to handle missing values, outliers, 
+                        and prepare features for machine learning models.
+                    </p>
+                </div>
+
+                <div class="dataset-preview" id="raw-preview">
+                    <div class="preview-header">
+                        <h4>Data Preview</h4>
+                        <div class="preview-actions">
+                            <button class="action-btn" onclick="loadDataPreview('raw')">
+                                <i class="fas fa-sync"></i>
+                                Load Preview
+                            </button>
+                            <a href="https://huggingface.co/datasets/souravv24112/Port_Dataset/blob/main/data_ecommerce/E-Commerce%20Churn%20Data.csv" 
+                               target="_blank" class="action-btn primary">
+                                <i class="fas fa-download"></i>
+                                Download Dataset
+                            </a>
+                        </div>
+                    </div>
+                    <div id="raw-table-container" class="table-container">
+                        <div class="loading-state">
+                            <i class="fas fa-spinner fa-spin"></i>
+                            <p>Click "Load Preview" to view the first 10 rows</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cleaned Dataset Content -->
+            <div id="cleaned-dataset" class="dataset-content">
+                <div class="dataset-info">
+                    <div class="info-card">
+                        <i class="fas fa-check-circle"></i>
+                        <div>
+                            <h4>5,630 Records</h4>
+                            <p>No missing values</p>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-chart-bar"></i>
+                        <div>
+                            <h4>Normalized Features</h4>
+                            <p>Ready for modeling</p>
+                        </div>
+                    </div>
+                    <div class="info-card">
+                        <i class="fas fa-code-branch"></i>
+                        <div>
+                            <h4>Feature Engineered</h4>
+                            <p>Enhanced predictive power</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dataset-description">
+                    <h3>About the Cleaned Dataset</h3>
+                    <p>
+                        The cleaned dataset has undergone comprehensive preprocessing and feature engineering. 
+                        This includes handling missing values, removing outliers, encoding categorical variables, 
+                        creating interaction features, and normalizing numerical features. This dataset is production-ready 
+                        for machine learning model training and achieves the 89.3% accuracy reported in this analysis.
+                    </p>
+                    <div class="cleaning-steps">
+                        <h4>Data Cleaning Pipeline:</h4>
+                        <ul>
+                            <li><i class="fas fa-check"></i> Handled missing values using median/mode imputation</li>
+                            <li><i class="fas fa-check"></i> Removed outliers using IQR method</li>
+                            <li><i class="fas fa-check"></i> Encoded categorical variables (Label & One-Hot encoding)</li>
+                            <li><i class="fas fa-check"></i> Created tenure buckets (0-3, 3-6, 6-12, 12+ months)</li>
+                            <li><i class="fas fa-check"></i> Normalized continuous features using StandardScaler</li>
+                            <li><i class="fas fa-check"></i> Performed stratified sampling to handle class imbalance</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="dataset-preview" id="cleaned-preview">
+                    <div class="preview-header">
+                        <h4>Data Preview</h4>
+                        <div class="preview-actions">
+                            <button class="action-btn" onclick="loadDataPreview('cleaned')">
+                                <i class="fas fa-sync"></i>
+                                Load Preview
+                            </button>
+                            <a href="https://huggingface.co/datasets/souravv24112/Port_Dataset/blob/main/data_ecommerce/E-Commerce_Cleaned.csv" 
+                               target="_blank" class="action-btn primary">
+                                <i class="fas fa-download"></i>
+                                Download Dataset
+                            </a>
+                        </div>
+                    </div>
+                    <div id="cleaned-table-container" class="table-container">
+                        <div class="loading-state">
+                            <i class="fas fa-spinner fa-spin"></i>
+                            <p>Click "Load Preview" to view the first 10 rows</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Data Dictionary -->
+    <section class="data-dictionary">
+        <div class="max-width">
+            <h2 class="section-title">Data Dictionary</h2>
+            <p class="section-description">Understanding the features used in the analysis</p>
+
+            <div class="dictionary-grid">
+                <div class="dict-category">
+                    <h3><i class="fas fa-user"></i> Customer Profile</h3>
+                    <div class="dict-items">
+                        <div class="dict-item">
+                            <strong>CustomerID</strong>
+                            <p>Unique identifier for each customer</p>
+                        </div>
+                        <div class="dict-item">
+                            <strong>Tenure</strong>
+                            <p>Months as active customer (0-61 months)</p>
+                        </div>
+                        <div class="dict-item">
+                            <strong>PreferredLoginDevice</strong>
+                            <p>Primary device used: Mobile, Computer, Phone</p>
+                        </div>
+                        <div class="dict-item">
+                            <strong>CityTier</strong>
+                            <p>City classification: Tier 1, 2, or 3</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dict-category">
+                    <h3><i class="fas fa-shopping-cart"></i> Behavioral Metrics</h3>
+                    <div class="dict-items">
+                        <div class="dict-item">
+                            <strong>WarehouseToHome</strong>
+                            <p>Distance between warehouse and customer (km)</p>
+                        </div>
+                        <div class="dict-item">
+                            <strong>PreferredPaymentMode</strong>
+                            <p>Preferred payment method</p>
+                        </div>
+                        <div class="dict-item">
+                            <strong>HourSpendOnApp</strong>
+                            <p>Average hours spent on mobile app</p>
+                        </div>
+                        <div class="dict-item">
+                            <strong>NumberOfDeviceRegistered</strong>
+                            <p>Total devices registered to account</p>
+                        </div>
+                        <div class="dict-item">
+                            <strong>SatisfactionScore</strong>
+                            <p>Customer satisfaction rating (1-5)</p>
+                        </div>
+                        <div class="dict-item">
+                            <strong>OrderCount</strong>
+                            <p>Total number of orders placed</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dict-category">
+                    <h3><i class="fas fa-credit-card"></i> Financial Indicators</h3>
+                    <div class="dict-items">
+                        <div class="dict-item">
+                            <strong>CashbackAmount</strong>
+                            <p>Average cashback earned per order</p>
+                        </div>
+                        <div class="dict-item">
+                            <strong>OrderAmountHikeFromlastYear</strong>
+                            <p>Percentage increase in order value</p>
+                        </div>
+                        <div class="dict-item">
+                            <strong>CouponUsed</strong>
+                            <p>Number of coupons used in last month</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dict-category">
+                    <h3><i class="fas fa-flag"></i> Risk Indicators</h3>
+                    <div class="dict-items">
+                        <div class="dict-item">
+                            <strong>Complain</strong>
+                            <p>Binary: Has filed complaint (Yes/No)</p>
+                        </div>
+                        <div class="dict-item">
+                            <strong>DaySinceLastOrder</strong>
+                            <p>Days since most recent purchase</p>
+                        </div>
+                        <div class="dict-item">
+                            <strong>Churn</strong>
+                            <p>Target variable: Customer churned (1) or active (0)</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Insights Preview -->
+    <section class="insights-preview">
+        <div class="max-width">
+            <h2 class="section-title">Initial Data Insights</h2>
+            <div class="insights-grid">
+                <div class="insight-card">
+                    <div class="insight-number">~50%</div>
+                    <p>Churn rate for customers in 0-3 month tenure</p>
+                </div>
+                <div class="insight-card">
+                    <div class="insight-number">31.7%</div>
+                    <p>Churn rate for customers who filed complaints</p>
+                </div>
+                <div class="insight-card">
+                    <div class="insight-number">3-4</div>
+                    <p>Satisfaction score range showing highest churn</p>
+                </div>
+                <div class="insight-card">
+                    <div class="insight-number">52%</div>
+                    <p>Tenure feature importance in model</p>
+                </div>
+            </div>
+
+            <div class="next-step">
+                <p>Ready to dive deeper into the technical analysis?</p>
+                <a href="insights.html" class="next-btn">
+                    <span>Explore Insights Lab</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="project-footer">
+        <div class="max-width">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <h3>E-Commerce Churn Prediction</h3>
+                    <p>A data analytics project by Souravdeep Singh</p>
+                </div>
+                <div class="footer-right">
+                    <a href="../index.html" class="footer-link">
+                        <i class="fas fa-home"></i>
+                        Back to Portfolio
+                    </a>
+                    <a href="../index.html#contact" class="footer-link">
+                        <i class="fas fa-envelope"></i>
+                        Contact Me
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+    <script src="../js/ecommerce-project.js"></script>
+</body>
+</html>
