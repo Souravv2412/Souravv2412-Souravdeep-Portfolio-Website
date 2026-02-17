@@ -336,27 +336,6 @@ if (canvas) {
   let divergenceProgram, curlProgram, vorticityProgram, pressureProgram;
   let gradienSubtractProgram, displayMaterial;
 
-  // Helper function to check if we should handle touch
-  function shouldHandleTouch(e) {
-    // Don't handle touch if we're scrolling
-    if (isScrolling) return false;
-    
-    // Check if the target is interactive
-    const target = e.target;
-    const interactiveElements = ['A', 'BUTTON', 'INPUT', 'TEXTAREA', 'SELECT', 'OPTION'];
-    if (interactiveElements.includes(target.tagName) || 
-        target.closest('.menu-btn') || 
-        target.closest('.navbar') || 
-        target.closest('#chatIcon') || 
-        target.closest('.social-icon') ||
-        target.closest('.menu') ||
-        target.closest('.max-width')) {
-      return false;
-    }
-    
-    return true;
-  }
-
   function initializeWebGL() {
     const params = {
       alpha: true,
@@ -1118,23 +1097,24 @@ if (canvas) {
     return { r, g, b };
   }
 
-  // SOFTER color generation - back to almost original but with slight warmth
+  // MORE VIBRANT color generation - increased saturation and brightness
   function generateColor() {
-    // Use softer, pastel-like colors
+    // Use more vibrant, saturated colors
     let hue;
     
-    // More subtle color palette
+    // Vibrant color palette - warm and cool tones
     if (Math.random() > 0.5) {
-      hue = 0.0 + (Math.random() * 0.1); // Soft reds/oranges
+      hue = 0.0 + (Math.random() * 0.15); // Vibrant reds/oranges (0-0.15)
     } else {
-      hue = 0.6 + (Math.random() * 0.2); // Soft blues/purples
+      hue = 0.55 + (Math.random() * 0.25); // Vibrant blues/purples (0.55-0.8)
     }
     
-    // Lower saturation (0.4-0.6) and medium brightness (0.5-0.7)
-    const c = HSVtoRGB(hue, 0.5 + (Math.random() * 0.2), 0.6 + (Math.random() * 0.2));
+    // INCREASED saturation (0.75-0.95) for more vibrancy
+    // INCREASED brightness (0.7-0.9) for more visibility
+    const c = HSVtoRGB(hue, 0.75 + (Math.random() * 0.2), 0.7 + (Math.random() * 0.2));
     
-    // Very gentle intensity boost
-    const intensity = 0.25 + (Math.random() * 0.2); // 0.25-0.45 range (much lower)
+    // INCREASED intensity boost for more vibrant appearance
+    const intensity = 0.6 + (Math.random() * 0.3); // 0.6-0.9 range (much higher than before)
     
     c.r *= intensity;
     c.g *= intensity;
@@ -1396,21 +1376,21 @@ if (canvas) {
     splat(pointer.texcoordX, pointer.texcoordY, dx, dy, pointer.color);
   }
 
-  // SOFTER click splat
+  // VIBRANT click splat - increased multiplier
   function clickSplat(pointer) {
     const color = generateColor();
-    // Much lower multiplier for softer appearance
-    const multiplier = 5 + (Math.random() * 5); // 5-10 range (much lower)
+    // INCREASED multiplier for more vibrant clicks (was 5-10, now 15-25)
+    const multiplier = 15 + (Math.random() * 10);
     color.r *= multiplier;
     color.g *= multiplier;
     color.b *= multiplier;
     
-    const dx = 5 * (Math.random() - 0.5); // Reduced movement
-    const dy = 15 * (Math.random() - 0.5); // Reduced movement
+    const dx = 5 * (Math.random() - 0.5);
+    const dy = 15 * (Math.random() - 0.5);
     splat(pointer.texcoordX, pointer.texcoordY, dx, dy, color);
   }
 
-  // SOFTER splat with lower velocity
+  // VIBRANT splat with slightly higher velocity
   function splat(x, y, dx, dy, color) {
     splatProgram.bind();
     if (splatProgram.uniforms.uTarget) {
@@ -1426,8 +1406,8 @@ if (canvas) {
       gl.uniform2f(splatProgram.uniforms.point, x, y);
     }
     
-    // Lower velocity multiplier for gentler effect
-    const velocityMultiplier = 0.8; // Reduced from 1.5
+    // Slightly higher velocity multiplier for more vibrant movement
+    const velocityMultiplier = 1.0; // Increased from 0.8
     if (splatProgram.uniforms.color) {
       gl.uniform3f(splatProgram.uniforms.color, dx * velocityMultiplier, dy * velocityMultiplier, 0);
     }
@@ -1494,11 +1474,12 @@ if (canvas) {
     return delta;
   }
 
-  // FIXED: Event listeners with proper mobile handling
+  // FIXED: Event listeners with proper mobile handling - SMOOTH SCROLLING
   function setupEventListeners() {
     let touchStartTime = 0;
     let touchStartY = 0;
     let touchStartX = 0;
+    let isTouchMoving = false;
     
     // Mouse events (desktop) - keep as is
     window.addEventListener("mousedown", (e) => {
@@ -1517,89 +1498,86 @@ if (canvas) {
       updatePointerMoveData(pointer, posX, posY, color);
     });
 
-    // FIXED: Touch events for mobile - completely redesigned for better scrolling
-    window.addEventListener(
-      "touchstart",
-      (e) => {
-        // Always store touch position for scroll detection
-        touchStartTime = Date.now();
-        touchStartY = e.touches[0].clientY;
-        touchStartX = e.touches[0].clientX;
-        lastTouchY = touchStartY;
-        
-        // Check if this is an interactive element
-        const target = e.target;
-        const isInteractive = target.closest('a') || 
-                             target.closest('button') || 
-                             target.closest('.menu-btn') || 
-                             target.closest('.navbar') || 
-                             target.closest('#chatIcon') || 
-                             target.closest('.social-icon') ||
-                             target.closest('.menu');
-        
-        if (isInteractive) {
-          // Let browser handle clicks on interactive elements
-          return;
-        }
-        
-        // For non-interactive elements, prevent default but don't block scrolling
-        e.preventDefault();
-        
+    // FIXED: Touch events for mobile - COMPLETELY REWRITTEN FOR SMOOTH SCROLLING
+    // Use PASSIVE listeners for scroll, ACTIVE only when needed for fluid
+    
+    // Touch start - detect if interactive element, otherwise passive
+    window.addEventListener("touchstart", (e) => {
+      touchStartTime = Date.now();
+      touchStartY = e.touches[0].clientY;
+      touchStartX = e.touches[0].clientX;
+      isTouchMoving = false;
+      
+      // Check if clicking on interactive element
+      const target = e.target;
+      const isInteractive = target.closest('a') || 
+                           target.closest('button') || 
+                           target.closest('input') ||
+                           target.closest('textarea') ||
+                           target.closest('select') ||
+                           target.closest('.menu-btn') || 
+                           target.closest('.navbar') || 
+                           target.closest('#chatIcon') || 
+                           target.closest('.social-icon') ||
+                           target.closest('.menu') ||
+                           target.closest('nav');
+      
+      if (!isInteractive) {
+        // Only prevent default on non-interactive elements
+        // This allows scrolling to work naturally
         const pointer = pointers[0];
         const posX = scaleByPixelRatio(e.touches[0].clientX);
         const posY = scaleByPixelRatio(e.touches[0].clientY);
         updatePointerDownData(pointer, 0, posX, posY);
-      },
-      { passive: false }
-    );
+      }
+    }, { passive: true });
 
-    window.addEventListener(
-      "touchmove",
-      (e) => {
-        const currentTouchY = e.touches[0].clientY;
-        const deltaY = Math.abs(currentTouchY - touchStartY);
-        const deltaX = Math.abs(e.touches[0].clientX - touchStartX);
-        
-        // If vertical movement is significant, it's a scroll
-        if (deltaY > 10 && deltaY > deltaX) {
-          // This is a scroll gesture - let the browser handle it
-          isScrolling = true;
-          return; // Don't prevent default, allow scrolling
-        }
-        
-        // Only apply fluid effect for small movements that are likely not scrolls
-        if (!isScrolling && deltaY < 10) {
-          e.preventDefault();
-          
-          const pointer = pointers[0];
-          const posX = scaleByPixelRatio(e.touches[0].clientX);
-          const posY = scaleByPixelRatio(e.touches[0].clientY);
-          updatePointerMoveData(pointer, posX, posY, pointer.color);
-        }
-      },
-      { passive: false }
-    );
+    // Touch move - handle fluid effect without blocking scroll
+    window.addEventListener("touchmove", (e) => {
+      const currentY = e.touches[0].clientY;
+      const currentX = e.touches[0].clientX;
+      const deltaY = Math.abs(currentY - touchStartY);
+      const deltaX = Math.abs(currentX - touchStartX);
+      
+      // If we've moved significantly, mark as moving
+      if (deltaY > 5 || deltaX > 5) {
+        isTouchMoving = true;
+      }
+      
+      // Only apply fluid effect for horizontal-ish movements or very small vertical movements
+      // This prevents scroll blocking while allowing fluid interaction
+      if (deltaX > deltaY && deltaX > 10) {
+        // Horizontal movement - apply fluid effect
+        e.preventDefault(); // Prevent scroll only for horizontal swipes
+        const pointer = pointers[0];
+        const posX = scaleByPixelRatio(currentX);
+        const posY = scaleByPixelRatio(currentY);
+        updatePointerMoveData(pointer, posX, posY, pointer.color);
+      }
+      // Vertical movements > 10px are treated as scroll - do nothing, let browser handle it
+      
+    }, { passive: false });
 
+    // Touch end - handle click vs scroll
     window.addEventListener("touchend", (e) => {
       const pointer = pointers[0];
       pointer.down = false;
       
-      // If it wasn't a scroll, trigger a click splat
-      if (!isScrolling) {
+      const touchDuration = Date.now() - touchStartTime;
+      
+      // If it was a short tap without much movement, treat as click
+      if (!isTouchMoving && touchDuration < 200) {
         clickSplat(pointer);
       }
       
-      // Reset scroll flag
-      setTimeout(() => {
-        isScrolling = false;
-      }, 100);
-    });
+      isTouchMoving = false;
+    }, { passive: true });
 
     window.addEventListener("touchcancel", (e) => {
       const pointer = pointers[0];
       pointer.down = false;
-      isScrolling = false;
-    });
+      isTouchMoving = false;
+    }, { passive: true });
   }
 
   // Initialize everything
