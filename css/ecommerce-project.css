@@ -759,6 +759,50 @@
     transform: scale(1.05);
 }
 
+/* ===== TABLEAU DASHBOARD CENTERING ===== */
+.tableau-section {
+    overflow-x: hidden !important;
+}
+
+.tableau-section .max-width {
+    max-width: 1400px;
+    overflow-x: hidden;
+}
+
+.tableau-wrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden !important;
+}
+
+.tableauPlaceholder {
+    width: 100% !important;
+    max-width: 1366px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    overflow: hidden !important;
+}
+
+.tableauViz {
+    margin: 0 auto !important;
+    display: block !important;
+    max-width: 100% !important;
+}
+
+/* Prevent Tableau from causing horizontal scroll */
+.tableauPlaceholder iframe,
+.tableauPlaceholder object,
+.tableauPlaceholder embed,
+.tableauViz iframe,
+.tableauViz object,
+.tableauViz embed {
+    max-width: 100% !important;
+}
+
 /* ===== PAGE HEADER ===== */
 .page-header {
     background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
@@ -1415,5 +1459,96 @@
     
     .metric-unit {
         font-size: 20px;
+    }
+}
+/* ===== MOBILE NAVBAR - HAMBURGER MENU FIX ===== */
+
+/* Hide hamburger on desktop */
+.hamburger-btn {
+    display: none;
+    cursor: pointer;
+    padding: 5px;
+    z-index: 1001;
+}
+
+.hamburger-btn i {
+    font-size: 23px;
+    color: #fff;
+    transition: all 0.3s ease;
+}
+
+.hamburger-btn i.active {
+    color: #dc143c;
+}
+
+@media (max-width: 947px) {
+
+    /* Show hamburger icon */
+    .hamburger-btn {
+        display: block;
+    }
+
+    /* Hide nav links by default on mobile */
+    .navbar .menu {
+        position: fixed;
+        top: 70px;
+        left: -100%;
+        width: 100%;
+        background: #111;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 0 30px;
+        gap: 0;
+        transition: left 0.35s ease;
+        z-index: 999;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+        list-style: none;
+        margin: 0;
+    }
+
+    /* Slide in when active */
+    .navbar .menu.active {
+        left: 0;
+    }
+
+    /* Style each nav item */
+    .navbar .menu li {
+        width: 100%;
+        text-align: center;
+    }
+
+    .navbar .menu li a {
+        display: block;
+        width: 100%;
+        padding: 14px 20px;
+        font-size: 16px;
+        color: #ddd;
+        text-decoration: none;
+        border-bottom: 1px solid rgba(255,255,255,0.07);
+        transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .navbar .menu li a:hover,
+    .navbar .menu li a.active {
+        background: rgba(220, 20, 60, 0.15);
+        color: #dc143c;
+    }
+
+    /* Remove menu-btn class styles from nav links on mobile
+       (they share class with old approach — make sure they look like links) */
+    .navbar .menu li a.menu-btn {
+        background: none;
+        border: none;
+        border-radius: 0;
+        font-weight: 400;
+        letter-spacing: normal;
+        padding: 14px 20px;
+        border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+
+    .navbar .menu li a.menu-btn:hover,
+    .navbar .menu li a.active.menu-btn {
+        background: rgba(220, 20, 60, 0.15);
+        color: #dc143c;
     }
 }
