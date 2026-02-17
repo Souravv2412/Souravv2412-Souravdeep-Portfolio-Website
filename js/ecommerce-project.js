@@ -240,10 +240,27 @@ $(window).scroll(function() {
     }
 });
 
-// ===== MOBILE MENU TOGGLE =====
-$('.menu-btn').click(function() {
-    $('.navbar .menu').toggleClass("active");
-    $('.menu-btn i').toggleClass("active");
+// ===== MOBILE MENU TOGGLE - FIXED =====
+// hamburger is now div#hamburgerBtn, separate from nav link <a class="menu-btn">
+$(document).ready(function() {
+    $('#hamburgerBtn').on('click', function() {
+        $('.navbar .menu').toggleClass('active');
+        $(this).find('i').toggleClass('active');
+    });
+
+    // Close menu when any nav link is clicked (mobile UX)
+    $('.navbar .menu li a').on('click', function() {
+        $('.navbar .menu').removeClass('active');
+        $('#hamburgerBtn i').removeClass('active');
+    });
+
+    // Close menu when clicking anywhere outside navbar
+    $(document).on('click', function(e) {
+        if (!$(e.target).closest('.navbar').length) {
+            $('.navbar .menu').removeClass('active');
+            $('#hamburgerBtn i').removeClass('active');
+        }
+    });
 });
 
 // ===== PROGRESS BAR ANIMATION =====
