@@ -269,7 +269,7 @@ if (canvas) {
     }
 }
 
-// ===== FLUID ANIMATION FOR HOME SECTION - MOBILE FIXED VERSION =====
+// ===== FLUID ANIMATION FOR HOME SECTION - MOBILE OPTIMIZED & SOFTER COLORS =====
 (function() {
   const config = {
     SIM_RESOLUTION: 128,
@@ -298,8 +298,8 @@ if (canvas) {
   
   // Disable on mobile or reduce interaction
   if (isMobile) {
-    // On mobile, just show static effect or reduce interaction
-    config.SPLAT_FORCE = 2000; // Reduce force
+    config.SPLAT_FORCE = 1000; // Reduce force even more
+    config.COLOR_UPDATE_SPEED = 5; // Slower color changes
   }
 
   // Pointer interface
@@ -327,6 +327,9 @@ if (canvas) {
   let colorUpdateTimer = 0.0;
   let isScrolling = false;
   let scrollTimeout;
+  let touchStartY = 0;
+  let touchStartX = 0;
+  let lastTouchY = 0;
 
   // Programs
   let copyProgram, clearProgram, splatProgram, advectionProgram;
@@ -345,7 +348,9 @@ if (canvas) {
         target.closest('.menu-btn') || 
         target.closest('.navbar') || 
         target.closest('#chatIcon') || 
-        target.closest('.social-icon')) {
+        target.closest('.social-icon') ||
+        target.closest('.menu') ||
+        target.closest('.max-width')) {
       return false;
     }
     
@@ -642,12 +647,12 @@ if (canvas) {
       void main () {
           vec3 c = texture2D(uTexture, vUv).rgb;
           
-          // Boost color saturation and brightness for more vibrant output
-          c = c * 1.3; // Boost overall brightness
+          // Subtle color enhancement - much softer than before
+          c = c * 1.1; // Very slight brightness boost
           
-          // Saturation boost
+          // Very subtle saturation boost
           float gray = dot(c, vec3(0.299, 0.587, 0.114));
-          c = mix(vec3(gray), c, 1.4); // 1.4 = saturation multiplier
+          c = mix(vec3(gray), c, 1.1); // 1.1 = very subtle saturation
           
           #ifdef SHADING
               vec3 lc = texture2D(uTexture, vL).rgb;
@@ -666,7 +671,7 @@ if (canvas) {
           #endif
 
           float a = max(c.r, max(c.g, c.b));
-          gl_FragColor = vec4(c, a * 0.8); // Keep transparency
+          gl_FragColor = vec4(c, a * 0.6); // More transparent
       }
     `;
 
@@ -1113,33 +1118,27 @@ if (canvas) {
     return { r, g, b };
   }
 
-  // UPDATED: More vibrant color generation
+  // SOFTER color generation - back to almost original but with slight warmth
   function generateColor() {
-    // Create vibrant colors with high saturation and brightness
+    // Use softer, pastel-like colors
     let hue;
     
-    // Mix between warm and cool colors for variety
+    // More subtle color palette
     if (Math.random() > 0.5) {
-      hue = 0.0 + (Math.random() * 0.15); // Warm range (reds, oranges, yellows)
+      hue = 0.0 + (Math.random() * 0.1); // Soft reds/oranges
     } else {
-      hue = 0.6 + (Math.random() * 0.3); // Cool range (blues, purples)
+      hue = 0.6 + (Math.random() * 0.2); // Soft blues/purples
     }
     
-    // High saturation (0.9-1.0) and high brightness (0.9-1.0)
-    const c = HSVtoRGB(hue, 0.95, 0.95);
+    // Lower saturation (0.4-0.6) and medium brightness (0.5-0.7)
+    const c = HSVtoRGB(hue, 0.5 + (Math.random() * 0.2), 0.6 + (Math.random() * 0.2));
     
-    // Boost intensity to 0.5-0.9 range
-    const intensity = 0.5 + (Math.random() * 0.4);
+    // Very gentle intensity boost
+    const intensity = 0.25 + (Math.random() * 0.2); // 0.25-0.45 range (much lower)
     
     c.r *= intensity;
     c.g *= intensity;
     c.b *= intensity;
-    
-    // Randomly boost one channel for more variety
-    const channelBoost = Math.floor(Math.random() * 3);
-    if (channelBoost === 0) c.r *= 1.5;
-    else if (channelBoost === 1) c.g *= 1.5;
-    else c.b *= 1.5;
     
     return c;
   }
@@ -1397,21 +1396,21 @@ if (canvas) {
     splat(pointer.texcoordX, pointer.texcoordY, dx, dy, pointer.color);
   }
 
-  // UPDATED: More vibrant click splat
+  // SOFTER click splat
   function clickSplat(pointer) {
     const color = generateColor();
-    // Increase multiplier for more impact (15-25 range)
-    const multiplier = 15 + (Math.random() * 10);
+    // Much lower multiplier for softer appearance
+    const multiplier = 5 + (Math.random() * 5); // 5-10 range (much lower)
     color.r *= multiplier;
     color.g *= multiplier;
     color.b *= multiplier;
     
-    const dx = 10 * (Math.random() - 0.5);
-    const dy = 30 * (Math.random() - 0.5);
+    const dx = 5 * (Math.random() - 0.5); // Reduced movement
+    const dy = 15 * (Math.random() - 0.5); // Reduced movement
     splat(pointer.texcoordX, pointer.texcoordY, dx, dy, color);
   }
 
-  // UPDATED: Enhanced splat with velocity multiplier
+  // SOFTER splat with lower velocity
   function splat(x, y, dx, dy, color) {
     splatProgram.bind();
     if (splatProgram.uniforms.uTarget) {
@@ -1427,8 +1426,8 @@ if (canvas) {
       gl.uniform2f(splatProgram.uniforms.point, x, y);
     }
     
-    // Velocity splat - increase force for more energetic movement
-    const velocityMultiplier = 1.5;
+    // Lower velocity multiplier for gentler effect
+    const velocityMultiplier = 0.8; // Reduced from 1.5
     if (splatProgram.uniforms.color) {
       gl.uniform3f(splatProgram.uniforms.color, dx * velocityMultiplier, dy * velocityMultiplier, 0);
     }
@@ -1499,6 +1498,7 @@ if (canvas) {
   function setupEventListeners() {
     let touchStartTime = 0;
     let touchStartY = 0;
+    let touchStartX = 0;
     
     // Mouse events (desktop) - keep as is
     window.addEventListener("mousedown", (e) => {
@@ -1517,28 +1517,38 @@ if (canvas) {
       updatePointerMoveData(pointer, posX, posY, color);
     });
 
-    // FIXED: Touch events for mobile
+    // FIXED: Touch events for mobile - completely redesigned for better scrolling
     window.addEventListener(
       "touchstart",
       (e) => {
-        // Store touch start time and position for scroll detection
+        // Always store touch position for scroll detection
         touchStartTime = Date.now();
         touchStartY = e.touches[0].clientY;
+        touchStartX = e.touches[0].clientX;
+        lastTouchY = touchStartY;
         
-        // Check if we should handle this touch
-        if (!shouldHandleTouch(e)) {
-          return; // Let the browser handle normally
+        // Check if this is an interactive element
+        const target = e.target;
+        const isInteractive = target.closest('a') || 
+                             target.closest('button') || 
+                             target.closest('.menu-btn') || 
+                             target.closest('.navbar') || 
+                             target.closest('#chatIcon') || 
+                             target.closest('.social-icon') ||
+                             target.closest('.menu');
+        
+        if (isInteractive) {
+          // Let browser handle clicks on interactive elements
+          return;
         }
         
+        // For non-interactive elements, prevent default but don't block scrolling
         e.preventDefault();
-        const touches = e.targetTouches;
+        
         const pointer = pointers[0];
-        for (let i = 0; i < touches.length; i++) {
-          const posX = scaleByPixelRatio(touches[i].clientX);
-          const posY = scaleByPixelRatio(touches[i].clientY);
-          updatePointerDownData(pointer, touches[i].identifier, posX, posY);
-          clickSplat(pointer);
-        }
+        const posX = scaleByPixelRatio(e.touches[0].clientX);
+        const posY = scaleByPixelRatio(e.touches[0].clientY);
+        updatePointerDownData(pointer, 0, posX, posY);
       },
       { passive: false }
     );
@@ -1546,32 +1556,24 @@ if (canvas) {
     window.addEventListener(
       "touchmove",
       (e) => {
-        // Detect if this is a scroll gesture
-        const touchY = e.touches[0].clientY;
-        const deltaY = Math.abs(touchY - touchStartY);
-        const touchDuration = Date.now() - touchStartTime;
+        const currentTouchY = e.touches[0].clientY;
+        const deltaY = Math.abs(currentTouchY - touchStartY);
+        const deltaX = Math.abs(e.touches[0].clientX - touchStartX);
         
-        // If movement is primarily vertical and quick, it's likely a scroll
-        if (deltaY > 20 && touchDuration < 300) {
+        // If vertical movement is significant, it's a scroll
+        if (deltaY > 10 && deltaY > deltaX) {
+          // This is a scroll gesture - let the browser handle it
           isScrolling = true;
-          // Clear the scrolling flag after a delay
-          clearTimeout(scrollTimeout);
-          scrollTimeout = setTimeout(() => {
-            isScrolling = false;
-          }, 300);
+          return; // Don't prevent default, allow scrolling
         }
         
-        // Check if we should handle this touch
-        if (!shouldHandleTouch(e) || isScrolling) {
-          return; // Let the browser handle scrolling
-        }
-        
-        e.preventDefault();
-        const touches = e.targetTouches;
-        const pointer = pointers[0];
-        for (let i = 0; i < touches.length; i++) {
-          const posX = scaleByPixelRatio(touches[i].clientX);
-          const posY = scaleByPixelRatio(touches[i].clientY);
+        // Only apply fluid effect for small movements that are likely not scrolls
+        if (!isScrolling && deltaY < 10) {
+          e.preventDefault();
+          
+          const pointer = pointers[0];
+          const posX = scaleByPixelRatio(e.touches[0].clientX);
+          const posY = scaleByPixelRatio(e.touches[0].clientY);
           updatePointerMoveData(pointer, posX, posY, pointer.color);
         }
       },
@@ -1582,9 +1584,13 @@ if (canvas) {
       const pointer = pointers[0];
       pointer.down = false;
       
-      // Reset scroll flag after touch ends
-      clearTimeout(scrollTimeout);
-      scrollTimeout = setTimeout(() => {
+      // If it wasn't a scroll, trigger a click splat
+      if (!isScrolling) {
+        clickSplat(pointer);
+      }
+      
+      // Reset scroll flag
+      setTimeout(() => {
         isScrolling = false;
       }, 100);
     });
