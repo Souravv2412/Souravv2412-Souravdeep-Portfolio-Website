@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce Churn - Insights Lab</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/ecommerce-project.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+</head>
+<body>
+    <!-- Mobile Warning Banner -->
+    <div id="mobile-warning" class="mobile-warning">
+        <i class="fas fa-desktop"></i>
+        <p>For the best viewing experience, please open this page on a desktop or laptop.</p>
+        <button onclick="dismissWarning()">Continue Anyway</button>
+    </div>
+
+    <div class="scroll-up-btn">
+        <i class="fas fa-angle-up"></i>
+    </div>
+
+    <nav class="navbar">
+        <div class="max-width">
+            <div class="logo"><a href="../index.html">Back to <span>Portfolio</span></a></div>
+            <ul class="menu">
+                <li><a href="index.html" class="menu-btn">Overview</a></li>
+                <li><a href="problem.html" class="menu-btn">The Problem</a></li>
+                <li><a href="insights.html" class="menu-btn active">Insights Lab</a></li>
+                <li><a href="dashboard.html" class="menu-btn">Dashboard</a></li>
+                <li><a href="strategy.html" class="menu-btn">Strategy</a></li>
+            </ul>
+            <div class="hamburger-btn" id="hamburgerBtn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="max-width">
+            <div class="breadcrumb">
+                <a href="index.html">Overview</a>
+                <i class="fas fa-chevron-right"></i>
+                <span>Insights Lab</span>
+            </div>
+            <h1 class="page-title">Technical Analysis & Model Development</h1>
+            <p class="page-description">
+                Deep dive into the data science methodology, feature engineering, and machine learning models
+            </p>
+        </div>
+    </section>
+
+    <!-- Methodology Overview -->
+    <section class="methodology-section">
+        <div class="max-width">
+            <h2 class="section-title">Analysis Methodology</h2>
+            <div class="methodology-flow">
+                <div class="flow-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Data Acquisition</h3>
+                        <p>5,630 customer records with 20 features from e-commerce platform</p>
+                    </div>
+                </div>
+                <div class="flow-arrow"><i class="fas fa-arrow-right"></i></div>
+                <div class="flow-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>EDA & Cleaning</h3>
+                        <p>Statistical analysis, outlier detection, missing value handling</p>
+                    </div>
+                </div>
+                <div class="flow-arrow"><i class="fas fa-arrow-right"></i></div>
+                <div class="flow-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Feature Engineering</h3>
+                        <p>Created tenure buckets, interaction terms, behavioral scores</p>
+                    </div>
+                </div>
+                <div class="flow-arrow"><i class="fas fa-arrow-right"></i></div>
+                <div class="flow-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Model Training</h3>
+                        <p>Decision Tree, Logistic Regression, hyperparameter tuning</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Model Performance -->
+    <section class="model-performance">
+        <div class="max-width">
+            <h2 class="section-title">Model Performance Metrics</h2>
+            <div class="performance-grid">
+                <div class="perf-card primary">
+                    <h3>Best Model: Decision Tree Classifier</h3>
+                    <div class="metrics-table">
+                        <div class="metric-row">
+                            <span class="metric-name">Overall Accuracy</span>
+                            <span class="metric-score">89.3%</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-name">Churner Recall (Sensitivity)</span>
+                            <span class="metric-score">52%</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-name">Non-Churner Recall (Specificity)</span>
+                            <span class="metric-score">96%</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-name">AUC-ROC Score</span>
+                            <span class="metric-score">0.88</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-name">F1-Score (Churner Class)</span>
+                            <span class="metric-score">0.59</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="perf-card secondary">
+                    <h3>Logistic Regression (Baseline)</h3>
+                    <div class="metrics-table">
+                        <div class="metric-row">
+                            <span class="metric-name">Overall Accuracy</span>
+                            <span class="metric-score">87.1%</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-name">Churner Recall</span>
+                            <span class="metric-score">45%</span>
+                        </div>
+                        <div class="metric-row">
+                            <span class="metric-name">AUC-ROC Score</span>
+                            <span class="metric-score">0.85</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="model-insight">
+                <h3>Why This Matters</h3>
+                <p>
+                    While the model achieves 89.3% overall accuracy, the <strong>52% churner recall</strong> means 
+                    we successfully identify about half of all customers who will churn. In business terms, this 
+                    translates to catching approximately <strong>490 out of 947 churners</strong>, allowing for 
+                    proactive intervention. The high non-churner recall (96%) minimizes false alarms, ensuring 
+                    retention efforts are efficiently targeted.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Feature Importance -->
+    <section class="feature-importance">
+        <div class="max-width">
+            <h2 class="section-title">Feature Importance Analysis</h2>
+            <p class="section-description">
+                Understanding which customer attributes drive churn predictions
+            </p>
+
+            <div class="importance-chart">
+                <div class="chart-item" style="--importance: 52%;">
+                    <div class="chart-bar"></div>
+                    <div class="chart-label">
+                        <span class="feature-name">Tenure</span>
+                        <span class="importance-value">52%</span>
+                    </div>
+                </div>
+                <div class="chart-item" style="--importance: 14%;">
+                    <div class="chart-bar"></div>
+                    <div class="chart-label">
+                        <span class="feature-name">Complain</span>
+                        <span class="importance-value">14%</span>
+                    </div>
+                </div>
+                <div class="chart-item" style="--importance: 9%;">
+                    <div class="chart-bar"></div>
+                    <div class="chart-label">
+                        <span class="feature-name">CashbackAmount</span>
+                        <span class="importance-value">9%</span>
+                    </div>
+                </div>
+                <div class="chart-item" style="--importance: 7%;">
+                    <div class="chart-bar"></div>
+                    <div class="chart-label">
+                        <span class="feature-name">DaySinceLastOrder</span>
+                        <span class="importance-value">7%</span>
+                    </div>
+                </div>
+                <div class="chart-item" style="--importance: 6%;">
+                    <div class="chart-bar"></div>
+                    <div class="chart-label">
+                        <span class="feature-name">SatisfactionScore</span>
+                        <span class="importance-value">6%</span>
+                    </div>
+                </div>
+                <div class="chart-item" style="--importance: 12%;">
+                    <div class="chart-bar"></div>
+                    <div class="chart-label">
+                        <span class="feature-name">Other Features</span>
+                        <span class="importance-value">12%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="importance-insights">
+                <h3>Key Takeaways</h3>
+                <ul>
+                    <li><strong>Tenure dominates (52%):</strong> Time as a customer is the single most important predictor. The 0-3 month window is critical.</li>
+                    <li><strong>Complaints are red flags (14%):</strong> Customer service quality directly impacts retention.</li>
+                    <li><strong>Cashback drives engagement (9%):</strong> Financial incentives matter, but must be strategically deployed.</li>
+                    <li><strong>Recency matters (7%):</strong> Days since last order indicates declining engagement.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technical Details -->
+    <section class="technical-details">
+        <div class="max-width">
+            <h2 class="section-title">Technical Implementation</h2>
+
+            <div class="detail-cards">
+                <div class="detail-card">
+                    <h3><i class="fas fa-code"></i> Tech Stack</h3>
+                    <ul>
+                        <li><strong>Python 3.9+</strong> - Core language</li>
+                        <li><strong>Pandas & NumPy</strong> - Data manipulation</li>
+                        <li><strong>Scikit-learn</strong> - ML models & preprocessing</li>
+                        <li><strong>Matplotlib & Seaborn</strong> - Visualization</li>
+                        <li><strong>Jupyter Notebook</strong> - Analysis environment</li>
+                        <li><strong>Tableau</strong> - Interactive dashboards</li>
+                    </ul>
+                </div>
+
+                <div class="detail-card">
+                    <h3><i class="fas fa-cogs"></i> Model Configuration</h3>
+                    <ul>
+                        <li><strong>Algorithm:</strong> Decision Tree Classifier</li>
+                        <li><strong>Max Depth:</strong> 8 (to prevent overfitting)</li>
+                        <li><strong>Min Samples Split:</strong> 50</li>
+                        <li><strong>Class Weight:</strong> Balanced</li>
+                        <li><strong>Cross-Validation:</strong> 5-fold stratified</li>
+                        <li><strong>Train/Test Split:</strong> 80/20</li>
+                    </ul>
+                </div>
+
+                <div class="detail-card">
+                    <h3><i class="fas fa-tasks"></i> Data Processing</h3>
+                    <ul>
+                        <li><strong>Missing Values:</strong> Median/mode imputation</li>
+                        <li><strong>Outliers:</strong> IQR method (removed 3%)</li>
+                        <li><strong>Encoding:</strong> Label + One-Hot encoding</li>
+                        <li><strong>Scaling:</strong> StandardScaler for numeric features</li>
+                        <li><strong>Sampling:</strong> Stratified to maintain class distribution</li>
+                        <li><strong>Feature Engineering:</strong> Created 5 new features</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Code Snippet -->
+    <section class="code-section">
+        <div class="max-width">
+            <h2 class="section-title">Sample Code: Model Training</h2>
+            <p class="section-description">Key implementation code from the analysis notebook</p>
+
+            <div class="code-block">
+                <button class="copy-code-btn"><i class="fas fa-copy"></i> Copy</button>
+                <pre><code class="language-python"># Import libraries
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.model_selection import train_test_split, cross_val_score
+from sklearn.metrics import classification_report, confusion_matrix, roc_auc_score
+
+# Prepare features and target
+X = df_cleaned.drop(['Churn', 'CustomerID'], axis=1)
+y = df_cleaned['Churn']
+
+# Split data with stratification
+X_train, X_test, y_train, y_test = train_test_split(
+    X, y, test_size=0.2, random_state=42, stratify=y
+)
+
+# Initialize and train Decision Tree
+dt_model = DecisionTreeClassifier(
+    max_depth=8,
+    min_samples_split=50,
+    class_weight='balanced',
+    random_state=42
+)
+
+# Train model
+dt_model.fit(X_train, y_train)
+
+# Make predictions
+y_pred = dt_model.predict(X_test)
+y_pred_proba = dt_model.predict_proba(X_test)[:, 1]
+
+# Evaluate performance
+accuracy = dt_model.score(X_test, y_test)
+auc_score = roc_auc_score(y_test, y_pred_proba)
+
+print(f"Accuracy: {accuracy:.3f}")
+print(f"AUC-ROC: {auc_score:.3f}")
+print("\nClassification Report:")
+print(classification_report(y_test, y_pred))
+
+# Feature importance
+feature_importance = pd.DataFrame({
+    'feature': X.columns,
+    'importance': dt_model.feature_importances_
+}).sort_values('importance', ascending=False)
+
+print("\nTop 5 Features:")
+print(feature_importance.head())
+</code></pre>
+            </div>
+
+            <div class="download-notebook">
+                <a href="/mnt/user-data/uploads/Churn_Analysis_Lab_1.ipynb" download class="download-btn">
+                    <i class="fas fa-download"></i>
+                    Download Complete Jupyter Notebook
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Navigation -->
+    <section class="next-section">
+        <div class="max-width">
+            <div class="next-content">
+                <h2>Explore the Interactive Dashboard</h2>
+                <p>See the insights come to life through Tableau visualizations</p>
+                <a href="dashboard.html" class="next-btn">
+                    <span>View Dashboard</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="project-footer">
+        <div class="max-width">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <h3>E-Commerce Churn Prediction</h3>
+                    <p>A data analytics project by Souravdeep Singh</p>
+                </div>
+                <div class="footer-right">
+                    <a href="../index.html" class="footer-link">
+                        <i class="fas fa-home"></i>
+                        Back to Portfolio
+                    </a>
+                    <a href="../index.html#contact" class="footer-link">
+                        <i class="fas fa-envelope"></i>
+                        Contact Me
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+    <script src="../js/ecommerce-project.js"></script>
+    
+    <style>
+        /* Insights Lab specific styles */
+        .methodology-section {
+            padding: 80px 0;
+            background: #f8f8f8;
+        }
+        
+        .methodology-flow {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 50px;
+            gap: 20px;
+        }
+        
+        .flow-step {
+            flex: 1;
+            background: white;
+            padding: 30px 25px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            text-align: center;
+        }
+        
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: crimson;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            font-size: 24px;
+            font-weight: 700;
+        }
+        
+        .step-content h3 {
+            font-size: 18px;
+            color: #111;
+            margin-bottom: 10px;
+        }
+        
+        .step-content p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .flow-arrow {
+            color: crimson;
+            font-size: 24px;
+        }
+        
+        .model-performance {
+            padding: 80px 0;
+            background: #fff;
+        }
+        
+        .performance-grid {
+            display: grid;
+            grid-template-columns: 1.5fr 1fr;
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .perf-card {
+            background: #f8f8f8;
+            padding: 35px 30px;
+            border-radius: 15px;
+            border-top: 4px solid crimson;
+        }
+        
+        .perf-card h3 {
+            font-size: 22px;
+            color: #111;
+            margin-bottom: 25px;
+        }
+        
+        .metrics-table {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .metric-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            background: white;
+            border-radius: 8px;
+        }
+        
+        .metric-name {
+            font-size: 15px;
+            color: #444;
+        }
+        
+        .metric-score {
+            font-size: 20px;
+            font-weight: 700;
+            color: crimson;
+        }
+        
+        .model-insight {
+            background: #f8f8f8;
+            padding: 30px;
+            border-radius: 10px;
+            border-left: 4px solid crimson;
+        }
+        
+        .model-insight h3 {
+            font-size: 20px;
+            color: #111;
+            margin-bottom: 15px;
+        }
+        
+        .model-insight p {
+            font-size: 16px;
+            color: #444;
+            line-height: 1.8;
+        }
+        
+        .feature-importance {
+            padding: 80px 0;
+            background: #111;
+        }
+        
+        .feature-importance .section-title {
+            color: #fff;
+        }
+        
+        .feature-importance .section-description {
+            color: #ccc;
+        }
+        
+        .importance-chart {
+            max-width: 800px;
+            margin: 50px auto;
+        }
+        
+        .chart-item {
+            margin-bottom: 20px;
+        }
+        
+        .chart-bar {
+            height: 45px;
+            background: linear-gradient(90deg, crimson, #ff4466);
+            border-radius: 8px;
+            width: var(--importance);
+            transition: width 1.5s ease;
+            margin-bottom: 8px;
+        }
+        
+        .chart-label {
+            display: flex;
+            justify-content: space-between;
+            padding: 0 10px;
+        }
+        
+        .feature-name {
+            color: #ddd;
+            font-size: 15px;
+            font-weight: 500;
+        }
+        
+        .importance-value {
+            color: crimson;
+            font-size: 16px;
+            font-weight: 700;
+        }
+        
+        .importance-insights {
+            background: #1a1a1a;
+            padding: 35px 40px;
+            border-radius: 10px;
+            border-left: 4px solid crimson;
+            margin-top: 50px;
+        }
+        
+        .importance-insights h3 {
+            font-size: 22px;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+        
+        .importance-insights ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .importance-insights li {
+            padding-left: 25px;
+            position: relative;
+            margin-bottom: 15px;
+            font-size: 16px;
+            color: #ccc;
+            line-height: 1.7;
+        }
+        
+        .importance-insights li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: crimson;
+            font-weight: bold;
+        }
+        
+        .technical-details {
+            padding: 80px 0;
+            background: #f8f8f8;
+        }
+        
+        .detail-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .detail-card {
+            background: white;
+            padding: 35px 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+        
+        .detail-card h3 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 20px;
+            color: #111;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f0f0f0;
+        }
+        
+        .detail-card i {
+            color: crimson;
+            font-size: 22px;
+        }
+        
+        .detail-card ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .detail-card li {
+            padding: 8px 0;
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .code-section {
+            padding: 80px 0;
+            background: #fff;
+        }
+        
+        .code-block {
+            position: relative;
+            background: #1a1a1a;
+            border-radius: 10px;
+            padding: 25px;
+            margin-top: 40px;
+            overflow-x: auto;
+        }
+        
+        .copy-code-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            padding: 8px 16px;
+            background: crimson;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 13px;
+            cursor: pointer;
+            z-index: 10;
+        }
+        
+        .code-block pre {
+            margin: 0;
+        }
+        
+        .code-block code {
+            color: #f8f8f2;
+            font-family: 'Monaco', 'Courier New', monospace;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+        
+        .download-notebook {
+            text-align: center;
+            margin-top: 30px;
+        }
+        
+        .download-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 35px;
+            background: crimson;
+            color: white;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .download-btn:hover {
+            background: #b71c28;
+            transform: translateY(-2px);
+        }
+        
+        .next-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, crimson 0%, #b71c28 100%);
+            text-align: center;
+            color: white;
+        }
+        
+        .next-content h2 {
+            font-size: 36px;
+            margin-bottom: 15px;
+        }
+        
+        .next-content p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        @media (max-width: 1024px) {
+            .methodology-flow {
+                flex-direction: column;
+            }
+            
+            .flow-arrow {
+                transform: rotate(90deg);
+            }
+            
+            .performance-grid,
+            .detail-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</body>
+</html>

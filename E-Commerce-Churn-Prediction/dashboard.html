@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce Churn - Interactive Dashboard</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/ecommerce-project.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <style>
+        /* Tableau Dashboard Container Styles */
+        body {
+            overflow-x: hidden;
+        }
+        
+        .tableau-section {
+            padding: 40px 0;
+            background: #f8f8f8;
+            overflow: hidden;
+        }
+        
+        .tableau-container-wrapper {
+            width: 100%;
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 0 2%;
+        }
+        
+        .tableau-embed-container {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            width: 100%;
+        }
+        
+        .tableauPlaceholder {
+            width: 100% !important;
+            max-width: 100% !important;
+            margin: 0 auto !important;
+            display: flex !important;
+            justify-content: center !important;
+        }
+        
+        /* Force Tableau viz to scale to container */
+        .tableauViz {
+            width: 100% !important;
+            max-width: 100% !important;
+            height: auto !important;
+            margin: 0 auto !important;
+        }
+        
+        /* Scale down the 1920px to fit viewport */
+        #viz1771278791357 {
+            transform-origin: top center;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    <!-- Mobile Warning -->
+    <div id="mobile-warning" class="mobile-warning">
+        <i class="fas fa-desktop"></i>
+        <p>This dashboard is best viewed on desktop for optimal presentation.</p>
+        <button onclick="dismissWarning()">Continue</button>
+    </div>
+
+    <div class="scroll-up-btn">
+        <i class="fas fa-angle-up"></i>
+    </div>
+
+    <nav class="navbar">
+        <div class="max-width">
+            <div class="logo"><a href="../index.html">Back to <span>Portfolio</span></a></div>
+            <ul class="menu">
+                <li><a href="index.html" class="menu-btn">Overview</a></li>
+                <li><a href="problem.html" class="menu-btn">The Problem</a></li>
+                <li><a href="insights.html" class="menu-btn">Insights Lab</a></li>
+                <li><a href="dashboard.html" class="menu-btn active">Dashboard</a></li>
+                <li><a href="strategy.html" class="menu-btn">Strategy</a></li>
+            </ul>
+            <div class="hamburger-btn" id="hamburgerBtn">
+                <i class="fas fa-bars"></i>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Compact Page Header -->
+    <section class="page-header" style="padding: 100px 0 30px;">
+        <div class="max-width">
+            <h1 class="page-title" style="font-size: 36px; margin-bottom: 10px;">Interactive Analytics Dashboard</h1>
+            <p class="page-description" style="font-size: 14px;">
+                Explore customer segmentation, churn patterns, and behavioral insights
+            </p>
+        </div>
+    </section>
+
+    <!-- TABLEAU DASHBOARD - YOUR ORIGINAL EMBED CODE -->
+    <section class="tableau-section">
+        <div class="tableau-container-wrapper">
+            <div class="tableau-embed-container">
+                <div class='tableauPlaceholder' id='viz1771278791357' style='position: relative; width: 100%;'>
+                    <noscript>
+                        <a href='#'>
+                            <img alt='E-Commerce Churn Analysis' 
+                                 src='https://public.tableau.com/static/images/E-/E-CommerceChurnAnalysisRetentionStrategy/ExecutiveOverview/1_rss.png' 
+                                 style='border: none' />
+                        </a>
+                    </noscript>
+                    <object class='tableauViz' style='display:none;'>
+                        <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+                        <param name='embed_code_version' value='3' />
+                        <param name='site_root' value='' />
+                        <param name='name' value='E-CommerceChurnAnalysisRetentionStrategy/ExecutiveOverview' />
+                        <param name='tabs' value='no' />
+                        <param name='toolbar' value='yes' />
+                        <param name='static_image' value='https://public.tableau.com/static/images/E-/E-CommerceChurnAnalysisRetentionStrategy/ExecutiveOverview/1.png' />
+                        <param name='animate_transition' value='yes' />
+                        <param name='display_static_image' value='yes' />
+                        <param name='display_spinner' value='yes' />
+                        <param name='display_overlay' value='yes' />
+                        <param name='display_count' value='yes' />
+                        <param name='language' value='en-US' />
+                    </object>
+                </div>
+                
+                <script type='text/javascript'>
+                    var divElement = document.getElementById('viz1771278791357');
+                    var vizElement = divElement.getElementsByTagName('object')[0];
+                    
+                    // Get viewport width
+                    var viewportWidth = window.innerWidth;
+                    var containerWidth = divElement.offsetWidth;
+                    
+                    // Calculate scale to fit - Tableau is 1920px wide by default
+                    var tableauWidth = 1920;
+                    var tableauHeight = 1107;
+                    
+                    // Scale to fit container (use 96% of viewport width for margins)
+                    var targetWidth = viewportWidth * 0.96;
+                    var scale = Math.min(targetWidth / tableauWidth, 1);
+                    
+                    if (divElement.offsetWidth > 800) {
+                        // Desktop - scale proportionally
+                        var scaledWidth = tableauWidth * scale;
+                        var scaledHeight = tableauHeight * scale;
+                        
+                        vizElement.style.width = tableauWidth + 'px';
+                        vizElement.style.height = tableauHeight + 'px';
+                        
+                        // Apply CSS transform to scale down
+                        divElement.style.transform = 'scale(' + scale + ')';
+                        divElement.style.transformOrigin = 'top center';
+                        divElement.style.height = scaledHeight + 'px';
+                        divElement.style.width = tableauWidth + 'px';
+                        divElement.style.margin = '0 auto';
+                        
+                    } else if (divElement.offsetWidth > 500) {
+                        // Tablet
+                        vizElement.style.width = '1920px';
+                        vizElement.style.height = '1107px';
+                        
+                        var tabletScale = divElement.offsetWidth / 1920;
+                        divElement.style.transform = 'scale(' + tabletScale + ')';
+                        divElement.style.transformOrigin = 'top center';
+                        divElement.style.height = (1107 * tabletScale) + 'px';
+                        
+                    } else {
+                        // Mobile
+                        vizElement.style.width = '100%';
+                        vizElement.style.height = '4127px';
+                    }
+                    
+                    // Handle window resize
+                    window.addEventListener('resize', function() {
+                        var newViewportWidth = window.innerWidth;
+                        var newTargetWidth = newViewportWidth * 0.96;
+                        var newScale = Math.min(newTargetWidth / tableauWidth, 1);
+                        
+                        if (newViewportWidth > 800) {
+                            var newScaledHeight = tableauHeight * newScale;
+                            divElement.style.transform = 'scale(' + newScale + ')';
+                            divElement.style.height = newScaledHeight + 'px';
+                        }
+                    });
+                    
+                    var scriptElement = document.createElement('script');
+                    scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+                    vizElement.parentNode.insertBefore(scriptElement, vizElement);
+                </script>
+            </div>
+
+            <div class="dashboard-actions" style="display: flex; justify-content: center; gap: 15px; margin-top: 15px;">
+                <a href="https://public.tableau.com/views/E-CommerceChurnAnalysisRetentionStrategy/ExecutiveOverview?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link" 
+                   target="_blank" 
+                   class="action-btn primary">
+                    <i class="fas fa-external-link-alt"></i>
+                    Open in Tableau Public
+                </a>
+                <a href="strategy.html" class="action-btn">
+                    <i class="fas fa-arrow-right"></i>
+                    View Strategy
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Key Insights from Dashboard -->
+    <section class="dashboard-insights">
+        <div class="max-width">
+            <h2 class="section-title">Key Insights from the Dashboard</h2>
+            <div class="insights-grid">
+                <div class="insight-item">
+                    <div class="insight-header">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <h3>Tenure-Based Risk</h3>
+                    </div>
+                    <p>
+                        The dashboard reveals that <strong>0-3 month customers</strong> exhibit approximately 
+                        <strong>50% churn rate</strong>, making this the most critical intervention window.
+                    </p>
+                </div>
+
+                <div class="insight-item">
+                    <div class="insight-header">
+                        <i class="fas fa-comment-alt-slash"></i>
+                        <h3>Complaint Correlation</h3>
+                    </div>
+                    <p>
+                        Customers who filed complaints show <strong>31.7% churn rate</strong> versus 
+                        <strong>10.9% for non-complainers</strong> - a 2x multiplier effect.
+                    </p>
+                </div>
+
+                <div class="insight-item">
+                    <div class="insight-header">
+                        <i class="fas fa-face-meh"></i>
+                        <h3>Satisfaction Paradox</h3>
+                    </div>
+                    <p>
+                        Customers with <strong>satisfaction scores of 3-4</strong> (mid-range) 
+                        show higher churn than expected - the "hidden risk" segment.
+                    </p>
+                </div>
+
+                <div class="insight-item">
+                    <div class="insight-header">
+                        <i class="fas fa-gift"></i>
+                        <h3>Cashback Engagement</h3>
+                    </div>
+                    <p>
+                        High-value customers with <strong>low cashback usage</strong> represent untapped 
+                        retention opportunities. Dynamic targeting could increase engagement by 2x.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Navigation to Next Section -->
+    <section class="next-section">
+        <div class="max-width">
+            <div class="next-content">
+                <h2>Ready to see the strategic roadmap?</h2>
+                <p>Explore the 90-day implementation plan and retention recommendations</p>
+                <a href="strategy.html" class="next-btn">
+                    <span>View Strategic Roadmap</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="project-footer">
+        <div class="max-width">
+            <div class="footer-content">
+                <div class="footer-left">
+                    <h3>E-Commerce Churn Prediction</h3>
+                    <p>A data analytics project by Souravdeep Singh</p>
+                </div>
+                <div class="footer-right">
+                    <a href="../index.html" class="footer-link">
+                        <i class="fas fa-home"></i>
+                        Back to Portfolio
+                    </a>
+                    <a href="../index.html#contact" class="footer-link">
+                        <i class="fas fa-envelope"></i>
+                        Contact Me
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="../js/script.js"></script>
+    <script src="../js/ecommerce-project.js"></script>
+    
+    <style>
+        /* Additional Styles */
+        .action-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: #f0f0f0;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            color: #666;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .action-btn:hover {
+            background: #e8e8e8;
+            transform: translateY(-2px);
+        }
+        
+        .action-btn.primary {
+            background: crimson;
+            color: white;
+            border-color: crimson;
+        }
+        
+        .action-btn.primary:hover {
+            background: #b71c28;
+            box-shadow: 0 4px 12px rgba(220, 20, 60, 0.3);
+        }
+        
+        .page-header {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+            text-align: center;
+            color: white;
+        }
+        
+        .page-title {
+            color: #fff;
+        }
+        
+        .page-description {
+            color: #ccc;
+        }
+        
+        .mobile-warning {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, #dc143c, #b71c28);
+            color: white;
+            padding: 12px 20px;
+            text-align: center;
+            z-index: 10000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            font-size: 13px;
+        }
+        
+        .mobile-warning button {
+            background: white;
+            color: crimson;
+            border: none;
+            padding: 6px 16px;
+            border-radius: 4px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        
+        @media (max-width: 1024px) {
+            .mobile-warning {
+                display: flex;
+            }
+        }
+        
+        .dashboard-insights {
+            padding: 80px 0;
+            background: #fff;
+        }
+        
+        .insights-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin-top: 40px;
+        }
+        
+        .insight-item {
+            padding: 25px;
+            background: #f8f8f8;
+            border-radius: 10px;
+            border-left: 4px solid crimson;
+        }
+        
+        .insight-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        
+        .insight-header i {
+            color: crimson;
+            font-size: 20px;
+        }
+        
+        .insight-header h3 {
+            font-size: 18px;
+            color: #111;
+            margin: 0;
+        }
+        
+        .insight-item p {
+            font-size: 15px;
+            color: #444;
+            line-height: 1.7;
+            margin: 0;
+        }
+        
+        .next-section {
+            padding: 80px 0;
+            background: linear-gradient(135deg, crimson 0%, #b71c28 100%);
+            text-align: center;
+            color: white;
+        }
+        
+        .next-content h2 {
+            font-size: 36px;
+            margin-bottom: 15px;
+        }
+        
+        .next-content p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+        
+        .next-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 40px;
+            background: white;
+            color: crimson;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+        
+        .next-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            gap: 16px;
+        }
+        
+        .project-footer {
+            background: #0a0a0a;
+            padding: 30px 0;
+            border-top: 1px solid #222;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .footer-left h3 {
+            font-size: 18px;
+            color: #fff;
+            margin-bottom: 5px;
+        }
+        
+        .footer-left p {
+            color: #888;
+            font-size: 13px;
+        }
+        
+        .footer-right {
+            display: flex;
+            gap: 20px;
+        }
+        
+        .footer-link {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #ccc;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-link:hover {
+            color: crimson;
+        }
+        
+        @media (max-width: 1024px) {
+            .insights-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-content {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+        }
+    </style>
+</body>
+</html>
