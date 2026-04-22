@@ -26,6 +26,4 @@ Personal portfolio website showcasing featured data analytics and web developmen
 - `images/`: Portfolio assets
 - `Healthcare_project/`: Embedded full healthcare capstone project assets
 
-## Notes
-- Intro animation now includes a **Skip Intro** button.
-- Performance optimized for smoother scrolling, especially on mobile/reduced-motion devices.
+
