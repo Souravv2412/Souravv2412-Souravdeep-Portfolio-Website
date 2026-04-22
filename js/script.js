@@ -1,21 +1,31 @@
 $(document).ready(function () {
-    $(window).scroll(function () {
-        // Sticky navbar on scroll script
-        if (this.scrollY > 20) {
+    let scrollingTick = false;
+
+    function handleScrollEffects() {
+        const y = window.scrollY || window.pageYOffset;
+
+        if (y > 20) {
             $('.navbar').addClass("sticky");
         } else {
             $('.navbar').removeClass("sticky");
         }
 
-        // Scroll-up button show/hide script
-        if (this.scrollY > 500) {
+        if (y > 500) {
             $('.scroll-up-btn').addClass("show");
         } else {
             $('.scroll-up-btn').removeClass("show");
         }
-    });
 
-    // Slide-up script
+        scrollingTick = false;
+    }
+
+    window.addEventListener('scroll', function () {
+        if (!scrollingTick) {
+            window.requestAnimationFrame(handleScrollEffects);
+            scrollingTick = true;
+        }
+    }, { passive: true });
+
     $('.scroll-up-btn').click(function () {
         $('html').animate({ scrollTop: 0 });
         $('html').css("scrollBehavior", "auto");
@@ -25,7 +35,6 @@ $(document).ready(function () {
         $('html').css("scrollBehavior", "smooth");
     });
 
-    // Toggle menu/navbar script
     $('.menu-btn').click(function () {
         $('.navbar .menu').toggleClass("active");
         $('.menu-btn i').toggleClass("active");
@@ -200,72 +209,87 @@ if (canvas) {
         update() {
             this.x += this.vx;
             this.y += this.vy;
-            if(this.x < 0 || this.x > w) this.vx *= -1;
-            if(this.y < 0 || this.y > h) this.vy *= -1;
+            if (this.x < 0 || this.x > w) this.vx *= -1;
+            if (this.y < 0 || this.y > h) this.vy *= -1;
             this.opacity += (this.targetOpacity - this.opacity) * 0.02;
         }
         draw() {
             ctx.fillStyle = `rgba(34,211,238,${this.opacity})`;
             ctx.beginPath();
-            ctx.arc(this.x, this.y, this.size, 0, Math.PI*2);
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
             ctx.fill();
         }
     }
 
-    for(let i=0;i<120;i++){
+    const lowPerfDevice = window.matchMedia('(prefers-reduced-motion: reduce)').matches || ((navigator.hardwareConcurrency || 8) <= 4);
+    const particleCount = lowPerfDevice ? 50 : 90;
+
+    for (let i = 0; i < particleCount; i++) {
         particles.push(new Particle());
     }
 
     function animateParticles() {
-        ctx.clearRect(0,0,w,h);
+        ctx.clearRect(0, 0, w, h);
         particles.forEach(p => {
             p.update();
             p.draw();
         });
-        // Connect close particles
-        for(let i=0;i<particles.length;i++){
-            for(let j=i+1;j<particles.length;j++){
-                const dx = particles[i].x - particles[j].x;
-                const dy = particles[i].y - particles[j].y;
-                const dist = Math.sqrt(dx*dx + dy*dy);
-                if(dist < 120){
-                    ctx.strokeStyle = `rgba(239,68,68,0.1)`;
-                    ctx.beginPath();
-                    ctx.moveTo(particles[i].x, particles[i].y);
-                    ctx.lineTo(particles[j].x, particles[j].y);
-                    ctx.stroke();
+
+        if (!lowPerfDevice) {
+            for (let i = 0; i < particles.length; i++) {
+                for (let j = i + 1; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const dist = Math.sqrt(dx * dx + dy * dy);
+                    if (dist < 120) {
+                        ctx.strokeStyle = `rgba(239,68,68,0.1)`;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
                 }
             }
         }
+
         requestAnimationFrame(animateParticles);
     }
     animateParticles();
 
     /* ===== INTRO EXIT / PHOTO & TEXT FADE IN - ONLY ONCE PER SESSION ===== */
-    // Check if intro has already been shown in this session
-    const introShown = sessionStorage.getItem('introShown');
-    
-    if (!introShown) {
-        // Show intro animation
-        setTimeout(() => {
-            document.querySelector(".introCenter").style.opacity = 1;
-            setTimeout(() => {
-                const intro = document.getElementById("dataIntro");
-                intro.style.transition = "1.5s";
-                intro.style.opacity = 0;
-                setTimeout(() => {
-                    intro.remove();
-                    // Mark intro as shown for this session
-                    sessionStorage.setItem('introShown', 'true');
-                }, 1500);
-            }, 3000);
-        }, 1000);
-    } else {
-        // Skip intro, remove it immediately
-        const intro = document.getElementById("dataIntro");
-        if (intro) {
+    const intro = document.getElementById("dataIntro");
+    const introCenter = document.querySelector(".introCenter");
+    const skipIntroBtn = document.getElementById("skipIntroBtn");
+
+    function removeIntro(immediate = false) {
+        if (!intro) return;
+        if (immediate) {
             intro.remove();
+            sessionStorage.setItem('introShown', 'true');
+            return;
         }
+
+        intro.style.transition = "1.0s";
+        intro.style.opacity = 0;
+        setTimeout(() => {
+            intro.remove();
+            sessionStorage.setItem('introShown', 'true');
+        }, 1000);
+    }
+
+    if (skipIntroBtn) {
+        skipIntroBtn.addEventListener('click', () => removeIntro(true));
+    }
+
+    const introShown = sessionStorage.getItem('introShown');
+
+    if (!introShown) {
+        setTimeout(() => {
+            if (introCenter) introCenter.style.opacity = 1;
+            setTimeout(() => removeIntro(false), 2600);
+        }, 600);
+    } else {
+        removeIntro(true);
     }
 }
 
@@ -295,11 +319,12 @@ if (canvas) {
 
   // Add flag to track if we're on mobile
   const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-  
-  // Disable on mobile or reduce interaction
-  if (isMobile) {
-    config.SPLAT_FORCE = 1000; // Reduce force even more
-    config.COLOR_UPDATE_SPEED = 5; // Slower color changes
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Disable heavy simulation on mobile/reduced-motion devices for smooth scrolling
+  if (isMobile || prefersReducedMotion) {
+    fluidCanvas.style.display = "none";
+    return;
   }
 
   // Pointer interface

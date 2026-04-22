@@ -1536,6 +1536,7 @@
 
     /* Remove menu-btn class styles from nav links on mobile
        (they share class with old approach — make sure they look like links) */
+       (they share class with old approach  -  make sure they look like links) */
     .navbar .menu li a.menu-btn {
         background: none;
         border: none;

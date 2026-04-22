@@ -1580,6 +1580,26 @@ footer span a:hover {
     font-family: 'Poppins', sans-serif;
 }
 
+.intro-skip-btn {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    background: rgba(0, 0, 0, 0.35);
+    color: #ffffff;
+    border-radius: 999px;
+    padding: 8px 14px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    backdrop-filter: blur(4px);
+}
+
+.intro-skip-btn:hover {
+    background: rgba(220, 20, 60, 0.9);
+    border-color: rgba(220, 20, 60, 1);
+}
+
 /* ========== RESPONSIVE DESIGN ========== */
 @media (max-width: 1200px) {
     .max-width {
