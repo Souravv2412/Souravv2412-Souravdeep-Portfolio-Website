@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-Commerce customer value - The Problem & Dataset</title>
+    <title>E-Commerce Churn - The Problem & Dataset</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/ecommerce-project.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
@@ -47,7 +47,7 @@
             </div>
             <h1 class="page-title">Data & Problem Definition</h1>
             <p class="page-description">
-                Understanding the business context, exploring the dataset, and defining the critical 0-3 month customer value crisis
+                Understanding the business context, exploring the dataset, and defining the critical 0-3 month churn crisis
             </p>
         </div>
     </section>
@@ -61,15 +61,15 @@
                     <div class="crisis-icon">
                         <i class="fas fa-exclamation-triangle"></i>
                     </div>
-                    <h3>16.8% customer value Rate</h3>
-                    <p>947 out of 5,630 customers have customer valueed, representing significant revenue loss</p>
+                    <h3>16.8% Churn Rate</h3>
+                    <p>947 out of 5,630 customers have churned, representing significant revenue loss</p>
                 </div>
                 <div class="crisis-card warning">
                     <div class="crisis-icon">
                         <i class="fas fa-calendar-times"></i>
                     </div>
                     <h3>0-3 Month Window</h3>
-                    <p>New customers in their first quarter show the highest risk, with nearly 50% customer value rate</p>
+                    <p>New customers in their first quarter show the highest risk, with nearly 50% churn rate</p>
                 </div>
                 <div class="crisis-card danger">
                     <div class="crisis-icon">
@@ -84,16 +84,16 @@
                 <h3>Why This Matters</h3>
                 <p>
                     Customer acquisition costs in e-commerce typically range from $50-$200 per customer. 
-                    With 947 customer valueed customers, the company has lost between <strong>$47,350 - $189,400</strong> 
+                    With 947 churned customers, the company has lost between <strong>$47,350 - $189,400</strong> 
                     in acquisition investments alone, not counting the lost lifetime value of these customers.
                 </p>
                 <p>
-                    The <strong>0-3 month customer value crisis</strong> is particularly critical because:
+                    The <strong>0-3 month churn crisis</strong> is particularly critical because:
                 </p>
                 <ul class="detail-list">
                     <li>These customers haven't recovered their acquisition cost</li>
                     <li>Early negative experiences create lasting brand damage</li>
-                    <li>High early customer value signals systemic onboarding or product issues</li>
+                    <li>High early churn signals systemic onboarding or product issues</li>
                     <li>Prevention is 5-25x cheaper than reacquisition</li>
                 </ul>
             </div>
@@ -150,7 +150,7 @@
                     <h3>About the Raw Dataset</h3>
                     <p>
                         This dataset contains the original, unprocessed customer data from an e-commerce platform. 
-                        It includes behavioral patterns, transaction history, satisfaction scores, and customer value status 
+                        It includes behavioral patterns, transaction history, satisfaction scores, and churn status 
                         for 5,630 customers. The raw data requires preprocessing to handle missing values, outliers, 
                         and prepare features for machine learning models.
                     </p>
@@ -164,7 +164,7 @@
                                 <i class="fas fa-sync"></i>
                                 Load Preview
                             </button>
-                            <a href="https://huggingface.co/datasets/souravv24112/Port_Dataset/blob/main/data_ecommerce/E-Commerce%20customer value%20Data.csv" 
+                            <a href="https://huggingface.co/datasets/souravv24112/Port_Dataset/blob/main/data_ecommerce/E-Commerce%20Churn%20Data.csv" 
                                target="_blank" class="action-btn primary">
                                 <i class="fas fa-download"></i>
                                 Download Dataset
@@ -342,8 +342,8 @@
                             <p>Days since most recent purchase</p>
                         </div>
                         <div class="dict-item">
-                            <strong>customer value</strong>
-                            <p>Target variable: Customer customer valueed (1) or active (0)</p>
+                            <strong>Churn</strong>
+                            <p>Target variable: Customer churned (1) or active (0)</p>
                         </div>
                     </div>
                 </div>
@@ -358,15 +358,15 @@
             <div class="insights-grid">
                 <div class="insight-card">
                     <div class="insight-number">~50%</div>
-                    <p>customer value rate for customers in 0-3 month tenure</p>
+                    <p>Churn rate for customers in 0-3 month tenure</p>
                 </div>
                 <div class="insight-card">
                     <div class="insight-number">31.7%</div>
-                    <p>customer value rate for customers who filed complaints</p>
+                    <p>Churn rate for customers who filed complaints</p>
                 </div>
                 <div class="insight-card">
                     <div class="insight-number">3-4</div>
-                    <p>Satisfaction score range showing highest customer value</p>
+                    <p>Satisfaction score range showing highest churn</p>
                 </div>
                 <div class="insight-card">
                     <div class="insight-number">52%</div>
@@ -389,7 +389,7 @@
         <div class="max-width">
             <div class="footer-content">
                 <div class="footer-left">
-                    <h3>Customer Lifetime Value Analysis</h3>
+                    <h3>E-Commerce Churn Prediction</h3>
                     <p>A data analytics project by Souravdeep Singh</p>
                 </div>
                 <div class="footer-right">

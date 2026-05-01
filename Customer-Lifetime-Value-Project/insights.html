@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-Commerce customer value - Insights Lab</title>
+    <title>E-Commerce Churn - Insights Lab</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/ecommerce-project.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
@@ -105,11 +105,11 @@
                             <span class="metric-score">89.3%</span>
                         </div>
                         <div class="metric-row">
-                            <span class="metric-name">customer valueer Recall (Sensitivity)</span>
+                            <span class="metric-name">Churner Recall (Sensitivity)</span>
                             <span class="metric-score">52%</span>
                         </div>
                         <div class="metric-row">
-                            <span class="metric-name">Non-customer valueer Recall (Specificity)</span>
+                            <span class="metric-name">Non-Churner Recall (Specificity)</span>
                             <span class="metric-score">96%</span>
                         </div>
                         <div class="metric-row">
@@ -117,7 +117,7 @@
                             <span class="metric-score">0.88</span>
                         </div>
                         <div class="metric-row">
-                            <span class="metric-name">F1-Score (customer valueer Class)</span>
+                            <span class="metric-name">F1-Score (Churner Class)</span>
                             <span class="metric-score">0.59</span>
                         </div>
                     </div>
@@ -131,7 +131,7 @@
                             <span class="metric-score">87.1%</span>
                         </div>
                         <div class="metric-row">
-                            <span class="metric-name">customer valueer Recall</span>
+                            <span class="metric-name">Churner Recall</span>
                             <span class="metric-score">45%</span>
                         </div>
                         <div class="metric-row">
@@ -145,10 +145,10 @@
             <div class="model-insight">
                 <h3>Why This Matters</h3>
                 <p>
-                    While the model achieves 89.3% overall accuracy, the <strong>52% customer valueer recall</strong> means 
-                    we successfully identify about half of all customers who will customer value. In business terms, this 
-                    translates to catching approximately <strong>490 out of 947 customer valueers</strong>, allowing for 
-                    proactive intervention. The high non-customer valueer recall (96%) minimizes false alarms, ensuring 
+                    While the model achieves 89.3% overall accuracy, the <strong>52% churner recall</strong> means 
+                    we successfully identify about half of all customers who will churn. In business terms, this 
+                    translates to catching approximately <strong>490 out of 947 churners</strong>, allowing for 
+                    proactive intervention. The high non-churner recall (96%) minimizes false alarms, ensuring 
                     retention efforts are efficiently targeted.
                 </p>
             </div>
@@ -160,7 +160,7 @@
         <div class="max-width">
             <h2 class="section-title">Feature Importance Analysis</h2>
             <p class="section-description">
-                Understanding which customer attributes drive customer value predictions
+                Understanding which customer attributes drive churn predictions
             </p>
 
             <div class="importance-chart">
@@ -279,8 +279,8 @@ from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.metrics import classification_report, confusion_matrix, roc_auc_score
 
 # Prepare features and target
-X = df_cleaned.drop(['customer value', 'CustomerID'], axis=1)
-y = df_cleaned['customer value']
+X = df_cleaned.drop(['Churn', 'CustomerID'], axis=1)
+y = df_cleaned['Churn']
 
 # Split data with stratification
 X_train, X_test, y_train, y_test = train_test_split(
@@ -323,7 +323,7 @@ print(feature_importance.head())
             </div>
 
             <div class="download-notebook">
-                <a href="/mnt/user-data/uploads/customer value_Analysis_Lab_1.ipynb" download class="download-btn">
+                <a href="/mnt/user-data/uploads/Churn_Analysis_Lab_1.ipynb" download class="download-btn">
                     <i class="fas fa-download"></i>
                     Download Complete Jupyter Notebook
                 </a>
@@ -350,7 +350,7 @@ print(feature_importance.head())
         <div class="max-width">
             <div class="footer-content">
                 <div class="footer-left">
-                    <h3>Customer Lifetime Value Analysis</h3>
+                    <h3>E-Commerce Churn Prediction</h3>
                     <p>A data analytics project by Souravdeep Singh</p>
                 </div>
                 <div class="footer-right">
