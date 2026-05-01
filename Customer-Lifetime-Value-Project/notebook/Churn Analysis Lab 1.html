@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 
 <html lang="en">
 <head><meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>customer value Analysis Lab 1</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>Churn Analysis Lab 1</title><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <style type="text/css">
     pre { line-height: 125%; }
 td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
@@ -7528,11 +7528,11 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Executive-Summary"><strong>Executive Summary</strong><a class="anchor-link" href="#Executive-Summary">¶</a></h3><p>Customer customer value is a critical business challenge that directly impacts revenue, customer lifetime value, and long-term growth.</p>
-<p>In this project, historical e-commerce customer data (5,630 customers) was analyzed to understand customer value behavior and identify customers at high risk of leaving. The analysis combines exploratory data analysis with predictive modeling using Logistic Regression and Decision Tree classifiers.</p>
-<p>The overall customer value rate in the dataset is 16.8% (948 customers). Results show that early tenure (0–3 months), customer complaints, low cashback incentives, and declining engagement are the strongest indicators of customer value.
-The Decision Tree model achieved the best overall performance (89.3% accuracy) while maintaining comparable customer value detection capability.</p>
-<p>These insights can be used by business and retention teams to proactively identify high-risk customers and apply targeted interventions to reduce customer value.</p>
+<h3 id="Executive-Summary"><strong>Executive Summary</strong><a class="anchor-link" href="#Executive-Summary">¶</a></h3><p>Customer churn is a critical business challenge that directly impacts revenue, customer lifetime value, and long-term growth.</p>
+<p>In this project, historical e-commerce customer data (5,630 customers) was analyzed to understand churn behavior and identify customers at high risk of leaving. The analysis combines exploratory data analysis with predictive modeling using Logistic Regression and Decision Tree classifiers.</p>
+<p>The overall churn rate in the dataset is 16.8% (948 customers). Results show that early tenure (0–3 months), customer complaints, low cashback incentives, and declining engagement are the strongest indicators of churn.
+The Decision Tree model achieved the best overall performance (89.3% accuracy) while maintaining comparable churn detection capability.</p>
+<p>These insights can be used by business and retention teams to proactively identify high-risk customers and apply targeted interventions to reduce churn.</p>
 </div>
 </div>
 </div>
@@ -7543,14 +7543,14 @@ The Decision Tree model achieved the best overall performance (89.3% accuracy) w
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Business-Problem"><strong>Business Problem</strong><a class="anchor-link" href="#Business-Problem">¶</a></h3><p>Customer customer value occurs when customers discontinue their relationship with a business, resulting in direct revenue loss and increased customer acquisition costs. In competitive e-commerce environments, even small increases in customer value can significantly impact profitability.</p>
-<p>With an observed customer value rate of 16.8%, understanding why customers leave and which customers are likely to customer value next is essential for designing effective retention strategies.</p>
+<h3 id="Business-Problem"><strong>Business Problem</strong><a class="anchor-link" href="#Business-Problem">¶</a></h3><p>Customer churn occurs when customers discontinue their relationship with a business, resulting in direct revenue loss and increased customer acquisition costs. In competitive e-commerce environments, even small increases in churn can significantly impact profitability.</p>
+<p>With an observed churn rate of 16.8%, understanding why customers leave and which customers are likely to churn next is essential for designing effective retention strategies.</p>
 <p><strong>Project Objective</strong></p>
 <p>The objective of this analysis is to:</p>
 <ul>
-<li><p>Identify key behavioral and transactional factors that influence customer customer value</p>
+<li><p>Identify key behavioral and transactional factors that influence customer churn</p>
 </li>
-<li><p>Predict which customers are at high risk of customer valueing using supervised machine learning</p>
+<li><p>Predict which customers are at high risk of churning using supervised machine learning</p>
 </li>
 <li><p>Translate analytical findings into actionable business and retention strategies</p>
 </li>
@@ -7565,14 +7565,14 @@ The Decision Tree model achieved the best overall performance (89.3% accuracy) w
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Target-Variable"><strong>Target Variable</strong><a class="anchor-link" href="#Target-Variable">¶</a></h3><p>The target variable in this project is customer value, a binary indicator where:</p>
+<h3 id="Target-Variable"><strong>Target Variable</strong><a class="anchor-link" href="#Target-Variable">¶</a></h3><p>The target variable in this project is Churn, a binary indicator where:</p>
 <ul>
-<li><p><code>1</code> represents customers who have customer valueed</p>
+<li><p><code>1</code> represents customers who have churned</p>
 </li>
 <li><p><code>0</code> represents customers who have been retained</p>
 </li>
 </ul>
-<p>The goal is to predict customer value within the observed time period using historical customer behavior and engagement data.</p>
+<p>The goal is to predict churn within the observed time period using historical customer behavior and engagement data.</p>
 </div>
 </div>
 </div>
@@ -7614,7 +7614,7 @@ The Decision Tree model achieved the best overall performance (89.3% accuracy) w
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p><strong>Data Overview</strong></p>
-<p>The dataset contains customer-level behavioral, transactional, and demographic information used to analyze and predict customer value.</p>
+<p>The dataset contains customer-level behavioral, transactional, and demographic information used to analyze and predict churn.</p>
 </div>
 </div>
 </div>
@@ -7626,7 +7626,7 @@ The Decision Tree model achieved the best overall performance (89.3% accuracy) w
 <div class="jp-InputPrompt jp-InputArea-prompt">In [2]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"../data/E-Commerce customer value Data.csv"</span><span class="p">)</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"../data/E-Commerce Churn Data.csv"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -7672,7 +7672,7 @@ The Decision Tree model achieved the best overall performance (89.3% accuracy) w
 <tr style="text-align: right;">
 <th></th>
 <th>CustomerID</th>
-<th>customer value</th>
+<th>Churn</th>
 <th>Tenure</th>
 <th>PreferredLoginDevice</th>
 <th>CityTier</th>
@@ -7979,7 +7979,7 @@ The Decision Tree model achieved the best overall performance (89.3% accuracy) w
 <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[5]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
 <pre>CustomerID                       int64
-customer value                            int64
+Churn                            int64
 Tenure                         float64
 PreferredLoginDevice            object
 CityTier                         int64
@@ -8025,7 +8025,7 @@ dtype: object</pre>
 <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[7]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
 <pre>CustomerID                     0.000000
-customer value                          0.000000
+Churn                          0.000000
 Tenure                         4.689165
 PreferredLoginDevice           0.000000
 CityTier                       0.000000
@@ -8059,7 +8059,7 @@ dtype: float64</pre>
 <p><strong>Handling Missing Values and Outliers</strong></p>
 <p>Several numerical features (e.g., Tenure, HourSpendOnApp, DaySinceLastOrder) contained 4–5% missing values.
 Before imputation, outlier analysis was conducted using boxplots.</p>
-<p>Since this is a customer value analysis, extreme values (such as very low engagement or very high order counts) represent meaningful customer behavior rather than noise. Removing them would risk losing important customer value signals.</p>
+<p>Since this is a churn analysis, extreme values (such as very low engagement or very high order counts) represent meaningful customer behavior rather than noise. Removing them would risk losing important churn signals.</p>
 <p>Therefore, missing values were imputed using the median, which preserves the underlying distribution without being influenced by extreme but valid observations.</p>
 </div>
 </div>
@@ -8086,7 +8086,7 @@ Before imputation, outlier analysis was conducted using boxplots.</p>
 <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[8]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
 <pre>CustomerID                       0
-customer value                            0
+Churn                            0
 Tenure                         264
 PreferredLoginDevice             0
 CityTier                         0
@@ -8153,8 +8153,8 @@ dtype: int64</pre>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<p>Since this is a customer value analysis project, the “extreme” cases are actually meaningful (e.g., very low activity or very high order counts).<br/>
-They represent important customer value-driving behavior.</p>
+<p>Since this is a churn analysis project, the “extreme” cases are actually meaningful (e.g., very low activity or very high order counts).<br/>
+They represent important churn-driving behavior.</p>
 </div>
 </div>
 </div>
@@ -8195,7 +8195,7 @@ They represent important customer value-driving behavior.</p>
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
 <pre>CustomerID                     0
-customer value                          0
+Churn                          0
 Tenure                         0
 PreferredLoginDevice           0
 CityTier                       0
@@ -8227,7 +8227,7 @@ dtype: int64
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h1 id="PHASE-3:-DESCRIPTIVE-customer value-ANALYSIS-(EDA)">PHASE 3: DESCRIPTIVE customer value ANALYSIS (EDA)<a class="anchor-link" href="#PHASE-3:-DESCRIPTIVE-customer value-ANALYSIS-(EDA)">¶</a></h1>
+<h1 id="PHASE-3:-DESCRIPTIVE-CHURN-ANALYSIS-(EDA)">PHASE 3: DESCRIPTIVE CHURN ANALYSIS (EDA)<a class="anchor-link" href="#PHASE-3:-DESCRIPTIVE-CHURN-ANALYSIS-(EDA)">¶</a></h1>
 </div>
 </div>
 </div>
@@ -8238,17 +8238,17 @@ dtype: int64
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Overall-customer value-Overview"><strong>Overall customer value Overview</strong><a class="anchor-link" href="#Overall-customer value-Overview">¶</a></h3><ul>
+<h3 id="Overall-Churn-Overview"><strong>Overall Churn Overview</strong><a class="anchor-link" href="#Overall-Churn-Overview">¶</a></h3><ul>
 <li><p>Total customers: 5,630</p>
 </li>
-<li><p>customer valueed customers: 948</p>
+<li><p>Churned customers: 948</p>
 </li>
 <li><p>Active customers: 4,682</p>
 </li>
-<li><p>Overall customer value rate: 16.8%</p>
+<li><p>Overall churn rate: 16.8%</p>
 </li>
 </ul>
-<p>This confirms that customer value is a significant but imbalanced problem, requiring careful model evaluation beyond accuracy alone.</p>
+<p>This confirms that churn is a significant but imbalanced problem, requiring careful model evaluation beyond accuracy alone.</p>
 </div>
 </div>
 </div>
@@ -8260,33 +8260,33 @@ dtype: int64
 <div class="jp-InputPrompt jp-InputArea-prompt">In [12]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Calculate customer value stats</span>
-<span class="n">customer value_counts</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">'customer value'</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
-<span class="n">customer value_pct</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">'customer value'</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Calculate churn stats</span>
+<span class="n">churn_counts</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">'Churn'</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+<span class="n">churn_pct</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">'Churn'</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span>
 
 <span class="c1"># Subplots </span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
 
 <span class="c1"># Bar chart</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
-<span class="n">bars</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">([</span><span class="s1">'No customer value'</span><span class="p">,</span> <span class="s1">'customer value'</span><span class="p">],</span> <span class="n">customer value_counts</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s1">'lightblue'</span><span class="p">,</span> <span class="s1">'lightcoral'</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">'Customer customer value: Count'</span><span class="p">)</span>
+<span class="n">bars</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">([</span><span class="s1">'No Churn'</span><span class="p">,</span> <span class="s1">'Churn'</span><span class="p">],</span> <span class="n">churn_counts</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s1">'lightblue'</span><span class="p">,</span> <span class="s1">'lightcoral'</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">'Customer Churn: Count'</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'Number of Customers'</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">bar_label</span><span class="p">(</span><span class="n">bars</span><span class="p">,</span> <span class="n">padding</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 
 <span class="c1"># Pie chart</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">pie</span><span class="p">(</span><span class="n">customer value_pct</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s1">'No customer value'</span><span class="p">,</span> <span class="s1">'customer value'</span><span class="p">],</span> <span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s1">'lightblue'</span><span class="p">,</span> <span class="s1">'lightcoral'</span><span class="p">],</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">pie</span><span class="p">(</span><span class="n">churn_pct</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s1">'No Churn'</span><span class="p">,</span> <span class="s1">'Churn'</span><span class="p">],</span> <span class="n">colors</span><span class="o">=</span><span class="p">[</span><span class="s1">'lightblue'</span><span class="p">,</span> <span class="s1">'lightcoral'</span><span class="p">],</span>
         <span class="n">autopct</span><span class="o">=</span><span class="s1">'</span><span class="si">%1.1f%%</span><span class="s1">'</span><span class="p">,</span> <span class="n">startangle</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">'Customer customer value: Percentage'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">'Customer Churn: Percentage'</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"customer value Rate: </span><span class="si">{</span><span class="n">customer value_pct</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"customer valueed customers: </span><span class="si">{</span><span class="n">customer value_counts</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Active customers: </span><span class="si">{</span><span class="n">customer value_counts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Churn Rate: </span><span class="si">{</span><span class="n">churn_pct</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2">%"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Churned customers: </span><span class="si">{</span><span class="n">churn_counts</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Active customers: </span><span class="si">{</span><span class="n">churn_counts</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -8305,8 +8305,8 @@ dtype: int64
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>customer value Rate: 16.8%
-customer valueed customers: 948
+<pre>Churn Rate: 16.8%
+Churned customers: 948
 Active customers: 4682
 </pre>
 </div>
@@ -8320,7 +8320,7 @@ Active customers: 4682
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="What-Factors-Influence-Customer-customer value?"><strong>What Factors Influence Customer customer value?</strong><a class="anchor-link" href="#What-Factors-Influence-Customer-customer value?">¶</a></h3>
+<h3 id="What-Factors-Influence-Customer-Churn?"><strong>What Factors Influence Customer Churn?</strong><a class="anchor-link" href="#What-Factors-Influence-Customer-Churn?">¶</a></h3>
 </div>
 </div>
 </div>
@@ -8332,28 +8332,28 @@ Active customers: 4682
 <div class="jp-InputPrompt jp-InputArea-prompt">In [13]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Correlation with customer value for all number columns</span>
-<span class="n">correlation</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">numeric_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="s1">'customer value'</span><span class="p">]</span>
-<span class="n">correlation</span> <span class="o">=</span> <span class="n">correlation</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">'customer value'</span><span class="p">)</span>  <span class="c1"># Remove customer value itself</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># Correlation with Churn for all number columns</span>
+<span class="n">correlation</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">corr</span><span class="p">(</span><span class="n">numeric_only</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="s1">'Churn'</span><span class="p">]</span>
+<span class="n">correlation</span> <span class="o">=</span> <span class="n">correlation</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="s1">'Churn'</span><span class="p">)</span>  <span class="c1"># Remove Churn itself</span>
 <span class="n">correlation</span> <span class="o">=</span> <span class="n">correlation</span><span class="o">.</span><span class="n">sort_values</span><span class="p">()</span>  <span class="c1"># Sort from lowest to highest</span>
 
 <span class="c1"># Create the bar chart</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">barh</span><span class="p">(</span><span class="n">correlation</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">correlation</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'lightblue'</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">'What Factors Affect Customer customer value?'</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">'Correlation Strength (Negative = Prevents customer value, Positive = Causes customer value)'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">'What Factors Affect Customer Churn?'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">'Correlation Strength (Negative = Prevents Churn, Positive = Causes Churn)'</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'black'</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># vertical line at zero</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 
 <span class="c1"># Print the results in a simple table</span>
-<span class="nb">print</span><span class="p">(</span><span class="s2">"HOW EACH FACTOR AFFECTS customer value:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"HOW EACH FACTOR AFFECTS CHURN:"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">"=============================="</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">factor</span><span class="p">,</span> <span class="n">strength</span> <span class="ow">in</span> <span class="n">correlation</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
     <span class="k">if</span> <span class="n">strength</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">factor</span><span class="si">:</span><span class="s2">25</span><span class="si">}</span><span class="s2"> | Prevents customer value (</span><span class="si">{</span><span class="n">strength</span><span class="si">:</span><span class="s2">+.3f</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">factor</span><span class="si">:</span><span class="s2">25</span><span class="si">}</span><span class="s2"> | Prevents churn (</span><span class="si">{</span><span class="n">strength</span><span class="si">:</span><span class="s2">+.3f</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">factor</span><span class="si">:</span><span class="s2">25</span><span class="si">}</span><span class="s2"> | Causes customer value  (</span><span class="si">{</span><span class="n">strength</span><span class="si">:</span><span class="s2">+.3f</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">factor</span><span class="si">:</span><span class="s2">25</span><span class="si">}</span><span class="s2"> | Causes churn  (</span><span class="si">{</span><span class="n">strength</span><span class="si">:</span><span class="s2">+.3f</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -8372,22 +8372,22 @@ Active customers: 4682
 <div class="jp-OutputArea-child">
 <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
-<pre>HOW EACH FACTOR AFFECTS customer value:
+<pre>HOW EACH FACTOR AFFECTS CHURN:
 ==============================
-Tenure                    | Prevents customer value (-0.338)
-DaySinceLastOrder         | Prevents customer value (-0.156)
-CashbackAmount            | Prevents customer value (-0.154)
-OrderCount                | Prevents customer value (-0.024)
-CustomerID                | Prevents customer value (-0.019)
-OrderAmountHikeFromlastYear | Prevents customer value (-0.007)
-CouponUsed                | Prevents customer value (-0.001)
-HourSpendOnApp            | Causes customer value  (+0.019)
-NumberOfAddress           | Causes customer value  (+0.044)
-WarehouseToHome           | Causes customer value  (+0.070)
-CityTier                  | Causes customer value  (+0.085)
-SatisfactionScore         | Causes customer value  (+0.105)
-NumberOfDeviceRegistered  | Causes customer value  (+0.108)
-Complain                  | Causes customer value  (+0.250)
+Tenure                    | Prevents churn (-0.338)
+DaySinceLastOrder         | Prevents churn (-0.156)
+CashbackAmount            | Prevents churn (-0.154)
+OrderCount                | Prevents churn (-0.024)
+CustomerID                | Prevents churn (-0.019)
+OrderAmountHikeFromlastYear | Prevents churn (-0.007)
+CouponUsed                | Prevents churn (-0.001)
+HourSpendOnApp            | Causes churn  (+0.019)
+NumberOfAddress           | Causes churn  (+0.044)
+WarehouseToHome           | Causes churn  (+0.070)
+CityTier                  | Causes churn  (+0.085)
+SatisfactionScore         | Causes churn  (+0.105)
+NumberOfDeviceRegistered  | Causes churn  (+0.108)
+Complain                  | Causes churn  (+0.250)
 </pre>
 </div>
 </div>
@@ -8400,9 +8400,9 @@ Complain                  | Causes customer value  (+0.250)
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="customer value-Behavior-by-Customer-Tenure"><strong>customer value Behavior by Customer Tenure</strong><a class="anchor-link" href="#customer value-Behavior-by-Customer-Tenure">¶</a></h3><p>Tenure – The First 3 Months Are Critical</p>
-<p>Customers in their first 0–3 months show nearly 50% customer value</p>
-<p>customer value drops sharply after 6 months and becomes very low after 12 months
+<h3 id="Churn-Behavior-by-Customer-Tenure"><strong>Churn Behavior by Customer Tenure</strong><a class="anchor-link" href="#Churn-Behavior-by-Customer-Tenure">¶</a></h3><p>Tenure – The First 3 Months Are Critical</p>
+<p>Customers in their first 0–3 months show nearly 50% churn</p>
+<p>Churn drops sharply after 6 months and becomes very low after 12 months
 Business Insight: Early onboarding experience is the most critical retention phase.</p>
 </div>
 </div>
@@ -8415,12 +8415,12 @@ Business Insight: Early onboarding experience is the most critical retention pha
 <div class="jp-InputPrompt jp-InputArea-prompt">In [14]:</div>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
-<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># How Tenure affects customer value</span>
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1"># How Tenure affects Churn</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="n">data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">'Tenure'</span><span class="p">)[</span><span class="s1">'customer value'</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">'line'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'lightcoral'</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">'o'</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">'customer value Rate vs. Customer Tenure'</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">'Tenure'</span><span class="p">)[</span><span class="s1">'Churn'</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">'line'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'lightcoral'</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">'o'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">'Churn Rate vs. Customer Tenure'</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">'Tenure (Months)'</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'customer value Rate'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'Churn Rate'</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
@@ -8452,7 +8452,7 @@ Business Insight: Early onboarding experience is the most critical retention pha
 <code>This is the most critical period to keep customers engaged</code></p>
 <p><strong>The Loyalty Building Phase</strong></p>
 <p><code>After 6 months, the chance of customers leaving drops dramatically</code>
-<code>By 12 months, customer value is very low</code>
+<code>By 12 months, churn is very low</code>
 <code>The longer customers stay, the more loyal they become</code></p>
 <p><strong>Key Business Insight</strong></p>
 <p><code>Focus on the first 3 months: Get customers past this risky period so they stay long-term</code>
@@ -8467,8 +8467,8 @@ Business Insight: Early onboarding experience is the most critical retention pha
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Impact-of-Cashback-on-Customer-Retention"><strong>Impact of Cashback on Customer Retention</strong><a class="anchor-link" href="#Impact-of-Cashback-on-Customer-Retention">¶</a></h3><p>Cashback Incentives Reduce customer value</p>
-<p>Customers receiving higher cashback have less than half the customer value rate of low-cashback customers
+<h3 id="Impact-of-Cashback-on-Customer-Retention"><strong>Impact of Cashback on Customer Retention</strong><a class="anchor-link" href="#Impact-of-Cashback-on-Customer-Retention">¶</a></h3><p>Cashback Incentives Reduce Churn</p>
+<p>Customers receiving higher cashback have less than half the churn rate of low-cashback customers
 Business Insight: Cashback programs are effective loyalty and retention tools.</p>
 </div>
 </div>
@@ -8482,10 +8482,10 @@ Business Insight: Cashback programs are effective loyalty and retention tools.</
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="n">data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">qcut</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">'CashbackAmount'</span><span class="p">],</span> <span class="mi">5</span><span class="p">))[</span><span class="s1">'customer value'</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">'bar'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'lightblue'</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">'customer value Rate by Cashback Amount'</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">qcut</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s1">'CashbackAmount'</span><span class="p">],</span> <span class="mi">5</span><span class="p">))[</span><span class="s1">'Churn'</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">'bar'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'lightblue'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">'Churn Rate by Cashback Amount'</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">'Cashback Amount Groups'</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'customer value Rate'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'Churn Rate'</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">45</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span> 
 </pre></div>
@@ -8514,7 +8514,7 @@ Business Insight: Cashback programs are effective loyalty and retention tools.</
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p><strong>Clear Pattern</strong></p>
 <p><code>Customers who get more cashback are much less likely to leave</code>
-<code>Highest cashback group has less than half the customer value rate of the lowest group</code></p>
+<code>Highest cashback group has less than half the churn rate of the lowest group</code></p>
 <p><strong>Key Insight</strong></p>
 <p><code>Your reward program works effectively to retain customers</code>
 <code>Cashback is a powerful tool to encourage loyalty</code></p>
@@ -8528,7 +8528,7 @@ Business Insight: Cashback programs are effective loyalty and retention tools.</
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Complaints-%E2%80%93-The-Strongest-customer value-Signal"><strong>Complaints – The Strongest customer value Signal</strong><a class="anchor-link" href="#Complaints-%E2%80%93-The-Strongest-customer value-Signal">¶</a></h3><p>Customers who submitted complaints have a <strong>31.7% customer value rate</strong> compared to <strong>10.9%</strong> for those without complaints - <strong>nearly 3x higher risk</strong></p>
+<h3 id="Complaints-%E2%80%93-The-Strongest-Churn-Signal"><strong>Complaints – The Strongest Churn Signal</strong><a class="anchor-link" href="#Complaints-%E2%80%93-The-Strongest-Churn-Signal">¶</a></h3><p>Customers who submitted complaints have a <strong>31.7% churn rate</strong> compared to <strong>10.9%</strong> for those without complaints - <strong>nearly 3x higher risk</strong></p>
 </div>
 </div>
 </div>
@@ -8541,10 +8541,10 @@ Business Insight: Cashback programs are effective loyalty and retention tools.</
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="n">data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">'Complain'</span><span class="p">)[</span><span class="s1">'customer value'</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">'bar'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s1">'lightblue'</span><span class="p">,</span> <span class="s1">'lightcoral'</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">'customer value Rate: Complaints vs No Complaints'</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">'Complain'</span><span class="p">)[</span><span class="s1">'Churn'</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">'bar'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s1">'lightblue'</span><span class="p">,</span> <span class="s1">'lightcoral'</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">'Churn Rate: Complaints vs No Complaints'</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">'Customer Complained? (0=No, 1=Yes)'</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'customer value Rate'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'Churn Rate'</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">(</span><span class="n">rotation</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
@@ -8586,9 +8586,9 @@ Business Insight: Cashback programs are effective loyalty and retention tools.</
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h3 id="Satisfaction-Paradox-insight"><strong>Satisfaction Paradox insight</strong><a class="anchor-link" href="#Satisfaction-Paradox-insight">¶</a></h3><p>The Satisfaction Paradox</p>
-<p>Customers giving mid-range satisfaction scores (3–4/5) show the highest customer value</p>
+<p>Customers giving mid-range satisfaction scores (3–4/5) show the highest churn</p>
 <p>Indicates hidden dissatisfaction not captured by surveys
-Business Insight: Satisfaction scores alone are insufficient to detect customer value risk.</p>
+Business Insight: Satisfaction scores alone are insufficient to detect churn risk.</p>
 </div>
 </div>
 </div>
@@ -8601,10 +8601,10 @@ Business Insight: Satisfaction scores alone are insufficient to detect customer 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="n">data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">'SatisfactionScore'</span><span class="p">)[</span><span class="s1">'customer value'</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">'bar'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'lightcoral'</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">'The Satisfaction Paradox: customer value Rate by Score'</span><span class="p">)</span>
+<span class="n">data</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s1">'SatisfactionScore'</span><span class="p">)[</span><span class="s1">'Churn'</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">'bar'</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">'lightcoral'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">'The Satisfaction Paradox: Churn Rate by Score'</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">'Satisfaction Score (1-5)'</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'customer value Rate'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'Churn Rate'</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -8631,7 +8631,7 @@ Business Insight: Satisfaction scores alone are insufficient to detect customer 
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p><strong>Unexpected Pattern</strong></p>
-<p><code>Customers giving middle scores (3-4) have the HIGHEST customer value rate</code>
+<p><code>Customers giving middle scores (3-4) have the HIGHEST churn rate</code>
 <code>This doesn't make sense - satisfied customers should stay, not leave!</code></p>
 <p><strong>Possible Explanations</strong></p>
 <p><code>Your satisfaction survey might be asking the wrong questions</code>
@@ -8658,10 +8658,10 @@ Business Insight: Satisfaction scores alone are insufficient to detect customer 
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Predictive-Modeling-Approach"><strong>Predictive Modeling Approach</strong><a class="anchor-link" href="#Predictive-Modeling-Approach">¶</a></h3><p>Two supervised classification models were trained to predict customer customer value:</p>
+<h3 id="Predictive-Modeling-Approach"><strong>Predictive Modeling Approach</strong><a class="anchor-link" href="#Predictive-Modeling-Approach">¶</a></h3><p>Two supervised classification models were trained to predict customer churn:</p>
 <p>Logistic Regression – baseline, interpretable model</p>
 <p>Decision Tree Classifier – non-linear model capturing interaction effects</p>
-<p>Data was split into 80% training (4,504 customers) and 20% testing (1,126 customers) using stratified sampling to preserve the customer value rate (16.8% vs 16.9%), ensuring a fair and leakage-free evaluation.</p>
+<p>Data was split into 80% training (4,504 customers) and 20% testing (1,126 customers) using stratified sampling to preserve the churn rate (16.8% vs 16.9%), ensuring a fair and leakage-free evaluation.</p>
 <p>Categorical variables were encoded using one-hot encoding.</p>
 </div>
 </div>
@@ -8679,9 +8679,9 @@ Business Insight: Satisfaction scores alone are insufficient to detect customer 
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.tree</span><span class="w"> </span><span class="kn">import</span> <span class="n">DecisionTreeClassifier</span>
 <span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">accuracy_score</span><span class="p">,</span> <span class="n">classification_report</span><span class="p">,</span> <span class="n">confusion_matrix</span>
 
-<span class="c1"># all columns except customer value and CustomerID</span>
-<span class="n">X</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">'customer value'</span><span class="p">,</span> <span class="s1">'CustomerID'</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">'customer value'</span><span class="p">]</span>
+<span class="c1"># all columns except Churn and CustomerID</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">([</span><span class="s1">'Churn'</span><span class="p">,</span> <span class="s1">'CustomerID'</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">'Churn'</span><span class="p">]</span>
 
 <span class="c1"># Convert categorical text to numbers</span>
 <span class="n">X</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">drop_first</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -8692,8 +8692,8 @@ Business Insight: Satisfaction scores alone are insufficient to detect customer 
 <span class="nb">print</span><span class="p">(</span><span class="s2">"***** Data prepared successfully! *****"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Training samples: </span><span class="si">{</span><span class="n">X_train</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Testing samples: </span><span class="si">{</span><span class="n">X_test</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"customer value rate in training: </span><span class="si">{</span><span class="n">y_train</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.1%</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"customer value rate in testing: </span><span class="si">{</span><span class="n">y_test</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.1%</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Churn rate in training: </span><span class="si">{</span><span class="n">y_train</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.1%</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Churn rate in testing: </span><span class="si">{</span><span class="n">y_test</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.1%</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -8709,8 +8709,8 @@ Business Insight: Satisfaction scores alone are insufficient to detect customer 
 <pre>***** Data prepared successfully! *****
 Training samples: 4504
 Testing samples: 1126
-customer value rate in training: 16.8%
-customer value rate in testing: 16.9%
+Churn rate in training: 16.8%
+Churn rate in testing: 16.9%
 </pre>
 </div>
 </div>
@@ -8725,7 +8725,7 @@ customer value rate in testing: 16.9%
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <p><strong>Training Set (4504 customers - 80%): This is the data the model will learn from.</strong>
 <strong>Testing Set (1126 customers - 20%): This is the data we will use to test the model's predictions, simulating real-world performance.</strong></p>
-<p><code>Most importantly, the customer value rate is nearly identical in both sets (16.8% vs 16.9%). This proves our split is fair and balanced, ``with no data leakage. The model will learn on representative data and we can trust its predictions on new, unseen customers."</code></p>
+<p><code>Most importantly, the churn rate is nearly identical in both sets (16.8% vs 16.9%). This proves our split is fair and balanced, ``with no data leakage. The model will learn on representative data and we can trust its predictions on new, unseen customers."</code></p>
 </div>
 </div>
 </div>
@@ -8737,12 +8737,12 @@ customer value rate in testing: 16.9%
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h1 id="PHASE-5:-MODEL-RESULTS-&amp;-EVALUATION">PHASE 5: MODEL RESULTS &amp; EVALUATION<a class="anchor-link" href="#PHASE-5:-MODEL-RESULTS-&amp;-EVALUATION">¶</a></h1><p>Model Evaluation Strategy</p>
-<p>customer value prediction is a cost-sensitive problem, where accuracy alone can be misleading.
-Missing a customer who is about to customer value (false negative) results in lost future revenue, while incorrectly flagging a customer (false positive) only incurs additional retention cost.</p>
+<p>Churn prediction is a cost-sensitive problem, where accuracy alone can be misleading.
+Missing a customer who is about to churn (false negative) results in lost future revenue, while incorrectly flagging a customer (false positive) only incurs additional retention cost.</p>
 <p>Therefore, model performance was evaluated using:</p>
 <p>Accuracy</p>
 <p>Precision, Recall, and F1-score</p>
-<p>Special focus on customer valueer Recall (Class 1)</p>
+<p>Special focus on Churner Recall (Class 1)</p>
 </div>
 </div>
 </div>
@@ -8816,7 +8816,7 @@ weighted avg       0.88      0.89      0.88      1126
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <hr/>
-<h1 id="Logistic-Regression-Results-Summary:">Logistic Regression Results Summary:<a class="anchor-link" href="#Logistic-Regression-Results-Summary:">¶</a></h1><p><strong>Accuracy: 88.9%</strong> - Our model correctly predicts customer customer value <strong>89 times out of 100</strong></p>
+<h1 id="Logistic-Regression-Results-Summary:">Logistic Regression Results Summary:<a class="anchor-link" href="#Logistic-Regression-Results-Summary:">¶</a></h1><p><strong>Accuracy: 88.9%</strong> - Our model correctly predicts customer churn <strong>89 times out of 100</strong></p>
 <h2 id="Performance-Breakdown:">Performance Breakdown:<a class="anchor-link" href="#Performance-Breakdown:">¶</a></h2><table>
 <thead>
 <tr>
@@ -8826,16 +8826,16 @@ weighted avg       0.88      0.89      0.88      1126
 </thead>
 <tbody>
 <tr>
-<td><strong>Non-customer valueers</strong> (0)</td>
+<td><strong>Non-Churners</strong> (0)</td>
 <td><strong>Excellent</strong> (96% correct)</td>
 </tr>
 <tr>
-<td><strong>customer valueers</strong> (1)</td>
+<td><strong>Churners</strong> (1)</td>
 <td><strong>Good but could improve</strong> (52% correct)</td>
 </tr>
 </tbody>
 </table>
-<h2 id="Key-Insight:">Key Insight:<a class="anchor-link" href="#Key-Insight:">¶</a></h2><p>The model is <strong>better at identifying loyal customers</strong> than predicting who will customer value. This is common in customer value prediction because keeping customers is easier when we know who's at risk!</p>
+<h2 id="Key-Insight:">Key Insight:<a class="anchor-link" href="#Key-Insight:">¶</a></h2><p>The model is <strong>better at identifying loyal customers</strong> than predicting who will churn. This is common in churn prediction because keeping customers is easier when we know who's at risk!</p>
 <h2 id="Why-This-Matters:">Why This Matters:<a class="anchor-link" href="#Why-This-Matters:">¶</a></h2><p>Even with 88.9% accuracy, we can still identify <strong>half of the customers who might leave</strong> - giving us a chance to save them with targeted marketing campaigns!</p>
 <hr/>
 </div>
@@ -8910,7 +8910,7 @@ weighted avg       0.89      0.89      0.88      1126
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <hr/>
-<h1 id="Decision-Tree-Results-Summary:">Decision Tree Results Summary:<a class="anchor-link" href="#Decision-Tree-Results-Summary:">¶</a></h1><p><strong>Accuracy: 89.3%</strong> - Our model correctly predicts customer customer value <strong>89 times out of 100</strong></p>
+<h1 id="Decision-Tree-Results-Summary:">Decision Tree Results Summary:<a class="anchor-link" href="#Decision-Tree-Results-Summary:">¶</a></h1><p><strong>Accuracy: 89.3%</strong> - Our model correctly predicts customer churn <strong>89 times out of 100</strong></p>
 <h2 id="Performance-Breakdown:">Performance Breakdown:<a class="anchor-link" href="#Performance-Breakdown:">¶</a></h2><table>
 <thead>
 <tr>
@@ -8920,17 +8920,17 @@ weighted avg       0.89      0.89      0.88      1126
 </thead>
 <tbody>
 <tr>
-<td><strong>Non-customer valueers</strong> (0)</td>
+<td><strong>Non-Churners</strong> (0)</td>
 <td><strong>Excellent</strong> (97% correct)</td>
 </tr>
 <tr>
-<td><strong>customer valueers</strong> (1)</td>
+<td><strong>Churners</strong> (1)</td>
 <td><strong>Good but could improve</strong> (52% correct)</td>
 </tr>
 </tbody>
 </table>
 <h2 id="Key-Insight:">Key Insight:<a class="anchor-link" href="#Key-Insight:">¶</a></h2><p>The Decision Tree performs slightly better than Logistic Regression (89.3% vs 88.9%) and is particularly good at identifying loyal customers (97% accuracy!)</p>
-<h2 id="Why-This-Matters:">Why This Matters:<a class="anchor-link" href="#Why-This-Matters:">¶</a></h2><p>Both models catch <strong>about half of the customers who will leave</strong>, giving us a solid foundation for targeted retention campaigns. The Decision Tree is our best model for predicting customer customer value!</p>
+<h2 id="Why-This-Matters:">Why This Matters:<a class="anchor-link" href="#Why-This-Matters:">¶</a></h2><p>Both models catch <strong>about half of the customers who will leave</strong>, giving us a solid foundation for targeted retention campaigns. The Decision Tree is our best model for predicting customer churn!</p>
 </div>
 </div>
 </div>
@@ -8957,8 +8957,8 @@ weighted avg       0.89      0.89      0.88      1126
 <tr>
 <th>Model</th>
 <th>Accuracy</th>
-<th>Non-customer valueer Recall</th>
-<th>customer valueer Recall</th>
+<th>Non-Churner Recall</th>
+<th>Churner Recall</th>
 </tr>
 </thead>
 <tbody>
@@ -8998,9 +8998,9 @@ weighted avg       0.89      0.89      0.88      1126
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Model-Explainability:-Key-Features-Driving-customer value-Predictions"><strong>Model Explainability: Key Features Driving customer value Predictions</strong><a class="anchor-link" href="#Model-Explainability:-Key-Features-Driving-customer value-Predictions">¶</a></h3><p>To ensure the model is not a black box, feature importance was extracted from the selected
+<h3 id="Model-Explainability:-Key-Features-Driving-Churn-Predictions"><strong>Model Explainability: Key Features Driving Churn Predictions</strong><a class="anchor-link" href="#Model-Explainability:-Key-Features-Driving-Churn-Predictions">¶</a></h3><p>To ensure the model is not a black box, feature importance was extracted from the selected
 Decision Tree model. This helps identify which customer attributes most strongly influence
-customer value predictions and supports transparent, business-aligned decision-making.</p>
+churn predictions and supports transparent, business-aligned decision-making.</p>
 </div>
 </div>
 </div>
@@ -9022,7 +9022,7 @@ customer value predictions and supports transparent, business-aligned decision-m
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
 <span class="n">feature_importance</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s1">'barh'</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">()</span><span class="o">.</span><span class="n">invert_yaxis</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">'Top 10 Features Influencing Customer customer value (Decision Tree)'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">'Top 10 Features Influencing Customer Churn (Decision Tree)'</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">'Importance Score'</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -9050,9 +9050,9 @@ customer value predictions and supports transparent, business-aligned decision-m
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="Feature-Importance-%E2%80%93-Key-Drivers-of-Customer-customer value">Feature Importance – Key Drivers of Customer customer value<a class="anchor-link" href="#Feature-Importance-%E2%80%93-Key-Drivers-of-Customer-customer value">¶</a></h3><p>Feature importance analysis from the Decision Tree model highlights the most influential variables driving customer value predictions.</p>
-<p>Tenure emerges as the dominant predictor, accounting for more than half of the model’s total importance. This confirms earlier exploratory findings that customers with shorter tenure - particularly those within the first few months - are significantly more likely to customer value.</p>
-<p>Customer complaints are the second most important factor, reinforcing the observation that complaints act as strong early warning signals of imminent customer value. Customers who raise complaints are far more likely to leave if issues are not resolved promptly.</p>
+<h3 id="Feature-Importance-%E2%80%93-Key-Drivers-of-Customer-Churn">Feature Importance – Key Drivers of Customer Churn<a class="anchor-link" href="#Feature-Importance-%E2%80%93-Key-Drivers-of-Customer-Churn">¶</a></h3><p>Feature importance analysis from the Decision Tree model highlights the most influential variables driving churn predictions.</p>
+<p>Tenure emerges as the dominant predictor, accounting for more than half of the model’s total importance. This confirms earlier exploratory findings that customers with shorter tenure - particularly those within the first few months - are significantly more likely to churn.</p>
+<p>Customer complaints are the second most important factor, reinforcing the observation that complaints act as strong early warning signals of imminent churn. Customers who raise complaints are far more likely to leave if issues are not resolved promptly.</p>
 <p>Secondary factors such as DaySinceLastOrder and NumberOfAddress contribute additional predictive value, capturing signs of disengagement and changing customer behavior. Variables like CashbackAmount and SatisfactionScore play supportive but less decisive roles, indicating that incentives and stated satisfaction alone are insufficient without strong engagement and service quality.</p>
 <p>Overall, the feature importance results validate the model’s alignment with real-world customer behavior and confirm that the model is learning meaningful, business-relevant patterns rather than noise.</p>
 </div>
@@ -9065,8 +9065,8 @@ customer value predictions and supports transparent, business-aligned decision-m
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="ROC-Curve-Analysis"><strong>ROC Curve Analysis</strong><a class="anchor-link" href="#ROC-Curve-Analysis">¶</a></h3><p>The ROC curve is used to evaluate the model’s ability to distinguish between customer value and
-non-customer value customers across different classification thresholds. A higher Area Under the
+<h3 id="ROC-Curve-Analysis"><strong>ROC Curve Analysis</strong><a class="anchor-link" href="#ROC-Curve-Analysis">¶</a></h3><p>The ROC curve is used to evaluate the model’s ability to distinguish between churn and
+non-churn customers across different classification thresholds. A higher Area Under the
 Curve (AUC) indicates stronger overall predictive performance.</p>
 </div>
 </div>
@@ -9094,7 +9094,7 @@ Curve (AUC) indicates stronger overall predictive performance.</p>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">'--'</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">'False Positive Rate'</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">'True Positive Rate'</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">'ROC Curve – Decision Tree customer value Model'</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">'ROC Curve – Decision Tree Churn Model'</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
@@ -9123,9 +9123,9 @@ Curve (AUC) indicates stronger overall predictive performance.</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="ROC-Curve-%E2%80%93-Model-Performance">ROC Curve – Model Performance<a class="anchor-link" href="#ROC-Curve-%E2%80%93-Model-Performance">¶</a></h3><p>The ROC (Receiver Operating Characteristic) curve evaluates how well the Decision Tree model distinguishes between customers who customer value and those who remain active across different probability thresholds.</p>
-<p>The model achieves an AUC score of 0.88, indicating strong discriminatory power. Since an AUC of 0.5 represents random guessing and 1.0 represents perfect classification, a score of 0.88 demonstrates that the model reliably separates customer valueers from non-customer valueers.</p>
-<p>The ROC curve consistently remains well above the diagonal baseline, confirming that the model captures a high proportion of true customer valueers while keeping false positives at a manageable level. This performance supports the use of the model for real-world customer value risk prioritization, where identifying high-risk customers early is more important than perfect classification.</p>
+<h3 id="ROC-Curve-%E2%80%93-Model-Performance">ROC Curve – Model Performance<a class="anchor-link" href="#ROC-Curve-%E2%80%93-Model-Performance">¶</a></h3><p>The ROC (Receiver Operating Characteristic) curve evaluates how well the Decision Tree model distinguishes between customers who churn and those who remain active across different probability thresholds.</p>
+<p>The model achieves an AUC score of 0.88, indicating strong discriminatory power. Since an AUC of 0.5 represents random guessing and 1.0 represents perfect classification, a score of 0.88 demonstrates that the model reliably separates churners from non-churners.</p>
+<p>The ROC curve consistently remains well above the diagonal baseline, confirming that the model captures a high proportion of true churners while keeping false positives at a manageable level. This performance supports the use of the model for real-world churn risk prioritization, where identifying high-risk customers early is more important than perfect classification.</p>
 </div>
 </div>
 </div>
@@ -9150,12 +9150,12 @@ Curve (AUC) indicates stronger overall predictive performance.</p>
 <h3 id="Business-Interpretation-of-Model-Results"><strong>Business Interpretation of Model Results</strong><a class="anchor-link" href="#Business-Interpretation-of-Model-Results">¶</a></h3><ul>
 <li><p>Both models successfully identify nearly all loyal customers</p>
 </li>
-<li><p>Approximately 52% of future customer valueers are detected in advance</p>
+<li><p>Approximately 52% of future churners are detected in advance</p>
 </li>
 <li><p>This provides a strong opportunity for targeted retention campaigns</p>
 </li>
 </ul>
-<p>Even capturing half of potential customer valueers can result in significant revenue savings when combined with effective intervention strategies.</p>
+<p>Even capturing half of potential churners can result in significant revenue savings when combined with effective intervention strategies.</p>
 </div>
 </div>
 </div>
@@ -9166,14 +9166,14 @@ Curve (AUC) indicates stronger overall predictive performance.</p>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h3 id="High-Risk-Customer-Segments"><strong>High-Risk Customer Segments</strong><a class="anchor-link" href="#High-Risk-Customer-Segments">¶</a></h3><p>Customer Segments at Highest Risk of customer value</p>
+<h3 id="High-Risk-Customer-Segments"><strong>High-Risk Customer Segments</strong><a class="anchor-link" href="#High-Risk-Customer-Segments">¶</a></h3><p>Customer Segments at Highest Risk of Churn</p>
 <ol>
 <li>The Frustrated Newcomer</li>
 </ol>
 <ul>
 <li>Tenure: 0-3 months</li>
 <li>Has submitted complaints</li>
-<li>customer value risk: <strong>~32%</strong> (combination of new customer + complaint)</li>
+<li>Churn risk: <strong>~32%</strong> (combination of new customer + complaint)</li>
 </ul>
 <ol start="2">
 <li>The Quietly Disengaged</li>
@@ -9181,7 +9181,7 @@ Curve (AUC) indicates stronger overall predictive performance.</p>
 <ul>
 <li>Low cashback, high days since last order</li>
 <li>Declining engagement</li>
-<li>High gradual customer value risk</li>
+<li>High gradual churn risk</li>
 </ul>
 <ol start="3">
 <li>The Confidently Dissatisfied</li>
@@ -9189,7 +9189,7 @@ Curve (AUC) indicates stronger overall predictive performance.</p>
 <ul>
 <li>Satisfaction score: 3-4</li>
 <li>No formal complaint</li>
-<li>Hidden customer value risk</li>
+<li>Hidden churn risk</li>
 </ul>
 </div>
 </div>
@@ -9223,9 +9223,9 @@ Curve (AUC) indicates stronger overall predictive performance.</p>
 </li>
 </ul>
 <p><strong>Target Outcome:</strong></p>
-<p>Reduce overall customer value rate from 16.8% to below 12% within 6 months</p>
-<p>Note: 12% target assumes 55% intervention success on 52% of detected customer valueers
-(948 customer valueers × 52% detection × 55% success rate ≈ 270 customers saved)</p>
+<p>Reduce overall churn rate from 16.8% to below 12% within 6 months</p>
+<p>Note: 12% target assumes 55% intervention success on 52% of detected churners
+(948 churners × 52% detection × 55% success rate ≈ 270 customers saved)</p>
 </div>
 </div>
 </div>
@@ -9237,7 +9237,7 @@ Curve (AUC) indicates stronger overall predictive performance.</p>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 <h3 id="Closing-Statement"><strong>Closing Statement</strong><a class="anchor-link" href="#Closing-Statement">¶</a></h3><p><strong>Conclusion</strong></p>
-<p>This project demonstrates how combining behavioral analysis with machine learning can transform raw customer data into actionable business insights. By identifying high-risk customers early and understanding the drivers of customer value, organizations can take proactive steps to improve retention, customer satisfaction, and long-term profitability.</p>
+<p>This project demonstrates how combining behavioral analysis with machine learning can transform raw customer data into actionable business insights. By identifying high-risk customers early and understanding the drivers of churn, organizations can take proactive steps to improve retention, customer satisfaction, and long-term profitability.</p>
 </div>
 </div>
 </div>
@@ -9265,14 +9265,14 @@ Curve (AUC) indicates stronger overall predictive performance.</p>
 <span class="sd">test_indices = X_test.index</span>
 <span class="sd">results_df = pd.DataFrame({</span>
 <span class="sd">    'CustomerID': data.loc[test_indices, 'CustomerID'],</span>
-<span class="sd">    'Actual_customer value': y_test.values,</span>
-<span class="sd">    'Predicted_customer value': y_pred_tree,  # Decision Tree predictions</span>
-<span class="sd">    'customer value_Probability': y_prob_tree,  # probability of customer value</span>
+<span class="sd">    'Actual_Churn': y_test.values,</span>
+<span class="sd">    'Predicted_Churn': y_pred_tree,  # Decision Tree predictions</span>
+<span class="sd">    'Churn_Probability': y_prob_tree,  # probability of churn</span>
 <span class="sd">    'Risk_Score': (y_prob_tree * 100).astype(int)</span>
 <span class="sd">})</span>
 
 <span class="sd"># Save to CSV</span>
-<span class="sd">results_df.to_csv('customer value_predictions.csv', index=False)</span>
+<span class="sd">results_df.to_csv('churn_predictions.csv', index=False)</span>
 <span class="sd">print("Saved predictions for Tableau!")</span>
 <span class="sd">print(f"Total records: {len(results_df)}")</span>
 <span class="sd">print(results_df.head())</span>
@@ -9289,7 +9289,7 @@ Curve (AUC) indicates stronger overall predictive performance.</p>
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
 <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[23]:</div>
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain" tabindex="0">
-<pre>'\n# Get CustomerID from the original data that corresponds to test set\ntest_indices = X_test.index\nresults_df = pd.DataFrame({\n    \'CustomerID\': data.loc[test_indices, \'CustomerID\'],\n    \'Actual_customer value\': y_test.values,\n    \'Predicted_customer value\': y_pred_tree,  # Decision Tree predictions\n    \'customer value_Probability\': y_prob_tree,  # probability of customer value\n    \'Risk_Score\': (y_prob_tree * 100).astype(int)\n})\n\n# Save to CSV\nresults_df.to_csv(\'customer value_predictions.csv\', index=False)\nprint("Saved predictions for Tableau!")\nprint(f"Total records: {len(results_df)}")\nprint(results_df.head())\n'</pre>
+<pre>'\n# Get CustomerID from the original data that corresponds to test set\ntest_indices = X_test.index\nresults_df = pd.DataFrame({\n    \'CustomerID\': data.loc[test_indices, \'CustomerID\'],\n    \'Actual_Churn\': y_test.values,\n    \'Predicted_Churn\': y_pred_tree,  # Decision Tree predictions\n    \'Churn_Probability\': y_prob_tree,  # probability of churn\n    \'Risk_Score\': (y_prob_tree * 100).astype(int)\n})\n\n# Save to CSV\nresults_df.to_csv(\'churn_predictions.csv\', index=False)\nprint("Saved predictions for Tableau!")\nprint(f"Total records: {len(results_df)}")\nprint(results_df.head())\n'</pre>
 </div>
 </div>
 </div>
@@ -9440,4 +9440,3 @@ Curve (AUC) indicates stronger overall predictive performance.</p>
 </main>
 </body>
 </html>
-

@@ -1,4 +1,4 @@
-﻿$(document).ready(function () {
+$(document).ready(function () {
     let scrollingTick = false;
 
     function handleScrollEffects() {
@@ -181,9 +181,8 @@ function redirect(url) {
 }
 
 /* ===== CANVAS PARTICLE BURST ===== */
-const ENABLE_HEAVY_EFFECTS = false;
 const canvas = document.getElementById("dataCanvas");
-if (ENABLE_HEAVY_EFFECTS && canvas) {
+if (canvas) {
     const ctx = canvas.getContext("2d");
     let w, h, particles = [];
 
@@ -296,6 +295,7 @@ if (ENABLE_HEAVY_EFFECTS && canvas) {
 
 // ===== FLUID ANIMATION FOR HOME SECTION - MOBILE OPTIMIZED & SOFTER COLORS =====
 (function() {
+  const DISABLE_FLUID_ANIMATION = true;
   const config = {
     SIM_RESOLUTION: 128,
     DYE_RESOLUTION: 1440,
@@ -316,10 +316,11 @@ if (ENABLE_HEAVY_EFFECTS && canvas) {
 
   // Only initialize if we're on the home page and the fluid canvas exists
   const fluidCanvas = document.getElementById("fluid");
-  if (!ENABLE_HEAVY_EFFECTS || !fluidCanvas) {
+  if (DISABLE_FLUID_ANIMATION) {
     if (fluidCanvas) fluidCanvas.style.display = "none";
     return;
   }
+  if (!fluidCanvas) return;
 
   // Add flag to track if we're on mobile
   const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
@@ -1627,5 +1628,3 @@ if (ENABLE_HEAVY_EFFECTS && canvas) {
   // Start when page loads
   init();
 })();
-
-
