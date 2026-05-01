@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-Commerce Churn Prediction - Executive Overview</title>
+    <title>Customer Lifetime Value Analysis - Executive Overview</title>
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/ecommerce-project.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
@@ -47,10 +47,10 @@
                     <span>Machine Learning Project</span>
                 </div>
                 <h1 class="hero-title">Securing <span class="highlight">$800,000</span> in Revenue:</h1>
-                <h2 class="hero-subtitle">An E-Commerce Churn Prediction Engine</h2>
+                <h2 class="hero-subtitle">An Customer Lifetime Value Analysis Engine</h2>
                 <p class="hero-description">
                     Leveraging machine learning to identify at-risk customers and implement targeted retention strategies 
-                    that reduce churn from 16.8% to below 12%, saving approximately 270 customers and $236K in immediate revenue.
+                    that reduce customer value from 16.8% to below 12%, saving approximately 270 customers and $236K in immediate revenue.
                 </p>
                 <div class="hero-actions">
                     <a href="problem.html" class="hero-btn primary">
@@ -83,13 +83,13 @@
                 </div>
 
                 <div class="metric-card" data-aos="fade-up" data-aos-delay="100">
-                    <div class="metric-icon churn">
+                    <div class="metric-icon customer value">
                         <i class="fas fa-users-slash"></i>
                     </div>
                     <div class="metric-content">
                         <h3 class="metric-value" data-target="16.8">0</h3>
                         <span class="metric-unit">%</span>
-                        <p class="metric-label">Current Churn Rate</p>
+                        <p class="metric-label">Current customer value Rate</p>
                         <span class="metric-detail">947 of 5,630 customers</span>
                     </div>
                 </div>
@@ -121,7 +121,40 @@
         </div>
     </section>
 
-    <!-- Presentation section removed for now -->
+    <!-- Presentation Video Section (Hidden for now) -->`r`n    <!--`r`n<!-- Presentation Video Section -->
+    <section class="presentation-section">
+        <div class="max-width">
+            <div class="section-header">
+                <h2 class="section-title">The Pitch</h2>
+                <p class="section-description">
+                    Watch the complete project presentation explaining the business problem, technical approach, and strategic recommendations.
+                </p>
+            </div>
+            <div class="video-container">
+                <div class="video-wrapper">
+                    <video id="projectVideo" controls poster="assets/video-thumbnail.png">
+                        <source src="/mnt/user-data/uploads/ScreenRec_260216_65667.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                    <div class="video-overlay" id="videoOverlay">
+                        <button class="play-btn" onclick="playVideo()">
+                            <i class="fas fa-play"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="video-info">
+                    <div class="info-item">
+                        <i class="fas fa-clock"></i>
+                        <span>Duration: 5:30 minutes</span>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-user"></i>
+                        <span>Presented by: Souravdeep Singh</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>`r`n    -->
 
     <!-- Executive Summary Section -->
     <section class="executive-summary">
@@ -131,12 +164,12 @@
                     <h2 class="section-title">Executive Summary</h2>
                     <div class="summary-text">
                         <p class="lead-text">
-                            This project addresses a critical business challenge: <strong>16.8% customer churn</strong> 
+                            This project addresses a critical business challenge: <strong>16.8% customer customer value</strong> 
                             resulting in significant revenue loss for an e-commerce platform serving 5,630 customers.
                         </p>
                         <p>
                             Using advanced machine learning techniques, I developed a predictive model achieving 
-                            <strong>89.3% accuracy</strong> that identifies at-risk customers before they churn, 
+                            <strong>89.3% accuracy</strong> that identifies at-risk customers before they customer value, 
                             enabling proactive intervention strategies.
                         </p>
                         <div class="key-findings">
@@ -144,11 +177,11 @@
                             <ul class="findings-list">
                                 <li>
                                     <i class="fas fa-exclamation-triangle"></i>
-                                    <span><strong>Early Tenure Crisis:</strong> 0-3 month customers show ~50% churn rate</span>
+                                    <span><strong>Early Tenure Crisis:</strong> 0-3 month customers show ~50% customer value rate</span>
                                 </li>
                                 <li>
                                     <i class="fas fa-comment-slash"></i>
-                                    <span><strong>Complaint Impact:</strong> Customers with complaints have 31.7% churn (2x higher)</span>
+                                    <span><strong>Complaint Impact:</strong> Customers with complaints have 31.7% customer value (2x higher)</span>
                                 </li>
                                 <li>
                                     <i class="fas fa-gift"></i>
@@ -156,7 +189,7 @@
                                 </li>
                                 <li>
                                     <i class="fas fa-chart-line"></i>
-                                    <span><strong>Projected Impact:</strong> Targeted strategies could reduce churn to below 12%, saving ~270 customers</span>
+                                    <span><strong>Projected Impact:</strong> Targeted strategies could reduce customer value to below 12%, saving ~270 customers</span>
                                 </li>
                             </ul>
                         </div>
@@ -179,7 +212,7 @@
                                 <span class="impact-value">$800K</span>
                             </div>
                             <div class="impact-item">
-                                <span class="impact-label">Churn Reduction</span>
+                                <span class="impact-label">customer value Reduction</span>
                                 <span class="impact-value">29%</span>
                             </div>
                         </div>
@@ -194,7 +227,7 @@
                                 </div>
                             </div>
                             <div class="stat-row">
-                                <span>Churner Recall</span>
+                                <span>customer valueer Recall</span>
                                 <div class="stat-bar">
                                     <div class="stat-fill" style="width: 52%;">52%</div>
                                 </div>
@@ -277,7 +310,54 @@
             <p class="section-description">Download presentation materials and access code repositories</p>
             
             <div class="resources-grid">
-                <!-- Presentation resource hidden for now -->                <!---->
+                <!-- Presentation resource hidden for now -->`r`n                <!--<div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-file-powerpoint"></i>
+                    </div>
+                    <h3>Presentation Deck</h3>
+                    <p>Complete analysis presentation with business recommendations</p>
+                    <a href="/mnt/user-data/uploads/CUSTOMER_customer value_PREDICTION_ANALYSIS.pptx" download class="resource-btn">
+                        <i class="fas fa-download"></i>
+                        Download PPT
+                    </a>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fab fa-github"></i>
+                    </div>
+                    <h3>Code Repository</h3>
+                    <p>Full analysis code, model training, and evaluation scripts</p>
+                    <a href="https://github.com/Souravv2412/ecommerce-customer value-prediction" target="_blank" class="resource-btn">
+                        <i class="fab fa-github"></i>
+                        View on GitHub
+                    </a>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-file-code"></i>
+                    </div>
+                    <h3>Jupyter Notebook</h3>
+                    <p>Interactive analysis notebook with detailed methodology</p>
+                    <a href="/mnt/user-data/uploads/customer value_Analysis_Lab_1.ipynb" download class="resource-btn">
+                        <i class="fas fa-download"></i>
+                        Download Notebook
+                    </a>
+                </div>
+
+                <div class="resource-card">
+                    <div class="resource-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <h3>Tableau Dashboard</h3>
+                    <p>Interactive visualizations on Tableau Public</p>
+                    <a href="https://public.tableau.com/app/profile/souravdeep.singh/viz/E-Commercecustomer valueAnalysisRetentionStrategy/ExecutiveOverview" target="_blank" class="resource-btn">
+                        <i class="fas fa-external-link-alt"></i>
+                        Open Tableau
+                    </a>
+                </div>
+            </div>-->
         </div>
     </section>
 
@@ -286,7 +366,7 @@
         <div class="max-width">
             <div class="footer-content">
                 <div class="footer-left">
-                    <h3>E-Commerce Churn Prediction</h3>
+                    <h3>Customer Lifetime Value Analysis</h3>
                     <p>A data analytics project by Souravdeep Singh</p>
                 </div>
                 <div class="footer-right">
@@ -307,5 +387,4 @@
     <script src="../js/ecommerce-project.js"></script>
 </body>
 </html>
-
 
