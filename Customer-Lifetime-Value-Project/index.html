@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -88,7 +88,7 @@
                     <div class="metric-content">
                         <h3 class="metric-value" data-target="16.8">0</h3>
                         <span class="metric-unit">%</span>
-                        <p class="metric-label">Current Churn Rate</p>
+                        <p class="metric-label">Current Average CLV</p>
                         <span class="metric-detail">947 of 5,630 customers</span>
                     </div>
                 </div>
@@ -112,7 +112,7 @@
                     <div class="metric-content">
                         <h3 class="metric-value" data-target="800">0</h3>
                         <span class="metric-unit">K</span>
-                        <p class="metric-label">Annual Retention Potential</p>
+                        <p class="metric-label">Annual CLV Growth Potential</p>
                         <span class="metric-detail">With targeted strategies</span>
                     </div>
                 </div>
@@ -129,33 +129,25 @@
                 <div class="summary-content">
                     <h2 class="section-title">Executive Summary</h2>
                     <div class="summary-text">
-                        <p class="lead-text">
-                            This project addresses a critical business challenge: <strong>16.8% customer churn</strong> 
-                            resulting in significant revenue loss for an e-commerce platform serving 5,630 customers.
-                        </p>
-                        <p>
-                            Using advanced machine learning techniques, I developed a predictive model achieving 
-                            <strong>89.3% accuracy</strong> that identifies at-risk customers before they churn, 
-                            enabling proactive intervention strategies.
-                        </p>
+                        <p class="lead-text">This project builds a <strong>Customer Lifetime Value (CLV)</strong> framework to identify high-value customer segments and optimize long-term revenue planning.</p><p>Using predictive modeling and RFM-based segmentation, the analysis highlights where acquisition, retention, and reactivation investments generate the strongest business return.</p>
                         <div class="key-findings">
                             <h3>Key Discoveries:</h3>
                             <ul class="findings-list">
                                 <li>
                                     <i class="fas fa-exclamation-triangle"></i>
-                                    <span><strong>Early Tenure Crisis:</strong> 0-3 month customers show ~50% churn rate</span>
+                                    <span><strong>Revenue Concentration:</strong> Top customer segments drive a major share of total value contribution.</span>
                                 </li>
                                 <li>
                                     <i class="fas fa-comment-slash"></i>
-                                    <span><strong>Complaint Impact:</strong> Customers with complaints have 31.7% churn (2x higher)</span>
+                                    <span><strong>Segment Prioritization:</strong> Value-based cohorts enable smarter campaign targeting and budget allocation.</span>
                                 </li>
                                 <li>
                                     <i class="fas fa-gift"></i>
-                                    <span><strong>Cashback Paradox:</strong> Mid-satisfaction (3-4 score) customers with low cashback usage at highest risk</span>
+                                    <span><strong>Retention Leverage:</strong> Protecting high-CLV customers delivers stronger margin impact than broad discounts.</span>
                                 </li>
                                 <li>
                                     <i class="fas fa-chart-line"></i>
-                                    <span><strong>Projected Impact:</strong> Targeted strategies could reduce churn to below 12%, saving ~270 customers</span>
+                                    <span><strong>Projected Impact:</strong> CLV-led strategy supports sustained growth through better resource allocation.</span>
                                 </li>
                             </ul>
                         </div>
@@ -166,8 +158,7 @@
                         <h4>Business Impact</h4>
                         <div class="impact-stats">
                             <div class="impact-item">
-                                <span class="impact-label">Customers Saved</span>
-                                <span class="impact-value">~270</span>
+                                <span class="impact-label">Model Accuracy</span><span class="impact-value">98%</span>
                             </div>
                             <div class="impact-item">
                                 <span class="impact-label">Immediate Revenue</span>
@@ -178,8 +169,7 @@
                                 <span class="impact-value">$800K</span>
                             </div>
                             <div class="impact-item">
-                                <span class="impact-label">Churn Reduction</span>
-                                <span class="impact-value">29%</span>
+                                <span class="impact-label">Revenue Share (Top Segments)</span><span class="impact-value">45%</span>
                             </div>
                         </div>
                     </div>
@@ -193,7 +183,7 @@
                                 </div>
                             </div>
                             <div class="stat-row">
-                                <span>Churner Recall</span>
+                                <span>High-Value Segment Recall</span>
                                 <div class="stat-bar">
                                     <div class="stat-fill" style="width: 52%;">52%</div>
                                 </div>
@@ -296,7 +286,7 @@
                     </div>
                     <h3>Jupyter Notebook</h3>
                     <p>Interactive analysis notebook with detailed methodology</p>
-                    <a href="/mnt/user-data/uploads/Churn_Analysis_Lab_1.ipynb" download class="resource-btn">
+                    <a href="../Customer-Lifetime-Value/Notebook/Customer_lifetime_value.ipynb" download class="resource-btn">
                         <i class="fas fa-download"></i>
                         Download Notebook
                     </a>
@@ -308,7 +298,7 @@
                     </div>
                     <h3>Tableau Dashboard</h3>
                     <p>Interactive visualizations on Tableau Public</p>
-                    <a href="https://public.tableau.com/app/profile/souravdeep.singh/viz/E-CommerceChurnAnalysisRetentionStrategy/ExecutiveOverview" target="_blank" class="resource-btn">
+                    <a href="https://public.tableau.com/app/profile/souravdeep.singh/viz/CustomerLifetimeValueAnalysis/ExecutiveOverview" target="_blank" class="resource-btn">
                         <i class="fas fa-external-link-alt"></i>
                         Open Tableau
                     </a>
@@ -343,3 +333,5 @@
     <script src="../js/ecommerce-project.js"></script>
 </body>
 </html>
+
+
