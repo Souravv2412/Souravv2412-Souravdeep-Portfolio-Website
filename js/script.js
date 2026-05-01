@@ -1,4 +1,4 @@
-$(document).ready(function () {
+﻿$(document).ready(function () {
     let scrollingTick = false;
 
     function handleScrollEffects() {
@@ -181,8 +181,9 @@ function redirect(url) {
 }
 
 /* ===== CANVAS PARTICLE BURST ===== */
+const ENABLE_HEAVY_EFFECTS = false;
 const canvas = document.getElementById("dataCanvas");
-if (canvas) {
+if (ENABLE_HEAVY_EFFECTS && canvas) {
     const ctx = canvas.getContext("2d");
     let w, h, particles = [];
 
@@ -315,7 +316,10 @@ if (canvas) {
 
   // Only initialize if we're on the home page and the fluid canvas exists
   const fluidCanvas = document.getElementById("fluid");
-  if (!fluidCanvas) return;
+  if (!ENABLE_HEAVY_EFFECTS || !fluidCanvas) {
+    if (fluidCanvas) fluidCanvas.style.display = "none";
+    return;
+  }
 
   // Add flag to track if we're on mobile
   const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
@@ -1623,3 +1627,5 @@ if (canvas) {
   // Start when page loads
   init();
 })();
+
+
