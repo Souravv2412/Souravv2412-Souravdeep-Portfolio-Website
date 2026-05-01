@@ -183,6 +183,13 @@ function redirect(url) {
 /* ===== CANVAS PARTICLE BURST ===== */
 const ENABLE_HEAVY_EFFECTS = false;
 const canvas = document.getElementById("dataCanvas");
+if (!ENABLE_HEAVY_EFFECTS) {
+    const intro = document.getElementById("dataIntro");
+    if (intro) {
+        intro.remove();
+        sessionStorage.setItem('introShown', 'true');
+    }
+}
 if (ENABLE_HEAVY_EFFECTS && canvas) {
     const ctx = canvas.getContext("2d");
     let w, h, particles = [];
