@@ -143,9 +143,19 @@
             </div>
 
             <div class="model-insight">
+                <h3>Model Scope Note</h3>
+                <p>
+                    This project compares an interpretable baseline (Logistic Regression) with a non-linear tree model
+                    (Decision Tree) for business explainability. Gradient boosting models (XGBoost/LightGBM) are listed
+                    as next-step experiments and were not included in this published benchmark.
+                </p>
+            </div>
+
+            <div class="model-insight">
                 <h3>Why This Matters</h3>
                 <p>
-                    While the model achieves 89.3% overall accuracy, the <strong>52% churner recall</strong> means 
+                    While the model achieves 89.3% overall accuracy, class imbalance makes recall the critical metric.
+                    The <strong>52% churner recall</strong> means 
                     we successfully identify about half of all customers who will churn. In business terms, this 
                     translates to catching approximately <strong>490 out of 947 churners</strong>, allowing for 
                     proactive intervention. The high non-churner recall (96%) minimizes false alarms, ensuring 
