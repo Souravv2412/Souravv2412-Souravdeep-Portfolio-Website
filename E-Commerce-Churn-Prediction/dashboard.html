@@ -110,7 +110,11 @@
             </div>
 
             <script type='text/javascript'>
-                // Proper scale-to-fit: outer div hides overflow, inner scales down
+                // Define vizElement before using it
+                var divElement = document.getElementById('viz1771278791357');
+                var vizElement = divElement.getElementsByTagName('object')[0];
+
+                // Scale-to-fit: outer hides overflow, inner scales down from 1920px
                 function resizeTableauDash() {
                     var outer = document.getElementById('tableau-outer-shell');
                     var inner = document.getElementById('tableau-inner-shell');
@@ -121,12 +125,12 @@
                     outer.style.height = Math.round(1107 * scale) + 'px';
                 }
 
-                // Load Tableau viz
+                // Load Tableau viz script
                 var scriptElement = document.createElement('script');
                 scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
                 vizElement.parentNode.insertBefore(scriptElement, vizElement);
 
-                // Run resize on load and window resize
+                // Run resize on load and on every window resize
                 resizeTableauDash();
                 window.addEventListener('resize', resizeTableauDash);
                 window.addEventListener('load', function() {
