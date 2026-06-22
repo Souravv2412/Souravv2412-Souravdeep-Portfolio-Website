@@ -77,20 +77,21 @@
         </div>
     </section>
 
-    <!-- TABLEAU DASHBOARD - FIXED FULL-WIDTH EMBED -->
+    <!-- TABLEAU DASHBOARD EMBED -->
     <section class="tableau-section">
         <div class="tableau-container-wrapper">
-            <div id="tableau-outer-shell">
-                <div id="tableau-inner-shell">
-                    <div class='tableauPlaceholder' id='viz1771278791357' style='position:relative;width:1920px;'>
+
+            <div id="tab-shell" style="width:100%; overflow:hidden; border-radius:12px; box-shadow:0 10px 40px rgba(0,0,0,0.15); background:#fff; position:relative;">
+                <div id="tab-inner" style="transform-origin:top left; display:block;">
+                    <div class='tableauPlaceholder' id='viz1771278791357' style='position:relative;'>
                         <noscript>
                             <a href='#'>
                                 <img alt='E-Commerce Churn Analysis'
                                      src='https://public.tableau.com/static/images/E-/E-CommerceChurnAnalysisRetentionStrategy/ExecutiveOverview/1_rss.png'
-                                     style='border:none'/>
+                                     style='border:none; width:100%;'/>
                             </a>
                         </noscript>
-                        <object class='tableauViz' style='display:none;width:1920px;height:1107px;'>
+                        <object class='tableauViz' style='display:none;'>
                             <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F'/>
                             <param name='embed_code_version' value='3'/>
                             <param name='site_root' value=''/>
@@ -110,46 +111,49 @@
             </div>
 
             <script type='text/javascript'>
-                // Define vizElement before using it
+                var VIZ_W = 1400; // designed width of this dashboard
+                var VIZ_H = 960;  // designed height (roughly 1400 * 0.686)
+
                 var divElement = document.getElementById('viz1771278791357');
                 var vizElement = divElement.getElementsByTagName('object')[0];
 
-                // Scale-to-fit: outer hides overflow, inner scales down from 1920px
-                function resizeTableauDash() {
-                    var outer = document.getElementById('tableau-outer-shell');
-                    var inner = document.getElementById('tableau-inner-shell');
-                    if (!outer || !inner) return;
-                    var scale = outer.clientWidth / 1920;
-                    inner.style.transform = 'scale(' + scale + ')';
+                // Size the viz at designed dimensions
+                vizElement.style.width  = VIZ_W + 'px';
+                vizElement.style.height = VIZ_H + 'px';
+                document.getElementById('tab-inner').style.width = VIZ_W + 'px';
+
+                function fitTableau() {
+                    var shell = document.getElementById('tab-shell');
+                    var inner = document.getElementById('tab-inner');
+                    if (!shell || !inner) return;
+                    var ow = shell.offsetWidth;
+                    if (!ow) return;
+                    var s = ow / VIZ_W;
+                    inner.style.transform = 'scale(' + s + ')';
                     inner.style.transformOrigin = 'top left';
-                    outer.style.height = Math.round(1107 * scale) + 'px';
+                    shell.style.height = Math.round(VIZ_H * s) + 'px';
                 }
 
-                // Load Tableau viz script
+                // Load Tableau JS
                 var scriptElement = document.createElement('script');
                 scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
                 vizElement.parentNode.insertBefore(scriptElement, vizElement);
 
-                // Run resize on load and on every window resize
-                resizeTableauDash();
-                window.addEventListener('resize', resizeTableauDash);
-                window.addEventListener('load', function() {
-                    setTimeout(resizeTableauDash, 500);
-                    setTimeout(resizeTableauDash, 2000);
+                // Apply scale at multiple points to catch after Tableau renders
+                fitTableau();
+                [200, 500, 1000, 2000, 3500, 5000].forEach(function(t) {
+                    setTimeout(fitTableau, t);
                 });
+                window.addEventListener('resize', fitTableau);
             </script>
-        </div>
 
-            <div class="dashboard-actions" style="display: flex; justify-content: center; gap: 15px; margin-top: 15px;">
-                <a href="https://public.tableau.com/views/E-CommerceChurnAnalysisRetentionStrategy/ExecutiveOverview?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link" 
-                   target="_blank" 
-                   class="action-btn primary">
-                    <i class="fas fa-external-link-alt"></i>
-                    Open in Tableau Public
+            <div class="dashboard-actions" style="display:flex; justify-content:center; gap:15px; margin-top:20px;">
+                <a href="https://public.tableau.com/views/E-CommerceChurnAnalysisRetentionStrategy/ExecutiveOverview?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link"
+                   target="_blank" class="action-btn primary">
+                    <i class="fas fa-external-link-alt"></i> Open in Tableau Public
                 </a>
                 <a href="strategy.html" class="action-btn">
-                    <i class="fas fa-arrow-right"></i>
-                    View Strategy
+                    <i class="fas fa-arrow-right"></i> View Strategy
                 </a>
             </div>
         </div>
