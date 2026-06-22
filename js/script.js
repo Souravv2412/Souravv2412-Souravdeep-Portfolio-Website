@@ -1,3 +1,52 @@
+/* ── EmailJS Contact Form ─────────────────────────────────── */
+(function () {
+    // ★ Replace these three values after EmailJS setup (see instructions below)
+    var EMAILJS_PUBLIC_KEY  = '9MOhwVL6rEnMEyFZT';
+    var EMAILJS_SERVICE_ID  = 'service_va8tcqc';
+    var EMAILJS_TEMPLATE_ID = 'template_zymu7bk';
+
+    emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+
+    var form   = document.getElementById('contact-form');
+    var btn    = document.getElementById('cf-btn');
+    var status = document.getElementById('cf-status');
+
+    if (form) {
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            btn.textContent = 'Sending…';
+            btn.disabled = true;
+            status.style.display = 'none';
+
+            var templateParams = {
+                from_name:    document.getElementById('cf-name').value.trim(),
+                reply_to:     document.getElementById('cf-email').value.trim(),
+                subject:      document.getElementById('cf-subject').value.trim(),
+                message:      document.getElementById('cf-message').value.trim(),
+                // This produces the email subject line in the template
+                email_subject: 'Portfolio Message - ' + document.getElementById('cf-name').value.trim()
+            };
+
+            emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, templateParams)
+                .then(function () {
+                    status.textContent = '✅ Message sent! I\'ll get back to you soon.';
+                    status.style.color = '#4ade80';
+                    status.style.display = 'block';
+                    form.reset();
+                    btn.textContent = 'Send message';
+                    btn.disabled = false;
+                }, function (err) {
+                    status.textContent = '❌ Something went wrong. Please email me directly at singh.s.deep800@gmail.com';
+                    status.style.color = '#f87171';
+                    status.style.display = 'block';
+                    btn.textContent = 'Send message';
+                    btn.disabled = false;
+                });
+        });
+    }
+})();
+/* ─────────────────────────────────────────────────────────── */
+
 $(document).ready(function () {
     let scrollingTick = false;
 
@@ -53,7 +102,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 document.addEventListener('DOMContentLoaded', function() {
     var typed = new Typed(".typing2", {
-        strings: ["Certified Web Developer", "Data Analytics Student", "Freelancer"],
+        strings: ["Data Analyst", "Business Intelligence Analyst", "Business Analytics Graduate", "Analytics Consultant"],
         typeSpeed: 50,
         backSpeed: 30,
         loop: true
@@ -108,76 +157,290 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 });
 
-/* chatbot animation */
-const randomStatements = [
-    "Great choice! We are preparing everything for you. Redirecting in a moment...",
-    "Awesome! Just a second while we get things ready for you...",
-    "Perfect! We're setting things up. Please wait a moment...",
-    "Excellent choice! Redirecting you now...",
-    "Hold on! We're preparing your selection. Redirecting shortly...",
-    "Nice pick! We're getting everything ready for you..."
-];
+/* ===== SCROLL REVEAL ===== */
+document.addEventListener('DOMContentLoaded', function() {
+    const srObs = new IntersectionObserver((entries) => {
+        entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.sr-anim,.sr-left,.sr-right').forEach(el => srObs.observe(el));
+});
 
-function toggleChat() {
-    const chatbot = document.getElementById("chatbot");
-    chatbot.classList.toggle("show");
-    if (chatbot.classList.contains("show")) {
-        startConversation();
+/* ===== HERO COUNTER ANIMATION ===== */
+document.addEventListener('DOMContentLoaded', function() {
+    const cObs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (e.isIntersecting) {
+                e.target.querySelectorAll('.hs-num[data-target]').forEach(el => {
+                    const target = parseInt(el.dataset.target);
+                    let cur = 0; const step = target / 60;
+                    const tmr = setInterval(() => {
+                        cur = Math.min(cur + step, target);
+                        el.textContent = Math.floor(cur) + '+';
+                        if (cur >= target) clearInterval(tmr);
+                    }, 25);
+                });
+                cObs.unobserve(e.target);
+            }
+        });
+    }, { threshold: 0.5 });
+    const statsRow = document.querySelector('.hero-stats-row');
+    if (statsRow) cObs.observe(statsRow);
+});
+
+/* ===== PROJECT FILTER (index.html) ===== */
+function filterIdx(cat, btn) {
+    document.querySelectorAll('.pf-btn-new').forEach(b => b.classList.remove('on'));
+    btn.classList.add('on');
+    document.querySelectorAll('.idx-section').forEach(s => s.style.display = 'none');
+    const sec = document.getElementById('idx-' + cat);
+    if (sec) {
+        sec.style.display = 'block';
+        setTimeout(() => {
+            sec.querySelectorAll('.sr-anim').forEach(el => {
+                if (el.getBoundingClientRect().top < window.innerHeight * 0.9) el.classList.add('in');
+            });
+        }, 50);
     }
 }
 
-function cancelChat() {
-    const chatbot = document.getElementById("chatbot");
-    chatbot.classList.remove("show");
+/* ===== AI CHATBOT ===== */
+// ---------------------------------------------------------------
+// SETUP: Get your FREE Gemini API key at https://aistudio.google.com/app/apikey
+// Paste it below. The free tier gives 15 requests/min — more than enough.
+// ---------------------------------------------------------------
+const GEMINI_KEY = 'YOUR_GEMINI_API_KEY';
+
+const SOURAV_CONTEXT = `You are an intelligent, friendly portfolio assistant for Souravdeep Singh. You behave like a real AI assistant (similar to ChatGPT) — conversational, warm, smart, and helpful. Handle casual small talk naturally, answer professional questions precisely, and always tie answers back to Souravdeep's profile when relevant. Keep responses concise (under 180 words). Do NOT use em dashes (—). Use commas or semicolons instead.
+
+ABOUT SOURAVDEEP:
+Name: Souravdeep Singh | Nickname: Sourav
+Location: Windsor, Ontario, Canada
+Email: singh.s.deep800@gmail.com | Phone: +1 548 332-1627
+LinkedIn: linkedin.com/in/sourav2312/ | GitHub: github.com/Souravv2412
+
+PERSONALITY & PERSONAL:
+- Hobbies: Cricket (state-level player), Dancing (award-winning), Sketch art
+- Friendly, driven, data-obsessed professional
+- Loves turning messy data into clear stories
+- Enjoys mentoring and student leadership
+
+WORK AUTHORIZATION (CANADA):
+- Holds a Post-Graduation Work Permit (PGWP)
+- Fully authorized to work full-time in Canada WITHOUT employer sponsorship
+- LMIA is NOT required
+- Completely legal to work for any Canadian employer
+- Available immediately
+- NOT on LMIA, NOT illegal, NOT on a study permit anymore
+
+EDUCATION:
+1. Post-Graduate Diploma in Data Analytics for Business, St. Clair College, Windsor ON (Sep 2024 - Apr 2026) - Academic Honours, GPA 3.5
+2. BBA (Computer Applications), SPPU Pune University, India (Aug 2020 - Jul 2023) - CGPA 8.0, Distinction
+
+EXPERIENCE:
+- Data Analytics Co-op, Halight (Sep 2025 - Apr 2026): Built production-grade dashboard with live AWS Athena data, used by leadership daily. Agile/Scrum environment.
+- VP, Student Representative Council, St. Clair College (May 2025 - Apr 2026): Represented 10,000+ students, co-chaired board meetings, led advocacy.
+- Volunteer, Advisory Board, Transit Windsor (Oct 2025 - Oct 2026): SRC student representative in City of Windsor municipal transit planning.
+- Receptionist and Counselor, EEC Global, India (Oct 2023 - Mar 2024): International study counseling (Canada, USA), IELTS/GRE/PTE guidance, front-desk operations.
+
+SKILLS:
+- Python: Pandas, NumPy, scikit-learn, XGBoost, LightGBM
+- SQL: HackerRank Advanced
+- Tableau, Power BI (DAX), Excel
+- AWS: S3, Athena (production use)
+- Statistical Analysis, A/B Testing, Hypothesis Testing
+- Model Evaluation and Validation, Cross-validation, ROC/AUC
+- ETL, Data Wrangling, Feature Engineering
+- Git, Jira, Agile/Scrum
+- Web Dev: HTML, CSS, JavaScript, PHP, MySQL
+
+PROJECTS:
+1. Healthcare 30-Day Readmission Prediction: 101,766 patient records, LightGBM/XGBoost models, live Flask app at healthcare-readmission-analytics.onrender.com
+2. E-Commerce Churn Analysis: 52% churner recall, AUC 0.88, Tableau retention dashboard
+3. SRC Class Rep Portal: Real operational deployment, 80% workflow automated, 70% time saved
+4. Movie Ticket Booking System: Live PHP/MySQL full-stack app at moviebookapp.kesug.com
+5. Real Estate Listings: Live PHP/MySQL app
+
+ACHIEVEMENTS:
+- Academic Honours at St. Clair College (GPA 3.5)
+- Graduated with Distinction from SPPU (CGPA 8.0)
+- State-level cricket player representing regional teams
+- Award-winning dancer with competition achievements
+- Represented 10,000+ students as VP of SRC
+- Built a live production analytics dashboard used by leadership at Halight
+
+CERTIFICATES: SQL Advanced (HackerRank), Full Stack Web Development, AWS Data Engineering Foundations, End-to-End Machine Learning, Feature Engineering, Model Validation, Hyperparameter Tuning, Tree-Based Models, Cluster Analysis (DataCamp)
+
+OPEN TO WORK:
+- Full-time Data Analyst, Business Intelligence Analyst, Analytics Consultant
+- Anywhere in Canada (remote or in-person)
+- Can start immediately
+
+RULES:
+1. Handle small talk naturally - "how are you", "good morning", jokes etc - respond warmly and briefly before pivoting to Sourav's profile
+2. Work authorization questions: ALWAYS clarify he holds PGWP, is legal to work, NOT on LMIA, NOT illegal, can work for any employer without sponsorship
+3. If asked about salary, say: "For that conversation, please reach out directly at singh.s.deep800@gmail.com"
+4. If question is totally unrelated to the profile and not small talk, say you can only help with Souravdeep's professional profile and suggest contacting him
+5. NEVER produce illegal, adult, or harmful content - refuse politely
+6. Do NOT use em dashes (—) anywhere in your response`;
+
+
+async function callGemini(msg) {
+    if (!GEMINI_KEY || GEMINI_KEY === 'YOUR_GEMINI_API_KEY') return getRuleReply(msg);
+    try {
+        const res = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${GEMINI_KEY}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                contents: [{ role: 'user', parts: [{ text: SOURAV_CONTEXT + '\n\nRecruiter question: ' + msg }] }],
+                generationConfig: { temperature: 0.6, maxOutputTokens: 300 }
+            })
+        });
+        const data = await res.json();
+        return data.candidates?.[0]?.content?.parts?.[0]?.text || getRuleReply(msg);
+    } catch(e) { return getRuleReply(msg); }
 }
 
-function startConversation() {
-    const chatWindow = document.getElementById('chatWindow');
-    chatWindow.innerHTML = `
-        <div class="bot">
-            <p class="typing" id="typingEffect">
-                <span class="bot-emoji">🤖</span>
-            </p>
-        </div>`;
-    typeMessage("Hi there! Welcome to my portfolio.\n\nWhat would you like to explore?", function() {
-        setTimeout(() => {
-            chatWindow.innerHTML += `
-                <div class="options-container">
-                    <div class="option" onclick="redirect('index.html#projects')">📂 Projects</div>
-                    <div class="option" onclick="redirect('index.html#skills')">💡 Skills</div>
-                    <div class="option" onclick="redirect('Certificate.html')">🏅 Certifications</div>
-                    <div class="option" onclick="redirect('index.html#contact')">📞 Contact</div>
-                </div>`;
-        }, 500);
-    });
+// ===== SMART RULE-BASED FALLBACK =====
+function getRuleReply(msg) {
+    const m = msg.toLowerCase().trim();
+
+    // Block harmful/adult content
+    if (/sex|porn|nude|xxx|adult content|18\+|nsfw|explicit|rape|pedophil|bomb|hack the|malware|exploit|ransomware/.test(m)) {
+        return "Sorry, I can't help with that. 🙏 I'm here strictly for questions about Souravdeep's professional profile. Please keep it professional!";
+    }
+
+    // Greetings & small talk
+    if (/^(hi|hello|hey|yo|sup|howdy|hiya|greetings)[!\s?.]*$/.test(m) || /^good\s*(morning|afternoon|evening|night)[!\s?.]*$/.test(m)) {
+        const h = new Date().getHours();
+        const g = h < 12 ? 'Good morning' : h < 17 ? 'Good afternoon' : 'Good evening';
+        return g + "! 👋 I'm Sourav's AI assistant.\n\nI can tell you about his <b>skills, experience, projects, education, or work status</b> in Canada. What would you like to know?";
+    }
+    if (/how are you|how('?s| is) it going|what'?s up|you good|you ok/.test(m)) {
+        return "I'm doing great, thanks for asking! 😊\n\nSouravdeep is also doing well, actively looking for full-time <b>Data Analyst</b> or <b>BI Analyst</b> roles in Canada. Want to know more about him?";
+    }
+    if (/what'?s your name|who are you|are you (a bot|ai|human|real)|are you chatgpt/.test(m)) {
+        return "I'm Sourav's virtual portfolio assistant, powered by AI! 🤖\n\nI know everything about his skills, experience, projects, education, and Canadian work status. Fire away!";
+    }
+    if (/thank|thanks|cheers|appreciate it/.test(m)) {
+        return "You're welcome! 😊 Feel free to ask anything else about Souravdeep's profile.";
+    }
+    if (/bye|goodbye|see you|take care|ciao|later/.test(m)) {
+        return "Goodbye! 👋 Feel free to come back anytime. You can also reach Souravdeep at 📧 <a href='mailto:singh.s.deep800@gmail.com'>singh.s.deep800@gmail.com</a>";
+    }
+    if (/joke|funny|make me laugh/.test(m)) {
+        return "Here's a data joke for you: Why did the data analyst break up with the spreadsheet? Too many rows and not enough columns! 😄\n\nOn a serious note, Souravdeep is great at making sense of those rows. Want to know about his projects?";
+    }
+
+    // Work authorization (including tricky/sensitive phrasing)
+    if (/lmia|illegal|legal to work|work status|work permit|pgwp|work auth|visa|immigration|sponsor|permanent resident|pr status|citizen|study permit/.test(m)) {
+        return '🇨🇦 <b>Work Authorization:</b>\n\nSouravdeep holds a <b>Post-Graduation Work Permit (PGWP)</b>, completely legal to work in Canada.\n\n✅ No LMIA required\n✅ No employer sponsorship needed\n✅ Can work for ANY Canadian employer\n✅ NOT on a study permit, NOT illegal\n✅ Available to start immediately\n\n📧 <a href="mailto:singh.s.deep800@gmail.com">singh.s.deep800@gmail.com</a>';
+    }
+
+    // Availability / hiring
+    if (/hire|availab|open to work|looking for job|job search|opportunit|full.?time|remote|relocat|start when/.test(m)) {
+        return '✅ <b>Souravdeep is actively seeking full-time roles!</b>\n\nTarget roles:\n- Data Analyst\n- Business Intelligence Analyst\n- Analytics Consultant\n\n📍 Windsor, Ontario, Canada\n🇨🇦 PGWP holder, no sponsorship needed, starts immediately.\n\n📧 <a href="mailto:singh.s.deep800@gmail.com">singh.s.deep800@gmail.com</a>\n👉 <a href="#contact">Contact form ↗</a>';
+    }
+
+    // Skills
+    if (/skill|python|pandas|numpy|scikit|sql|tableau|power.?bi|dax|aws|athena|s3|excel|machine.?learn|\bml\b|xgboost|lightgbm|etl|git|jira|agile|scrum|statistic|a\/b test|hypothesis|feature engine|model valid|data.?wrangl/.test(m)) {
+        return '🛠️ <b>Core Technical Skills:</b>\n\n🐍 <b>Python</b>: Pandas, NumPy, scikit-learn, XGBoost, LightGBM\n📊 <b>SQL</b>: HackerRank Advanced\n📈 <b>Tableau & Power BI</b>: dashboards, DAX measures\n☁️ <b>AWS</b>: S3, Athena (production at Halight)\n📐 <b>Stats</b>: A/B testing, hypothesis testing, model validation\n🌐 <b>Web Dev</b>: HTML, CSS, JS, PHP, MySQL\n\n👉 <a href="#skills">Full Skills section ↗</a>';
+    }
+
+    // Projects
+    if (/project|github|healthcare|readmission|churn|ecommerce|e-commerce|src portal|class rep|movie ticket|real estate|flask|deploy|live app/.test(m)) {
+        return '🚀 <b>Key Projects:</b>\n\n🏥 <b>Healthcare Readmission Prediction</b>\n101,766 records, LightGBM/XGBoost: <a href="https://healthcare-readmission-analytics.onrender.com" target="_blank">Live App ↗</a>\n\n📉 <b>E-Commerce Churn Analysis</b>\n52% churner recall, AUC 0.88, Tableau dashboard\n\n🏫 <b>SRC Class Rep Portal</b>\nLive deployment, 80% workflows automated\n\n🎬 <b>Movie Ticket Booking</b>: <a href="https://moviebookapp.kesug.com/" target="_blank">Live ↗</a>\n\n👉 <a href="#projects">All Projects ↗</a> | <a href="project.html">Full page ↗</a>';
+    }
+
+    // Experience
+    if (/experience|work history|career|halight|co-?op|internship|\beec\b|transit windsor|\bsrc\b|council|vp|vice president|employment|job history/.test(m)) {
+        return '💼 <b>Work Experience:</b>\n\n🏢 <b>Data Analytics Co-op, Halight</b> (Sep 2025–Apr 2026)\nProduction AWS Athena dashboard used by leadership daily.\n\n🎓 <b>VP, Student Representative Council</b> (May 2025–Apr 2026)\nRepresented 10,000+ students, chaired board meetings.\n\n🚌 <b>Advisory Board, Transit Windsor</b> (Oct 2025–Oct 2026)\nVolunteer, City of Windsor transit planning.\n\n🌐 <b>Counselor, EEC Global</b> (Oct 2023–Mar 2024)\nInternational study advising for Canada and USA.\n\n👉 <a href="#experience">Full timeline ↗</a>';
+    }
+
+    // Education
+    if (/education|degree|diploma|college|university|\bgpa\b|\bcgpa\b|st.?clair|sppu|pune|\bbba\b|study|graduated|distinction|honours|academic/.test(m)) {
+        return '🎓 <b>Education:</b>\n\n📘 <b>PG Diploma in Data Analytics for Business</b>\nSt. Clair College, Windsor ON (Sep 2024–Apr 2026)\nAcademic Honours, GPA 3.5\n\n📗 <b>BBA (Computer Applications)</b>\nSPPU Pune University, India (Aug 2020–Jul 2023)\nGraduated with Distinction, CGPA 8.0\n\n👉 <a href="#experience">Education section ↗</a>';
+    }
+
+    // Achievements
+    if (/achievement|award|accomplish|proud|honour|honor|recognition|win|won|distinction/.test(m)) {
+        return '🏆 <b>Achievements:</b>\n\n🎓 Academic Honours, St. Clair College (GPA 3.5)\n📚 Distinction, SPPU Pune University (CGPA 8.0)\n🏏 State-level cricket player\n💃 Award-winning dancer\n🎓 Represented 10,000+ students as VP of SRC\n📊 Production analytics dashboard at Halight, used daily by leadership\n\n👉 <a href="#about">About section ↗</a>';
+    }
+
+    // Hobbies / personal
+    if (/hobby|hobbies|personal|outside work|free time|cricket|danc|sketch|art|sport|passion|interest|fun fact/.test(m)) {
+        return '🙌 <b>Beyond the Data:</b>\n\nSouravdeep is a <b>state-level cricketer</b>, representing his region competitively.\n\nHe is also an <b>award-winning dancer</b> with stage performance experience, and enjoys <b>sketch art</b> as a creative outlet.\n\nAnalytical at work, creative at heart! 🎭🏏🎨\n\n👉 <a href="#about">About section ↗</a>';
+    }
+
+    // Certificates
+    if (/certif|certificate|course|credential|badge|hackerrank|datacamp/.test(m)) {
+        return '🏅 <b>Certificates:</b>\n\n- SQL Advanced (HackerRank)\n- Full Stack Web Development\n- AWS Data Engineering Foundations\n- End-to-End Machine Learning\n- Feature Engineering\n- Model Validation\n- Hyperparameter Tuning\n- Tree-Based Models\n- Cluster Analysis (DataCamp)\n\n👉 <a href="Certificate.html">View all certificates ↗</a>';
+    }
+
+    // Contact
+    if (/contact|email|phone|reach out|call|linkedin|github|social|connect|get in touch|number/.test(m)) {
+        return '📬 <b>Contact Souravdeep:</b>\n\n📧 <a href="mailto:singh.s.deep800@gmail.com">singh.s.deep800@gmail.com</a>\n📞 +1 548 332-1627\n💼 <a href="https://www.linkedin.com/in/sourav2312/" target="_blank">LinkedIn ↗</a>\n🐙 <a href="https://github.com/Souravv2412" target="_blank">GitHub ↗</a>\n\n👉 <a href="#contact">Contact form ↗</a>';
+    }
+
+    // About / general
+    if (/who is sourav|tell me about (him|sourav)|about sourav|introduce|background|profile|summary/.test(m)) {
+        return '👤 <b>Souravdeep Singh</b>\n\nData analytics professional in Windsor, Ontario, Canada. Turns complex data into actionable business insights using Python, SQL, Power BI, Tableau, and AWS.\n\nCurrently seeking full-time Data Analyst or BI Analyst roles. Holds a PGWP, no sponsorship needed.\n\nHobbies: Cricket, Dancing, Sketch art.\n\n👉 <a href="#about">Full About section ↗</a>';
+    }
+
+    // Salary deflect
+    if (/salary|pay |compensat|wage|earn|rate|package|ctc/.test(m)) {
+        return "For salary discussions, it's best to connect with Souravdeep directly!\n\n📧 <a href='mailto:singh.s.deep800@gmail.com'>singh.s.deep800@gmail.com</a>\n📞 +1 548 332-1627";
+    }
+
+    // Fallback
+    return "Hmm, that's a bit outside what I know about Souravdeep's profile. 🤔\n\nI'm best at answering about his <b>skills, experience, projects, education, or work authorization</b>.\n\nFor anything else, contact him directly:\n📧 <a href='mailto:singh.s.deep800@gmail.com'>singh.s.deep800@gmail.com</a>\n📞 +1 548 332-1627";
 }
 
-function typeMessage(message, callback) {
-    let index = 0;
-    const typingElement = document.getElementById('typingEffect');
-    typingElement.innerHTML = `<span class="bot-emoji">🤖</span>`;
-    const typingInterval = setInterval(() => {
-        typingElement.innerHTML += message.charAt(index);
-        index++;
-        if (index === message.length) {
-            clearInterval(typingInterval);
-            if (callback) callback();
-        }
-    }, 30);
+let chatNewOpen = false, chatNewInit = false;
+
+function toggleChatNew() {
+    chatNewOpen = !chatNewOpen;
+    document.getElementById('chat-win-new').classList.toggle('open', chatNewOpen);
+    if (chatNewOpen && !chatNewInit) {
+        chatNewInit = true;
+        setTimeout(() => addBotMsgNew("Hi! 👋 I'm Sourav's AI assistant. Ask me anything about his skills, experience, projects, or work authorization in Canada. I'll answer instantly!\n\nClick a quick button below or type your question."), 400);
+    }
 }
 
-function redirect(url) {
-    const chatWindow = document.getElementById('chatWindow');
-    chatWindow.innerHTML = `
-        <div class="bot">
-            <p class="typing" id="typingEffect">
-                <span class="bot-emoji">🤖</span>
-            </p>
-        </div>`;
-    const randomStatement = randomStatements[Math.floor(Math.random() * randomStatements.length)];
-    typeMessage(randomStatement, function() {
-        setTimeout(() => { window.location.href = url; }, 2000);
-    });
+function addBotMsgNew(text) {
+    const msgs = document.getElementById('chat-msgs-new');
+    const typing = document.createElement('div');
+    typing.className = 'cmn bot';
+    typing.innerHTML = '<div class="cbbln"><div class="typing-ind-new"><span></span><span></span><span></span></div></div>';
+    msgs.appendChild(typing);
+    msgs.scrollTop = msgs.scrollHeight;
+    setTimeout(() => {
+        msgs.removeChild(typing);
+        const d = document.createElement('div'); d.className = 'cmn bot';
+        const now = new Date();
+        d.innerHTML = `<div class="cbbln">${text.replace(/\n/g,'<br>')}</div><div class="ctn">${now.getHours()}:${String(now.getMinutes()).padStart(2,'0')}</div>`;
+        msgs.appendChild(d); msgs.scrollTop = msgs.scrollHeight;
+    }, 800 + Math.random() * 400);
+}
+
+function addUserMsgNew(text) {
+    const msgs = document.getElementById('chat-msgs-new');
+    const d = document.createElement('div'); d.className = 'cmn usr';
+    const now = new Date();
+    d.innerHTML = `<div class="cbbln">${text}</div><div class="ctn">${now.getHours()}:${String(now.getMinutes()).padStart(2,'0')}</div>`;
+    msgs.appendChild(d); msgs.scrollTop = msgs.scrollHeight;
+}
+
+async function sendChatNew() {
+    const inp = document.getElementById('chat-input-new');
+    const text = inp.value.trim(); if (!text) return; inp.value = '';
+    addUserMsgNew(text);
+    const reply = await callGemini(text);
+    setTimeout(() => addBotMsgNew(reply), 200);
+}
+
+function askNew(q) {
+    addUserMsgNew(q);
+    callGemini(q).then(reply => setTimeout(() => addBotMsgNew(reply), 200));
 }
 
 /* ===== CANVAS PARTICLE BURST ===== */
