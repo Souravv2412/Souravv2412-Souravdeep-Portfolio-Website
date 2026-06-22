@@ -1895,7 +1895,9 @@ footer span a:hover {
 .sk-item-new2:last-child { border-bottom: none; padding-bottom: 0; }
 .sk-name-new2 { font-size: 14px; font-weight: 600; color: #fff; margin-bottom: 3px; display: flex; align-items: center; gap: 8px; }
 .sk-cert { font-size: 9px; font-weight: 700; padding: 2px 7px; border-radius: 100px; background: rgba(34,197,94,.15); color: #86efac; border: 1px solid rgba(34,197,94,.2); letter-spacing: .5px; }
-.sk-det-new2 { font-size: 12px; color: #999; line-height: 1.5; }
+.sk-det-new2 { font-size: 12px; color: #999; line-height: 1.5; margin-bottom: 6px; }
+.sk-tags-new { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 5px; }
+.sk-tags-new span { font-size: 10px; font-weight: 600; padding: 2px 8px; border-radius: 100px; background: rgba(220,20,60,0.1); border: 1px solid rgba(220,20,60,0.2); color: #ffaaaa; letter-spacing: 0.3px; }
 .prof-grid-new { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
 .prof-card-new { background: #1a1a1a; border: 1px solid #333; border-radius: 12px; padding: 22px; transition: all .35s; }
 .prof-card-new:hover { border-color: crimson; transform: translateY(-4px); box-shadow: 0 20px 40px rgba(220,20,60,0.12); }
