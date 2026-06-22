@@ -13,7 +13,7 @@
         body { overflow-x: hidden; }
 
         .tableau-section {
-            padding: 40px 0;
+            padding: 20px 0 30px;
             background: #f8f8f8;
             overflow: hidden;
         }
@@ -77,20 +77,34 @@
         </div>
     </section>
 
-    <!-- TABLEAU DASHBOARD - FIXED FULL-WIDTH EMBED -->
+    <!-- TABLEAU DASHBOARD EMBED -->
     <section class="tableau-section">
         <div class="tableau-container-wrapper">
-            <div id="tableau-outer-shell">
-                <div id="tableau-inner-shell">
-                    <div class='tableauPlaceholder' id='viz1771278791357' style='position:relative;width:1920px;'>
+
+            <!-- Notice -->
+            <div style="background:#1e293b; border:1px solid rgba(220,20,60,0.3); border-radius:10px; padding:12px 18px; margin-bottom:16px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;">
+                <span style="color:#cbd5e1; font-size:13px;"><i class="fas fa-info-circle" style="color:crimson; margin-right:8px;"></i>If the dashboard doesn't display correctly on your screen, view the full interactive version on Tableau Public.</span>
+                <a href="https://public.tableau.com/app/profile/souravdeep.singh/viz/E-CommerceChurnAnalysisRetentionStrategy/ExecutiveOverview"
+                   target="_blank"
+                   style="background:crimson; color:white; padding:7px 16px; border-radius:6px; font-size:12px; font-weight:600; white-space:nowrap; text-decoration:none;">
+                    <i class="fas fa-external-link-alt" style="margin-right:6px;"></i>Open in Tableau Public
+                </a>
+            </div>
+
+            <!-- Tableau embed: clip box → scale box → tableau placeholder -->
+            <!-- clip box: sets the visible 78% width, hides overflow -->
+            <div id="viz-clip" style="width:78%; margin:0 auto; overflow:hidden; border-radius:10px; box-shadow:0 6px 24px rgba(0,0,0,0.13); position:relative;">
+                <!-- scale box: this element gets CSS scaled; sits INSIDE clip -->
+                <div id="viz-scaler" style="transform-origin:top left; position:absolute; top:0; left:0;">
+                    <div class='tableauPlaceholder' id='viz1771278791357' style='position:relative;'>
                         <noscript>
                             <a href='#'>
                                 <img alt='E-Commerce Churn Analysis'
                                      src='https://public.tableau.com/static/images/E-/E-CommerceChurnAnalysisRetentionStrategy/ExecutiveOverview/1_rss.png'
-                                     style='border:none'/>
+                                     style='border:none; width:100%;'/>
                             </a>
                         </noscript>
-                        <object class='tableauViz' style='display:none;width:1920px;height:1107px;'>
+                        <object class='tableauViz' style='display:none;'>
                             <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F'/>
                             <param name='embed_code_version' value='3'/>
                             <param name='site_root' value=''/>
@@ -110,46 +124,48 @@
             </div>
 
             <script type='text/javascript'>
-                // Define vizElement before using it
-                var divElement = document.getElementById('viz1771278791357');
-                var vizElement = divElement.getElementsByTagName('object')[0];
+                (function() {
+                    // Render Tableau at this native pixel size — set wide enough to see all charts
+                    var VIZ_W = 1500, VIZ_H = 850;
 
-                // Scale-to-fit: outer hides overflow, inner scales down from 1920px
-                function resizeTableauDash() {
-                    var outer = document.getElementById('tableau-outer-shell');
-                    var inner = document.getElementById('tableau-inner-shell');
-                    if (!outer || !inner) return;
-                    var scale = outer.clientWidth / 1920;
-                    inner.style.transform = 'scale(' + scale + ')';
-                    inner.style.transformOrigin = 'top left';
-                    outer.style.height = Math.round(1107 * scale) + 'px';
-                }
+                    var clip        = document.getElementById('viz-clip');
+                    var scaler      = document.getElementById('viz-scaler');
+                    var placeholder = document.getElementById('viz1771278791357');
+                    var vizObject   = placeholder.getElementsByTagName('object')[0];
 
-                // Load Tableau viz script
-                var scriptElement = document.createElement('script');
-                scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
-                vizElement.parentNode.insertBefore(scriptElement, vizElement);
+                    // Tell Tableau to render at native size
+                    vizObject.style.width  = VIZ_W + 'px';
+                    vizObject.style.height = VIZ_H + 'px';
 
-                // Run resize on load and on every window resize
-                resizeTableauDash();
-                window.addEventListener('resize', resizeTableauDash);
-                window.addEventListener('load', function() {
-                    setTimeout(resizeTableauDash, 500);
-                    setTimeout(resizeTableauDash, 2000);
-                });
+                    // Load Tableau JS
+                    var s = document.createElement('script');
+                    s.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+                    vizObject.parentNode.insertBefore(s, vizObject);
+
+                    function fit() {
+                        var clipW = clip.offsetWidth || (window.innerWidth * 0.78);
+                        var scale = clipW / VIZ_W;
+                        // Scale the scaler div — everything inside (incl iframe) scales with it
+                        scaler.style.width     = VIZ_W + 'px';
+                        scaler.style.height    = VIZ_H + 'px';
+                        scaler.style.transform = 'scale(' + scale + ')';
+                        // Clip box height matches the scaled height so no empty space
+                        clip.style.height = Math.round(VIZ_H * scale) + 'px';
+                    }
+
+                    fit();
+                    [200, 800, 2000, 4000].forEach(function(t){ setTimeout(fit, t); });
+                    window.addEventListener('resize', fit);
+                })();
             </script>
-        </div>
 
-            <div class="dashboard-actions" style="display: flex; justify-content: center; gap: 15px; margin-top: 15px;">
-                <a href="https://public.tableau.com/views/E-CommerceChurnAnalysisRetentionStrategy/ExecutiveOverview?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link" 
-                   target="_blank" 
-                   class="action-btn primary">
-                    <i class="fas fa-external-link-alt"></i>
-                    Open in Tableau Public
+            <div class="dashboard-actions" style="display:flex; justify-content:center; gap:15px; margin-top:20px;">
+                <a href="https://public.tableau.com/views/E-CommerceChurnAnalysisRetentionStrategy/ExecutiveOverview?:language=en-US&:sid=&:redirect=auth&:display_count=n&:origin=viz_share_link"
+                   target="_blank" class="action-btn primary">
+                    <i class="fas fa-external-link-alt"></i> Open in Tableau Public
                 </a>
                 <a href="strategy.html" class="action-btn">
-                    <i class="fas fa-arrow-right"></i>
-                    View Strategy
+                    <i class="fas fa-arrow-right"></i> View Strategy
                 </a>
             </div>
         </div>
